@@ -38,6 +38,7 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "@inertiajs/react": "^2.3.17"
+        "@inertiajs/react": "^2.3.17",
+        "react-youtube": "^10.1.0"
     }
 }

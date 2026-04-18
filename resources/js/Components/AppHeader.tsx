@@ -1,0 +1,61 @@
+import { Link } from '@inertiajs/react';
+
+interface Props {
+    userName: string;
+    isPro?: boolean;
+}
+
+export default function AppHeader({ userName, isPro = false }: Props) {
+    return (
+        <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
+            <div className="container mx-auto flex items-center justify-between px-4 py-3">
+                <Link
+                    href="/"
+                    className="flex items-center gap-2 transition-opacity hover:opacity-80"
+                >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-purple-600">
+                        <svg
+                            className="h-5 w-5 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                    </div>
+                    <span className="text-lg font-bold">Loop Player</span>
+                </Link>
+
+                <div className="flex items-center gap-2">
+                    <span className="hidden text-sm text-gray-500 md:block">
+                        {userName}
+                    </span>
+                    {isPro && (
+                        <span className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-2 py-0.5 text-xs font-medium text-white">
+                            PRO
+                        </span>
+                    )}
+                    <Link
+                        href="/trash"
+                        className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100"
+                    >
+                        ゴミ箱
+                    </Link>
+                    <Link
+                        href="/plan"
+                        className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100"
+                    >
+                        プラン
+                    </Link>
+                    <Link
+                        href="/logout"
+                        method="post"
+                        as="button"
+                        className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100"
+                    >
+                        ログアウト
+                    </Link>
+                </div>
+            </div>
+        </header>
+    );
+}
