@@ -23,43 +23,54 @@ export default function Login({
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-white to-gray-100 px-4">
+        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-white via-white to-gray-100 px-4">
             <Head title="ログイン" />
 
             <div className="w-full max-w-md">
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-purple-600 rounded-2xl mb-4 shadow-lg">
-                        <svg className="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div className="mb-8 text-center">
+                    <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-purple-600 shadow-lg">
+                        <svg
+                            className="h-8 w-8 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                         </svg>
                     </div>
-                    <h1 className="text-3xl font-bold mb-2">Loop Player</h1>
+                    <h1 className="mb-2 text-3xl font-bold">Loop Player</h1>
                     <p className="text-gray-500">動画の指定区間をループ再生</p>
                 </div>
 
-                <div className="grid grid-cols-2 bg-gray-100 rounded-lg p-1 mb-4">
-                    <span className="text-center py-2 rounded-md bg-white shadow text-sm font-medium cursor-default">
+                <div className="mb-4 grid grid-cols-2 rounded-lg bg-gray-100 p-1">
+                    <span className="cursor-default rounded-md bg-white py-2 text-center text-sm font-medium shadow">
                         ログイン
                     </span>
                     <Link
                         href={route('register')}
-                        className="text-center py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+                        className="rounded-md py-2 text-center text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
                     >
                         新規登録
                     </Link>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-xl shadow-sm px-6 py-6">
-                    <h2 className="text-lg font-semibold mb-1">ログイン</h2>
-                    <p className="text-sm text-gray-500 mb-6">アカウントにログインしてください</p>
+                <div className="rounded-xl border border-gray-200 bg-white px-6 py-6 shadow-sm">
+                    <h2 className="mb-1 text-lg font-semibold">ログイン</h2>
+                    <p className="mb-6 text-sm text-gray-500">
+                        アカウントにログインしてください
+                    </p>
 
                     {status && (
-                        <div className="mb-4 text-sm font-medium text-green-600">{status}</div>
+                        <div className="mb-4 text-sm font-medium text-green-600">
+                            {status}
+                        </div>
                     )}
 
                     <form onSubmit={submit} className="space-y-4">
                         <div className="space-y-1">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            <label
+                                htmlFor="email"
+                                className="block text-sm font-medium text-gray-700"
+                            >
                                 メールアドレス
                             </label>
                             <input
@@ -69,14 +80,22 @@ export default function Login({
                                 value={data.email}
                                 autoComplete="username"
                                 autoFocus
-                                onChange={(e) => setData('email', e.target.value)}
+                                onChange={(e) =>
+                                    setData('email', e.target.value)
+                                }
                                 className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             />
-                            <InputError message={errors.email} className="mt-1" />
+                            <InputError
+                                message={errors.email}
+                                className="mt-1"
+                            />
                         </div>
 
                         <div className="space-y-1">
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            <label
+                                htmlFor="password"
+                                className="block text-sm font-medium text-gray-700"
+                            >
                                 パスワード
                             </label>
                             <input
@@ -85,10 +104,15 @@ export default function Login({
                                 name="password"
                                 value={data.password}
                                 autoComplete="current-password"
-                                onChange={(e) => setData('password', e.target.value)}
+                                onChange={(e) =>
+                                    setData('password', e.target.value)
+                                }
                                 className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             />
-                            <InputError message={errors.password} className="mt-1" />
+                            <InputError
+                                message={errors.password}
+                                className="mt-1"
+                            />
                         </div>
 
                         <div className="flex items-center justify-between">
@@ -97,7 +121,12 @@ export default function Login({
                                     type="checkbox"
                                     name="remember"
                                     checked={data.remember}
-                                    onChange={(e) => setData('remember', e.target.checked as false)}
+                                    onChange={(e) =>
+                                        setData(
+                                            'remember',
+                                            e.target.checked as false,
+                                        )
+                                    }
                                     className="rounded border-gray-300"
                                 />
                                 ログイン状態を保持
@@ -115,7 +144,7 @@ export default function Login({
                         <button
                             type="submit"
                             disabled={processing}
-                            className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 transition-colors"
+                            className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50"
                         >
                             ログイン
                         </button>
@@ -126,13 +155,15 @@ export default function Login({
                             <span className="w-full border-t border-gray-200" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-white px-2 text-gray-400">または</span>
+                            <span className="bg-white px-2 text-gray-400">
+                                または
+                            </span>
                         </div>
                     </div>
 
                     <a
                         href="/auth/redirect"
-                        className="block w-full rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+                        className="block w-full rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                         Googleでログイン
                     </a>
