@@ -43,6 +43,8 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         .filter((l) => !l.deleted_at)
         .sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
 
+    const isAtLimit = !isPro && activeLoops.length >= FREE_PLAN_LIMIT;
+
     const handleToggleFavorite = (loop: LoopSetting) => {
         router.post(route('home.favorite', loop.id));
     };
@@ -323,13 +325,20 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         >
                                             ▶ ループ再生開始
                                         </button>
-                                        <button
-                                            onClick={handleOpenSaveDialog}
-                                            disabled={!currentVideoId}
-                                            className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-40"
-                                        >
-                                            💾 保存
-                                        </button>
+                                        <div className="flex flex-col items-end gap-1">
+                                            <button
+                                                onClick={handleOpenSaveDialog}
+                                                disabled={!currentVideoId || isAtLimit}
+                                                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-40"
+                                            >
+                                                💾 保存
+                                            </button>
+                                            {isAtLimit && (
+                                                <p className="text-xs text-red-500">
+                                                    上限（{FREE_PLAN_LIMIT}件）に達しています
+                                                </p>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -340,7 +349,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         videoId={currentVideoId}
                                         startTime={currentStart}
                                         endTime={currentEnd}
-                                        onSave={handleOpenSaveDialog}
+                                        onSave={isAtLimit ? undefined : handleOpenSaveDialog}
                                     />
                                 </div>
                             )}
