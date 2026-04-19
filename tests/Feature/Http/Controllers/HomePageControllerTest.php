@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LoopSetting;
 use App\Models\User;
 
 test('index 正常時 200が返ってくる', function () {
@@ -71,4 +72,22 @@ test('store 異常時 video_idがない場合はバリデーションエラー',
     ]);
 
     $response->assertSessionHasErrors('video_id');
+});
+
+test('destroy 正常時 ループ設定がソフトデリートされてリダイレクトされる', function () {
+    $user = User::factory()->create();
+    $loopSetting = LoopSetting::factory()->create(['user_id' => $user->id]);
+
+    $response = $this->actingAs($user)->post("/home/destroy/{$loopSetting->id}");
+
+    $response->assertRedirect('/home');
+    $this->assertSoftDeleted('loop_settings', ['id' => $loopSetting->id]);
+});
+
+test('destroy 異常時 未認証はリダイレクトされる', function () {
+    $loopSetting = LoopSetting::factory()->create();
+
+    $response = $this->post("/home/destroy/{$loopSetting->id}");
+
+    $response->assertRedirect('/login');
 });
