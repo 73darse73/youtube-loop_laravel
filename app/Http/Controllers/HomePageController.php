@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HomeStoreRequest;
+use App\Models\LoopSetting;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -28,6 +29,13 @@ class HomePageController extends Controller
         $params = $request->validated();
         $params['user_id'] = $request->user()->id;
         $useCase->store($params);
+
+        return redirect()->route('home.index');
+    }
+
+    public function destroy(LoopSetting $loopSetting, HomePageUseCase $useCase)
+    {
+        $useCase->destroy($loopSetting);
 
         return redirect()->route('home.index');
     }

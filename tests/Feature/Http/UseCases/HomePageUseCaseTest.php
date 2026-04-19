@@ -39,6 +39,14 @@ test('ループ設定を保存できる', function () {
     $this->assertEquals('テストタイトル', $result->title);
 });
 
+test('ループ設定をソフトデリートできる', function () {
+    $loopSetting = LoopSetting::factory()->create();
+
+    $this->useCase->destroy($loopSetting);
+
+    $this->assertSoftDeleted('loop_settings', ['id' => $loopSetting->id]);
+});
+
 test('titleがnullでもループ設定を保存できる', function () {
     $user = User::factory()->create();
     $params = [

@@ -39,6 +39,7 @@
     },
     "dependencies": {
         "@inertiajs/react": "^2.3.17",
+        "lucide-react": "^1.8.0",
         "react-youtube": "^10.1.0"
     }
 }

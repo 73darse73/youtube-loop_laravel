@@ -21,4 +21,9 @@ class HomePageUseCase
     {
         return LoopSetting::create($params);
     }
+
+    public function destroy(LoopSetting $loopSetting): void
+    {
+        $loopSetting->delete();
+    }
 }
