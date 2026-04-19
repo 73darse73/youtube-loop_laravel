@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/home', [HomePageController::class, 'index'])->name('home.index');
     Route::post('/home', [HomePageController::class, 'store'])->name('home.store');
+    Route::post('/home/destroy/{loopSetting}', [HomePageController::class, 'destroy'])->name('home.destroy');
 });
 
 Route::get('/auth/redirect', function () {
