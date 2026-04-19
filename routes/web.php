@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomePageController::class, 'index'])->name('home.index');
     Route::post('/home', [HomePageController::class, 'store'])->name('home.store');
     Route::post('/home/destroy/{loopSetting}', [HomePageController::class, 'destroy'])->name('home.destroy');
+    Route::post('/home/favorite/{loopSetting}', [HomePageController::class, 'favorite'])->name('home.favorite');
 });
 
 Route::get('/auth/redirect', function () {

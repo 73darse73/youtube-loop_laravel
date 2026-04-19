@@ -39,4 +39,11 @@ class HomePageController extends Controller
 
         return redirect()->route('home.index');
     }
+
+    public function favorite(LoopSetting $loopSetting, HomePageUseCase $useCase)
+    {
+        $useCase->favorite($loopSetting);
+
+        return redirect()->route('home.index');
+    }
 }
