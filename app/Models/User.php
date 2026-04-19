@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
+        'is_pro',
     ];
 
     public function loopSettings(): HasMany
