@@ -74,6 +74,32 @@ test('store 異常時 video_idがない場合はバリデーションエラー',
     $response->assertSessionHasErrors('video_id');
 });
 
+test('store 異常時 Freeユーザーが上限を超えると403になる', function () {
+    $user = User::factory()->create(['is_pro' => false]);
+    LoopSetting::factory()->count(3)->create(['user_id' => $user->id]);
+
+    $response = $this->actingAs($user)->post('/home', [
+        'video_id' => 'dQw4w9WgXcQ',
+        'start_time' => 10.0,
+        'end_time' => 30.0,
+    ]);
+
+    $response->assertStatus(403);
+});
+
+test('store 正常時 Proユーザーは上限なく保存できる', function () {
+    $user = User::factory()->create(['is_pro' => true]);
+    LoopSetting::factory()->count(3)->create(['user_id' => $user->id]);
+
+    $response = $this->actingAs($user)->post('/home', [
+        'video_id' => 'dQw4w9WgXcQ',
+        'start_time' => 10.0,
+        'end_time' => 30.0,
+    ]);
+
+    $response->assertRedirect('/home');
+});
+
 test('destroy 正常時 ループ設定がソフトデリートされてリダイレクトされる', function () {
     $user = User::factory()->create();
     $loopSetting = LoopSetting::factory()->create(['user_id' => $user->id]);

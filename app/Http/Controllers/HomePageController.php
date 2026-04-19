@@ -26,9 +26,10 @@ class HomePageController extends Controller
 
     public function store(HomeStoreRequest $request, HomePageUseCase $useCase)
     {
+        $user = $request->user();
         $params = $request->validated();
-        $params['user_id'] = $request->user()->id;
-        $useCase->store($params);
+        $params['user_id'] = $user->id;
+        $useCase->store($user, $params);
 
         return redirect()->route('home.index');
     }
