@@ -1,7 +1,8 @@
 import AppHeader from '@/Components/AppHeader';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
+import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 const FREE_PLAN_LIMIT = 3;
@@ -91,6 +92,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         });
     };
 
+    const handleDeleteLoop = (loop: LoopSetting) => {
+        if (!window.confirm('このループ設定を削除しますか？')) return;
+        router.post(route('home.destroy', loop.id));
+    };
+
     const handleLoadLoop = (loop: LoopSetting) => {
         setCurrentVideoId(loop.video_id);
         setCurrentStart(loop.start_time);
@@ -111,62 +117,95 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                     {/* 1000px以上: 縦リスト（サムネイル左・テキスト右） */}
                     <div className="hidden space-y-2 sidebar:block">
                         {activeLoops.map((loop) => (
-                            <button
+                            <div
                                 key={loop.id}
-                                onClick={() => handleLoadLoop(loop)}
-                                className="group flex w-full gap-3 rounded-lg p-2 text-left transition-colors hover:bg-gray-50"
+                                className="group flex w-full items-center gap-3 rounded-lg p-2 transition-colors hover:bg-gray-50"
                             >
-                                <img
-                                    src={thumbnailUrl(loop.video_id)}
-                                    alt={loop.title}
-                                    className="h-16 w-28 flex-shrink-0 rounded object-cover"
-                                />
-                                <div className="min-w-0 flex-1">
-                                    <p className="line-clamp-2 text-sm font-medium leading-snug">
-                                        {loop.title}
-                                    </p>
-                                    {loop.description && (
-                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
-                                            {loop.description}
+                                <button
+                                    onClick={() => handleLoadLoop(loop)}
+                                    className="flex min-w-0 flex-1 gap-3 text-left"
+                                >
+                                    <img
+                                        src={thumbnailUrl(loop.video_id)}
+                                        alt={loop.title ?? ''}
+                                        className="h-16 w-28 flex-shrink-0 rounded object-cover"
+                                    />
+                                    <div className="min-w-0 flex-1">
+                                        <p className="line-clamp-2 text-sm font-medium leading-snug">
+                                            {loop.title}
                                         </p>
-                                    )}
-                                    <p className="mt-1 text-xs text-gray-400">
-                                        {Math.floor(loop.start_time)}秒 〜{' '}
-                                        {Math.floor(loop.end_time)}秒
-                                    </p>
-                                </div>
-                            </button>
+                                        {loop.description && (
+                                            <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
+                                                {loop.description}
+                                            </p>
+                                        )}
+                                        <p className="mt-1 text-xs text-gray-400">
+                                            {Math.floor(loop.start_time)}秒 〜{' '}
+                                            {Math.floor(loop.end_time)}秒
+                                        </p>
+                                    </div>
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteLoop(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                    aria-label="削除"
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Trash2 className="h-4 w-4" />
+                                        <span>削除</span>
+                                    </span>
+                                </button>
+                            </div>
                         ))}
                     </div>
 
                     {/* 999px以下: グリッド（サムネイル上・テキスト下） */}
                     <div className="grid grid-cols-1 gap-4 cols-2:grid-cols-2 cols-3:grid-cols-3 sidebar:hidden">
                         {activeLoops.map((loop) => (
-                            <button
+                            <div
                                 key={loop.id}
-                                onClick={() => handleLoadLoop(loop)}
-                                className="group rounded-lg text-left transition-colors hover:bg-gray-50"
+                                className="group rounded-lg transition-colors hover:bg-gray-50"
                             >
-                                <img
-                                    src={thumbnailUrl(loop.video_id)}
-                                    alt={loop.title}
-                                    className="aspect-video w-full rounded-lg object-cover"
-                                />
-                                <div className="mt-2 px-1">
-                                    <p className="line-clamp-2 text-sm font-medium leading-snug">
-                                        {loop.title}
-                                    </p>
-                                    {loop.description && (
-                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
-                                            {loop.description}
+                                <button
+                                    onClick={() => handleLoadLoop(loop)}
+                                    className="w-full text-left"
+                                >
+                                    <img
+                                        src={thumbnailUrl(loop.video_id)}
+                                        alt={loop.title ?? ''}
+                                        className="aspect-video w-full rounded-lg object-cover"
+                                    />
+                                </button>
+                                <div className="mt-2 flex items-start gap-1 px-1">
+                                    <button
+                                        onClick={() => handleLoadLoop(loop)}
+                                        className="min-w-0 flex-1 text-left"
+                                    >
+                                        <p className="line-clamp-2 text-sm font-medium leading-snug">
+                                            {loop.title}
                                         </p>
-                                    )}
-                                    <p className="mt-1 text-xs text-gray-400">
-                                        {Math.floor(loop.start_time)}秒 〜{' '}
-                                        {Math.floor(loop.end_time)}秒
-                                    </p>
+                                        {loop.description && (
+                                            <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
+                                                {loop.description}
+                                            </p>
+                                        )}
+                                        <p className="mt-1 text-xs text-gray-400">
+                                            {Math.floor(loop.start_time)}秒 〜{' '}
+                                            {Math.floor(loop.end_time)}秒
+                                        </p>
+                                    </button>
+                                    <button
+                                        onClick={() => handleDeleteLoop(loop)}
+                                        className="flex-shrink-0 rounded p-1.5 text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                        aria-label="削除"
+                                    >
+                                        <span className="flex flex-col items-center gap-0.5 text-xs">
+                                            <Trash2 className="h-4 w-4" />
+                                            <span>削除</span>
+                                        </span>
+                                    </button>
                                 </div>
-                            </button>
+                            </div>
                         ))}
                     </div>
                 </>
