@@ -31,12 +31,38 @@ test('ループ設定を保存できる', function () {
         'end_time' => 30.0,
     ];
 
-    $result = $this->useCase->store($params);
+    $result = $this->useCase->store($user, $params);
 
     $this->assertInstanceOf(LoopSetting::class, $result);
     $this->assertEquals($user->id, $result->user_id);
     $this->assertEquals('dQw4w9WgXcQ', $result->video_id);
     $this->assertEquals('テストタイトル', $result->title);
+});
+
+test('Freeユーザーが上限（3件）を超えると例外が発生する', function () {
+    $user = User::factory()->create(['is_pro' => false]);
+    LoopSetting::factory()->count(3)->create(['user_id' => $user->id]);
+
+    $this->useCase->store($user, [
+        'user_id' => $user->id,
+        'video_id' => 'dQw4w9WgXcQ',
+        'start_time' => 10.0,
+        'end_time' => 30.0,
+    ]);
+})->throws(\Symfony\Component\HttpKernel\Exception\HttpException::class);
+
+test('Proユーザーは上限なくループ設定を保存できる', function () {
+    $user = User::factory()->create(['is_pro' => true]);
+    LoopSetting::factory()->count(3)->create(['user_id' => $user->id]);
+
+    $result = $this->useCase->store($user, [
+        'user_id' => $user->id,
+        'video_id' => 'dQw4w9WgXcQ',
+        'start_time' => 10.0,
+        'end_time' => 30.0,
+    ]);
+
+    $this->assertInstanceOf(LoopSetting::class, $result);
 });
 
 test('お気に入りをオンにできる', function () {
@@ -73,7 +99,7 @@ test('titleがnullでもループ設定を保存できる', function () {
         'end_time' => 30.0,
     ];
 
-    $result = $this->useCase->store($params);
+    $result = $this->useCase->store($user, $params);
 
     $this->assertNull($result->title);
 });
