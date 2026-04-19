@@ -2,7 +2,7 @@ import AppHeader from '@/Components/AppHeader';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
-import { Trash2 } from 'lucide-react';
+import { Star, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 const FREE_PLAN_LIMIT = 3;
@@ -39,7 +39,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         end_time: 0,
     });
 
-    const activeLoops = loopSettings.filter((l) => !l.deleted_at);
+    const activeLoops = loopSettings
+        .filter((l) => !l.deleted_at)
+        .sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
+
+    const handleToggleFavorite = (loop: LoopSetting) => {
+        router.post(route('home.favorite', loop.id));
+    };
 
     const handleStartLoop = () => {
         const videoId = extractVideoId(url);
@@ -119,31 +125,42 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         {activeLoops.map((loop) => (
                             <div
                                 key={loop.id}
-                                className="group flex w-full items-center gap-3 rounded-lg p-2 transition-colors hover:bg-gray-50"
+                                className="flex w-full items-center gap-3 rounded-lg p-2 transition-colors hover:bg-gray-50"
                             >
-                                <button
-                                    onClick={() => handleLoadLoop(loop)}
-                                    className="flex min-w-0 flex-1 gap-3 text-left"
-                                >
+                                <div className="relative flex-shrink-0">
                                     <img
                                         src={thumbnailUrl(loop.video_id)}
                                         alt={loop.title ?? ''}
-                                        className="h-16 w-28 flex-shrink-0 rounded object-cover"
+                                        className="h-16 w-28 rounded object-cover"
                                     />
-                                    <div className="min-w-0 flex-1">
-                                        <p className="line-clamp-2 text-sm font-medium leading-snug">
-                                            {loop.title}
+                                    <button
+                                        onClick={() => handleToggleFavorite(loop)}
+                                        className="absolute right-1 top-1 rounded-full bg-black/40 p-0.5 transition-colors hover:bg-black/60"
+                                        aria-label="お気に入り"
+                                    >
+                                        <Star
+                                            className="h-3.5 w-3.5"
+                                            fill={loop.is_favorite ? '#facc15' : 'none'}
+                                            stroke={loop.is_favorite ? '#facc15' : 'white'}
+                                        />
+                                    </button>
+                                </div>
+                                <button
+                                    onClick={() => handleLoadLoop(loop)}
+                                    className="min-w-0 flex-1 text-left"
+                                >
+                                    <p className="line-clamp-2 text-sm font-medium leading-snug">
+                                        {loop.title}
+                                    </p>
+                                    {loop.description && (
+                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
+                                            {loop.description}
                                         </p>
-                                        {loop.description && (
-                                            <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
-                                                {loop.description}
-                                            </p>
-                                        )}
-                                        <p className="mt-1 text-xs text-gray-400">
-                                            {Math.floor(loop.start_time)}秒 〜{' '}
-                                            {Math.floor(loop.end_time)}秒
-                                        </p>
-                                    </div>
+                                    )}
+                                    <p className="mt-1 text-xs text-gray-400">
+                                        {Math.floor(loop.start_time)}秒 〜{' '}
+                                        {Math.floor(loop.end_time)}秒
+                                    </p>
                                 </button>
                                 <button
                                     onClick={() => handleDeleteLoop(loop)}
@@ -164,18 +181,31 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         {activeLoops.map((loop) => (
                             <div
                                 key={loop.id}
-                                className="group rounded-lg transition-colors hover:bg-gray-50"
+                                className="rounded-lg transition-colors hover:bg-gray-50"
                             >
-                                <button
-                                    onClick={() => handleLoadLoop(loop)}
-                                    className="w-full text-left"
-                                >
-                                    <img
-                                        src={thumbnailUrl(loop.video_id)}
-                                        alt={loop.title ?? ''}
-                                        className="aspect-video w-full rounded-lg object-cover"
-                                    />
-                                </button>
+                                <div className="relative">
+                                    <button
+                                        onClick={() => handleLoadLoop(loop)}
+                                        className="w-full text-left"
+                                    >
+                                        <img
+                                            src={thumbnailUrl(loop.video_id)}
+                                            alt={loop.title ?? ''}
+                                            className="aspect-video w-full rounded-lg object-cover"
+                                        />
+                                    </button>
+                                    <button
+                                        onClick={() => handleToggleFavorite(loop)}
+                                        className="absolute right-2 top-2 rounded-full bg-black/40 p-1 transition-colors hover:bg-black/60"
+                                        aria-label="お気に入り"
+                                    >
+                                        <Star
+                                            className="h-4 w-4"
+                                            fill={loop.is_favorite ? '#facc15' : 'none'}
+                                            stroke={loop.is_favorite ? '#facc15' : 'white'}
+                                        />
+                                    </button>
+                                </div>
                                 <div className="mt-2 flex items-start gap-1 px-1">
                                     <button
                                         onClick={() => handleLoadLoop(loop)}

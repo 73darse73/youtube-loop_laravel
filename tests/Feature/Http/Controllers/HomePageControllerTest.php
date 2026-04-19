@@ -91,3 +91,30 @@ test('destroy 異常時 未認証はリダイレクトされる', function () {
 
     $response->assertRedirect('/login');
 });
+
+test('favorite 正常時 お気に入りがオンになりリダイレクトされる', function () {
+    $user = User::factory()->create();
+    $loopSetting = LoopSetting::factory()->create(['user_id' => $user->id, 'is_favorite' => false]);
+
+    $response = $this->actingAs($user)->post("/home/favorite/{$loopSetting->id}");
+
+    $response->assertRedirect('/home');
+    $this->assertDatabaseHas('loop_settings', ['id' => $loopSetting->id, 'is_favorite' => true]);
+});
+
+test('favorite 正常時 お気に入りがオフになる（トグル）', function () {
+    $user = User::factory()->create();
+    $loopSetting = LoopSetting::factory()->create(['user_id' => $user->id, 'is_favorite' => true]);
+
+    $this->actingAs($user)->post("/home/favorite/{$loopSetting->id}");
+
+    $this->assertDatabaseHas('loop_settings', ['id' => $loopSetting->id, 'is_favorite' => false]);
+});
+
+test('favorite 異常時 未認証はリダイレクトされる', function () {
+    $loopSetting = LoopSetting::factory()->create();
+
+    $response = $this->post("/home/favorite/{$loopSetting->id}");
+
+    $response->assertRedirect('/login');
+});

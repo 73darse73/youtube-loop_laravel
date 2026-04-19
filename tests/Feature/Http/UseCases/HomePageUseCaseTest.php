@@ -39,6 +39,22 @@ test('ループ設定を保存できる', function () {
     $this->assertEquals('テストタイトル', $result->title);
 });
 
+test('お気に入りをオンにできる', function () {
+    $loopSetting = LoopSetting::factory()->create(['is_favorite' => false]);
+
+    $this->useCase->favorite($loopSetting);
+
+    $this->assertDatabaseHas('loop_settings', ['id' => $loopSetting->id, 'is_favorite' => true]);
+});
+
+test('お気に入りをトグルできる（オン→オフ）', function () {
+    $loopSetting = LoopSetting::factory()->create(['is_favorite' => true]);
+
+    $this->useCase->favorite($loopSetting);
+
+    $this->assertDatabaseHas('loop_settings', ['id' => $loopSetting->id, 'is_favorite' => false]);
+});
+
 test('ループ設定をソフトデリートできる', function () {
     $loopSetting = LoopSetting::factory()->create();
 

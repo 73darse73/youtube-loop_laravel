@@ -9,7 +9,7 @@ class HomePageUseCase
 {
     public function index(User $user): array
     {
-        $loopSettings = $user->loopSettings()->get();
+        $loopSettings = $user->loopSettings()->orderBy('is_favorite', 'desc')->get();
 
         return [
             'loopSettings' => $loopSettings,
@@ -25,5 +25,10 @@ class HomePageUseCase
     public function destroy(LoopSetting $loopSetting): void
     {
         $loopSetting->delete();
+    }
+
+    public function favorite(LoopSetting $loopSetting): void
+    {
+        $loopSetting->update(['is_favorite' => !$loopSetting->is_favorite]);
     }
 }
