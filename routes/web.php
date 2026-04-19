@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/home', [HomePageController::class, 'index'])->name('home.index');
+    Route::post('/home', [HomePageController::class, 'store'])->name('home.store');
 });
 
 Route::get('/auth/redirect', function () {

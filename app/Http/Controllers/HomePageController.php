@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HomeStoreRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -20,5 +21,14 @@ class HomePageController extends Controller
             'loopSettings' => $results['loopSettings'],
             'isPro' => $results['isPro'],
         ]);
+    }
+
+    public function store(HomeStoreRequest $request, HomePageUseCase $useCase)
+    {
+        $params = $request->validated();
+        $params['user_id'] = $request->user()->id;
+        $useCase->store($params);
+
+        return redirect()->route('home.index');
     }
 }

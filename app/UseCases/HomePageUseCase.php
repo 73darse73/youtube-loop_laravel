@@ -2,6 +2,7 @@
 
 namespace App\UseCases;
 
+use App\Models\LoopSetting;
 use App\Models\User;
 
 class HomePageUseCase
@@ -14,5 +15,10 @@ class HomePageUseCase
             'loopSettings' => $loopSettings,
             'isPro' => $user->is_pro,
         ];
+    }
+
+    public function store(array $params): LoopSetting
+    {
+        return LoopSetting::create($params);
     }
 }
