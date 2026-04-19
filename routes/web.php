@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Socialite;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\PlanPageController;
 use App\Http\Controllers\TrashPageController;
 
 Route::get('/', function () {
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/home', [HomePageController::class, 'store'])->name('home.store');
     Route::post('/home/destroy/{loopSetting}', [HomePageController::class, 'destroy'])->name('home.destroy');
     Route::post('/home/favorite/{loopSetting}', [HomePageController::class, 'favorite'])->name('home.favorite');
+    Route::get('/plan', [PlanPageController::class, 'index'])->name('plan.index');
     Route::get('/trash', [TrashPageController::class, 'index'])->name('trash.index');
     Route::post('/trash/restore/{loopSetting}', [TrashPageController::class, 'restore'])->name('trash.restore')->withTrashed();
     Route::delete('/trash/{loopSetting}', [TrashPageController::class, 'destroy'])->name('trash.destroy')->withTrashed();
