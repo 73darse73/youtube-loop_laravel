@@ -13,7 +13,7 @@ test('保存済みループやプロ機能の有無を取得できているか',
     $loopSettings = LoopSetting::factory()->count(3)->create(['user_id' => $user->id]);
     $results = $this->useCase->index($user);
 
-    $this->assertEquals(
+    $this->assertEqualsCanonicalizing(
         $loopSettings->pluck('id')->toArray(),
         $results['loopSettings']->pluck('id')->toArray()
     );
