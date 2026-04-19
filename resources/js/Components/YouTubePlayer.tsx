@@ -5,9 +5,15 @@ interface Props {
     videoId: string;
     startTime: number;
     endTime: number;
+    onSave?: () => void;
 }
 
-export default function YouTubePlayer({ videoId, startTime, endTime }: Props) {
+export default function YouTubePlayer({
+    videoId,
+    startTime,
+    endTime,
+    onSave,
+}: Props) {
     const playerRef = useRef<ReturnType<
         YouTubeEvent['target']['getIframe']
     > | null>(null);
@@ -95,6 +101,14 @@ export default function YouTubePlayer({ videoId, startTime, endTime }: Props) {
                     ループ区間: {Math.floor(startTime)}秒 〜{' '}
                     {Math.floor(endTime)}秒
                 </span>
+                {onSave && (
+                    <button
+                        onClick={onSave}
+                        className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                    >
+                        💾 保存
+                    </button>
+                )}
             </div>
         </div>
     );
