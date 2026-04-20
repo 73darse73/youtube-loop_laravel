@@ -136,14 +136,24 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         className="h-16 w-28 rounded object-cover"
                                     />
                                     <button
-                                        onClick={() => handleToggleFavorite(loop)}
+                                        onClick={() =>
+                                            handleToggleFavorite(loop)
+                                        }
                                         className="absolute right-1 top-1 rounded-full bg-black/40 p-0.5 transition-colors hover:bg-black/60"
                                         aria-label="お気に入り"
                                     >
                                         <Star
                                             className="h-3.5 w-3.5"
-                                            fill={loop.is_favorite ? '#facc15' : 'none'}
-                                            stroke={loop.is_favorite ? '#facc15' : 'white'}
+                                            fill={
+                                                loop.is_favorite
+                                                    ? '#facc15'
+                                                    : 'none'
+                                            }
+                                            stroke={
+                                                loop.is_favorite
+                                                    ? '#facc15'
+                                                    : 'white'
+                                            }
                                         />
                                     </button>
                                 </div>
@@ -197,14 +207,24 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         />
                                     </button>
                                     <button
-                                        onClick={() => handleToggleFavorite(loop)}
+                                        onClick={() =>
+                                            handleToggleFavorite(loop)
+                                        }
                                         className="absolute right-2 top-2 rounded-full bg-black/40 p-1 transition-colors hover:bg-black/60"
                                         aria-label="お気に入り"
                                     >
                                         <Star
                                             className="h-4 w-4"
-                                            fill={loop.is_favorite ? '#facc15' : 'none'}
-                                            stroke={loop.is_favorite ? '#facc15' : 'white'}
+                                            fill={
+                                                loop.is_favorite
+                                                    ? '#facc15'
+                                                    : 'none'
+                                            }
+                                            stroke={
+                                                loop.is_favorite
+                                                    ? '#facc15'
+                                                    : 'white'
+                                            }
                                         />
                                     </button>
                                 </div>
@@ -328,14 +348,17 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         <div className="flex flex-col items-end gap-1">
                                             <button
                                                 onClick={handleOpenSaveDialog}
-                                                disabled={!currentVideoId || isAtLimit}
+                                                disabled={
+                                                    !currentVideoId || isAtLimit
+                                                }
                                                 className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-40"
                                             >
                                                 💾 保存
                                             </button>
                                             {isAtLimit && (
                                                 <p className="text-xs text-red-500">
-                                                    上限（{FREE_PLAN_LIMIT}件）に達しています
+                                                    上限（{FREE_PLAN_LIMIT}
+                                                    件）に達しています
                                                 </p>
                                             )}
                                         </div>
@@ -349,7 +372,9 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         videoId={currentVideoId}
                                         startTime={currentStart}
                                         endTime={currentEnd}
-                                        onSave={isAtLimit ? undefined : handleOpenSaveDialog}
+                                        onSave={handleOpenSaveDialog}
+                                        isAtLimit={isAtLimit}
+                                        limitMessage={`上限（${FREE_PLAN_LIMIT}件）に達しています`}
                                     />
                                 </div>
                             )}
