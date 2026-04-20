@@ -17,8 +17,14 @@ class HomePageUseCase
         ];
     }
 
-    public function store(array $params): LoopSetting
+    private const FREE_PLAN_LIMIT = 3;
+
+    public function store(User $user, array $params): LoopSetting
     {
+        if (!$user->is_pro && $user->loopSettings()->count() >= self::FREE_PLAN_LIMIT) {
+            abort(403, 'ループ設定の上限（3件）に達しています。Proプランにアップグレードしてください。');
+        }
+
         return LoopSetting::create($params);
     }
 

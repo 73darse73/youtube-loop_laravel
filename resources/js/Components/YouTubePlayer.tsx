@@ -6,6 +6,8 @@ interface Props {
     startTime: number;
     endTime: number;
     onSave?: () => void;
+    isAtLimit?: boolean;
+    limitMessage?: string;
 }
 
 export default function YouTubePlayer({
@@ -13,6 +15,8 @@ export default function YouTubePlayer({
     startTime,
     endTime,
     onSave,
+    isAtLimit = false,
+    limitMessage,
 }: Props) {
     const playerRef = useRef<ReturnType<
         YouTubeEvent['target']['getIframe']
@@ -101,14 +105,18 @@ export default function YouTubePlayer({
                     ループ区間: {Math.floor(startTime)}秒 〜{' '}
                     {Math.floor(endTime)}秒
                 </span>
-                {onSave && (
+                <div className="flex flex-col items-end gap-1">
                     <button
-                        onClick={onSave}
-                        className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                        onClick={isAtLimit ? undefined : onSave}
+                        disabled={isAtLimit}
+                        className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-40"
                     >
                         💾 保存
                     </button>
-                )}
+                    {isAtLimit && limitMessage && (
+                        <p className="text-xs text-red-500">{limitMessage}</p>
+                    )}
+                </div>
             </div>
         </div>
     );
