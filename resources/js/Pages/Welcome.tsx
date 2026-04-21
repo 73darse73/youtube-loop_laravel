@@ -84,7 +84,15 @@ export default function Welcome({ auth }: PageProps) {
                         YouTube動画の指定区間をループ再生・保存できるサービスです。
                         聴き込みたいフレーズ、練習したいシーン。何度でも繰り返せます。
                     </p>
-                    <GoogleLoginButton />
+                    <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                        <GoogleLoginButton />
+                        <Link
+                            href={route('register')}
+                            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-8 py-4 text-base font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+                        >
+                            メールアドレスで登録
+                        </Link>
+                    </div>
                     <p className="mt-4 text-sm text-gray-400">
                         無料で使えます・クレジットカード不要
                     </p>
@@ -293,7 +301,15 @@ export default function Welcome({ auth }: PageProps) {
                     <p className="mb-8 text-gray-500">
                         無料・登録30秒・クレジットカード不要
                     </p>
-                    <GoogleLoginButton />
+                    <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                        <GoogleLoginButton />
+                        <Link
+                            href={route('register')}
+                            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-8 py-4 text-base font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+                        >
+                            メールアドレスで登録
+                        </Link>
+                    </div>
                 </section>
 
                 <footer className="border-t border-gray-100 py-8 text-center text-sm text-gray-400">
