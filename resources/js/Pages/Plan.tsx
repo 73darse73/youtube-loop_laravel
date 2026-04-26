@@ -1,7 +1,8 @@
 import AppHeader from '@/Components/AppHeader';
 import { PageProps } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Check } from 'lucide-react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const FREE_PLAN_LIMIT = 3;
@@ -13,6 +14,14 @@ type Props = PageProps<{
 
 export default function Plan({ auth, isPro, loopCount }: Props) {
     const { t } = useTranslation();
+    const [processing, setProcessing] = useState(false);
+
+    const handleUpgrade = () => {
+        setProcessing(true);
+        router.post(route('subscription.checkout'), {}, {
+            onError: () => setProcessing(false),
+        });
+    };
 
     const freeFeatures = [
         t('plan.features.loopPlay'),
@@ -121,10 +130,13 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
                                 </ul>
                                 {!isPro && (
                                     <button
-                                        disabled
-                                        className="w-full cursor-not-allowed rounded-md bg-gradient-to-r from-purple-500 to-pink-500 py-2 text-sm font-medium text-white opacity-60"
+                                        onClick={handleUpgrade}
+                                        disabled={processing}
+                                        className="w-full rounded-md bg-gradient-to-r from-purple-500 to-pink-500 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                                     >
-                                        {t('plan.upgradeSoon')}
+                                        {processing
+                                            ? t('common.loading')
+                                            : t('plan.upgrade')}
                                     </button>
                                 )}
                             </div>
