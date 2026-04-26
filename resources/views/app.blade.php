@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
     <head>
         <meta charset="utf-8">
+        <!-- Dark mode flash prevention -->
+        <script>
+            (function() {
+                var t = localStorage.getItem('theme');
+                if (t !== 'light') {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                }
+            })();
+        </script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
