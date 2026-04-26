@@ -40,15 +40,15 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
     return (
         <>
             <Head title={t('plan.title')} />
-            <div className="min-h-screen bg-gray-50">
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-100">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
                     <div className="mx-auto max-w-2xl">
-                        <h1 className="mb-2 text-xl font-semibold">
+                        <h1 className="mb-2 text-2xl font-bold tracking-tight">
                             {t('plan.heading')}
                         </h1>
-                        <p className="mb-8 text-sm text-gray-500">
+                        <p className="mb-8 text-sm text-gray-400">
                             {t('plan.current')}:{' '}
                             <span className="font-medium text-gray-800">
                                 {isPro ? 'Pro' : 'Free'}
@@ -57,7 +57,7 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
 
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div
-                                className={`rounded-xl border bg-white p-6 shadow-sm ${!isPro ? 'border-gray-900 ring-2 ring-gray-900' : 'border-gray-200'}`}
+                                className={`rounded-2xl border bg-white p-6 shadow-md transition-shadow hover:shadow-lg ${!isPro ? 'border-gray-900 ring-2 ring-gray-900' : 'border-gray-200/70'}`}
                             >
                                 <div className="mb-4 flex items-center justify-between">
                                     <h2 className="text-lg font-semibold">
@@ -98,7 +98,7 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
                             </div>
 
                             <div
-                                className={`rounded-xl border bg-white p-6 shadow-sm ${isPro ? 'border-purple-500 ring-2 ring-purple-500' : 'border-gray-200'}`}
+                                className={`rounded-2xl border bg-white p-6 shadow-md transition-shadow hover:shadow-lg ${isPro ? 'border-purple-500 ring-2 ring-purple-500' : 'border-gray-200/70'}`}
                             >
                                 <div className="mb-4 flex items-center justify-between">
                                     <h2 className="text-lg font-semibold">

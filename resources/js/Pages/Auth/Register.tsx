@@ -158,7 +158,7 @@ export default function Register() {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50"
+                            className="w-full rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50"
                         >
                             アカウント作成
                         </button>
