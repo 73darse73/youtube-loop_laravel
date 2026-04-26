@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import YouTube, { YouTubeEvent, YouTubeProps } from 'react-youtube';
 
 interface Props {
@@ -18,6 +19,7 @@ export default function YouTubePlayer({
     isAtLimit = false,
     limitMessage,
 }: Props) {
+    const { t } = useTranslation();
     const playerRef = useRef<ReturnType<
         YouTubeEvent['target']['getIframe']
     > | null>(null);
@@ -99,11 +101,13 @@ export default function YouTubePlayer({
                     onClick={handlePlayPause}
                     className="inline-flex items-center gap-2 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-700"
                 >
-                    {isPlaying ? '⏸ 一時停止' : '▶ 再生'}
+                    {isPlaying ? t('player.pause') : t('player.play')}
                 </button>
                 <span className="text-sm text-gray-500">
-                    ループ区間: {Math.floor(startTime)}秒 〜{' '}
-                    {Math.floor(endTime)}秒
+                    {t('player.loopRange', {
+                        start: Math.floor(startTime),
+                        end: Math.floor(endTime),
+                    })}
                 </span>
                 <div className="flex flex-col items-end gap-1">
                     <button

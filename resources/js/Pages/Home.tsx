@@ -4,6 +4,7 @@ import { LoopSetting, PageProps } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
 import { Star, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const FREE_PLAN_LIMIT = 3;
 
@@ -22,6 +23,7 @@ type Props = PageProps<{
 }>;
 
 export default function Home({ auth, loopSettings, isPro }: Props) {
+    const { t } = useTranslation();
     const [url, setUrl] = useState('');
     const [startTime, setStartTime] = useState('0');
     const [endTime, setEndTime] = useState('30');
@@ -52,13 +54,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const handleStartLoop = () => {
         const videoId = extractVideoId(url);
         if (!videoId) {
-            setError('有効なYouTube URLを入力してください');
+            setError(t('home.invalidUrl'));
             return;
         }
         const start = parseFloat(startTime);
         const end = parseFloat(endTime);
         if (isNaN(start) || isNaN(end) || start >= end) {
-            setError('開始時間は終了時間より小さい値を入力してください');
+            setError(t('home.invalidTime'));
             return;
         }
         setError('');
@@ -87,7 +89,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                 setData('title', json.title ?? '');
             }
         } catch {
-            // タイトル取得失敗時はそのまま空欄
+            // ignore
         }
     };
 
@@ -101,7 +103,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     };
 
     const handleDeleteLoop = (loop: LoopSetting) => {
-        if (!window.confirm('このループ設定を削除しますか？')) return;
+        if (!window.confirm(t('home.deleteConfirm'))) return;
         router.post(route('home.destroy', loop.id));
     };
 
@@ -118,11 +120,10 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         <>
             {activeLoops.length === 0 ? (
                 <div className="py-12 text-center text-sm text-gray-400">
-                    保存されたループ設定はありません
+                    {t('home.noLoops')}
                 </div>
             ) : (
                 <>
-                    {/* 1000px以上: 縦リスト（サムネイル左・テキスト右） */}
                     <div className="hidden space-y-2 sidebar:block">
                         {activeLoops.map((loop) => (
                             <div
@@ -140,7 +141,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             handleToggleFavorite(loop)
                                         }
                                         className="absolute right-1 top-1 rounded-full bg-black/40 p-0.5 transition-colors hover:bg-black/60"
-                                        aria-label="お気に入り"
+                                        aria-label={t('common.favorite')}
                                     >
                                         <Star
                                             className="h-3.5 w-3.5"
@@ -170,25 +171,26 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         </p>
                                     )}
                                     <p className="mt-1 text-xs text-gray-400">
-                                        {Math.floor(loop.start_time)}秒 〜{' '}
-                                        {Math.floor(loop.end_time)}秒
+                                        {t('home.loopRange', {
+                                            start: Math.floor(loop.start_time),
+                                            end: Math.floor(loop.end_time),
+                                        })}
                                     </p>
                                 </button>
                                 <button
                                     onClick={() => handleDeleteLoop(loop)}
                                     className="flex-shrink-0 rounded p-1.5 text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
-                                    aria-label="削除"
+                                    aria-label={t('common.delete')}
                                 >
                                     <span className="flex flex-col items-center gap-0.5 text-xs">
                                         <Trash2 className="h-4 w-4" />
-                                        <span>削除</span>
+                                        <span>{t('common.delete')}</span>
                                     </span>
                                 </button>
                             </div>
                         ))}
                     </div>
 
-                    {/* 999px以下: グリッド（サムネイル上・テキスト下） */}
                     <div className="grid grid-cols-1 gap-4 cols-2:grid-cols-2 cols-3:grid-cols-3 sidebar:hidden">
                         {activeLoops.map((loop) => (
                             <div
@@ -211,7 +213,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             handleToggleFavorite(loop)
                                         }
                                         className="absolute right-2 top-2 rounded-full bg-black/40 p-1 transition-colors hover:bg-black/60"
-                                        aria-label="お気に入り"
+                                        aria-label={t('common.favorite')}
                                     >
                                         <Star
                                             className="h-4 w-4"
@@ -242,18 +244,22 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             </p>
                                         )}
                                         <p className="mt-1 text-xs text-gray-400">
-                                            {Math.floor(loop.start_time)}秒 〜{' '}
-                                            {Math.floor(loop.end_time)}秒
+                                            {t('home.loopRange', {
+                                                start: Math.floor(
+                                                    loop.start_time,
+                                                ),
+                                                end: Math.floor(loop.end_time),
+                                            })}
                                         </p>
                                     </button>
                                     <button
                                         onClick={() => handleDeleteLoop(loop)}
                                         className="flex-shrink-0 rounded p-1.5 text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
-                                        aria-label="削除"
+                                        aria-label={t('common.delete')}
                                     >
                                         <span className="flex flex-col items-center gap-0.5 text-xs">
                                             <Trash2 className="h-4 w-4" />
-                                            <span>削除</span>
+                                            <span>{t('common.delete')}</span>
                                         </span>
                                     </button>
                                 </div>
@@ -267,26 +273,25 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
 
     return (
         <>
-            <Head title="ホーム" />
+            <Head title={t('home.title')} />
             <div className="min-h-screen bg-gray-50">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
                     <div className="sidebar:grid sidebar:grid-cols-3 sidebar:gap-6">
-                        {/* プレイヤーエリア */}
                         <div className="space-y-6 sidebar:col-span-2">
                             <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
                                 <h2 className="mb-1 text-lg font-semibold">
-                                    ループ再生
+                                    {t('home.loopPlay')}
                                 </h2>
                                 <p className="mb-4 text-sm text-gray-500">
-                                    YouTube動画のURLと再生区間を指定してください
+                                    {t('home.loopPlayDesc')}
                                 </p>
 
                                 <div className="space-y-4">
                                     <div>
                                         <label className="mb-1 block text-sm font-medium text-gray-700">
-                                            YouTube URL
+                                            {t('home.youtubeUrl')}
                                         </label>
                                         <input
                                             type="url"
@@ -294,7 +299,9 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             onChange={(e) =>
                                                 setUrl(e.target.value)
                                             }
-                                            placeholder="https://www.youtube.com/watch?v=..."
+                                            placeholder={t(
+                                                'home.urlPlaceholder',
+                                            )}
                                             className="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                         />
                                     </div>
@@ -302,7 +309,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="mb-1 block text-sm font-medium text-gray-700">
-                                                開始時間（秒）
+                                                {t('home.startTime')}
                                             </label>
                                             <input
                                                 type="number"
@@ -317,7 +324,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         </div>
                                         <div>
                                             <label className="mb-1 block text-sm font-medium text-gray-700">
-                                                終了時間（秒）
+                                                {t('home.endTime')}
                                             </label>
                                             <input
                                                 type="number"
@@ -343,7 +350,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             onClick={handleStartLoop}
                                             className="flex-1 rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700"
                                         >
-                                            ▶ ループ再生開始
+                                            {t('home.startLoop')}
                                         </button>
                                         <div className="flex flex-col items-end gap-1">
                                             <button
@@ -353,12 +360,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                                 }
                                                 className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-40"
                                             >
-                                                💾 保存
+                                                💾 {t('common.save')}
                                             </button>
                                             {isAtLimit && (
                                                 <p className="text-xs text-red-500">
-                                                    上限（{FREE_PLAN_LIMIT}
-                                                    件）に達しています
+                                                    {t('home.limitReached', {
+                                                        limit: FREE_PLAN_LIMIT,
+                                                    })}
                                                 </p>
                                             )}
                                         </div>
@@ -374,17 +382,18 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         endTime={currentEnd}
                                         onSave={handleOpenSaveDialog}
                                         isAtLimit={isAtLimit}
-                                        limitMessage={`上限（${FREE_PLAN_LIMIT}件）に達しています`}
+                                        limitMessage={t('home.limitReached', {
+                                            limit: FREE_PLAN_LIMIT,
+                                        })}
                                     />
                                 </div>
                             )}
 
-                            {/* 999px以下: ループ一覧をプレイヤー下に表示 */}
                             <div className="sidebar:hidden">
                                 <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
                                     <div className="mb-4 flex items-center justify-between">
                                         <h2 className="text-lg font-semibold">
-                                            保存済みループ
+                                            {t('home.savedLoops')}
                                         </h2>
                                         {!isPro && (
                                             <span className="text-xs text-gray-400">
@@ -398,12 +407,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                             </div>
                         </div>
 
-                        {/* 1000px以上: 右サイドバー */}
                         <div className="hidden sidebar:block">
                             <div className="sticky top-20 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
                                 <div className="mb-4 flex items-center justify-between">
                                     <h2 className="font-semibold">
-                                        保存済みループ
+                                        {t('home.savedLoops')}
                                     </h2>
                                     {!isPro && (
                                         <span className="text-xs text-gray-400">
@@ -419,21 +427,20 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                 </div>
             </div>
 
-            {/* 保存ダイアログ */}
             {showSaveDialog && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                     <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
                         <h3 className="mb-1 text-lg font-semibold">
-                            ループ設定を保存
+                            {t('home.saveDialog.title')}
                         </h3>
                         <p className="mb-4 text-sm text-gray-500">
-                            この動画に名前を付けて保存します
+                            {t('home.saveDialog.desc')}
                         </p>
 
                         <div className="space-y-4">
                             <div>
                                 <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    タイトル（任意）
+                                    {t('home.saveDialog.titleLabel')}
                                 </label>
                                 <input
                                     type="text"
@@ -441,7 +448,9 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     onChange={(e) =>
                                         setData('title', e.target.value)
                                     }
-                                    placeholder="例: サビの部分"
+                                    placeholder={t(
+                                        'home.saveDialog.titlePlaceholder',
+                                    )}
                                     className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                     autoFocus
                                 />
@@ -454,22 +463,26 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
 
                             <div>
                                 <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    メモ（任意）
+                                    {t('home.saveDialog.memoLabel')}
                                 </label>
                                 <textarea
                                     value={data.description}
                                     onChange={(e) =>
                                         setData('description', e.target.value)
                                     }
-                                    placeholder="メモを入力..."
+                                    placeholder={t(
+                                        'home.saveDialog.memoPlaceholder',
+                                    )}
                                     rows={3}
                                     className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 />
                             </div>
 
                             <p className="text-xs text-gray-400">
-                                区間: {Math.floor(data.start_time)}秒 〜{' '}
-                                {Math.floor(data.end_time)}秒
+                                {t('home.saveDialog.range', {
+                                    start: Math.floor(data.start_time),
+                                    end: Math.floor(data.end_time),
+                                })}
                             </p>
                         </div>
 
@@ -478,14 +491,14 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 onClick={() => setShowSaveDialog(false)}
                                 className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
                             >
-                                キャンセル
+                                {t('common.cancel')}
                             </button>
                             <button
                                 onClick={handleSave}
                                 disabled={processing}
                                 className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 disabled:opacity-40"
                             >
-                                保存
+                                {t('common.save')}
                             </button>
                         </div>
                     </div>

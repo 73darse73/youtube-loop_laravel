@@ -1,4 +1,6 @@
+import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     userName: string;
@@ -6,6 +8,8 @@ interface Props {
 }
 
 export default function AppHeader({ userName, isPro = false }: Props) {
+    const { t } = useTranslation();
+
     return (
         <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
             <div className="container mx-auto flex items-center justify-between px-4 py-3">
@@ -25,7 +29,7 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                     <span className="text-lg font-bold">Loop Player</span>
                 </Link>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                     <span className="hidden text-sm text-gray-500 md:block">
                         {userName}
                     </span>
@@ -34,17 +38,18 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                             PRO
                         </span>
                     )}
+                    <LanguageSwitcher />
                     <Link
                         href="/trash"
                         className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100"
                     >
-                        ゴミ箱
+                        {t('common.trash')}
                     </Link>
                     <Link
                         href="/plan"
                         className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100"
                     >
-                        プラン
+                        {t('common.plan')}
                     </Link>
                     <Link
                         href="/logout"
@@ -52,7 +57,7 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                         as="button"
                         className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100"
                     >
-                        ログアウト
+                        {t('common.logout')}
                     </Link>
                 </div>
             </div>
