@@ -103,6 +103,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         });
     };
 
+    const handleRangeChange = (start: number, end: number) => {
+        setCurrentStart(start);
+        setCurrentEnd(end);
+        setStartTime(start.toFixed(1));
+        setEndTime(end.toFixed(1));
+    };
+
     const handleDeleteLoop = (loop: LoopSetting) => {
         if (!window.confirm(t('home.deleteConfirm'))) return;
         router.post(route('home.destroy', loop.id));
@@ -382,6 +389,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         startTime={currentStart}
                                         endTime={currentEnd}
                                         onSave={handleOpenSaveDialog}
+                                        onRangeChange={handleRangeChange}
                                         isAtLimit={isAtLimit}
                                         limitMessage={t('home.limitReached', {
                                             limit: FREE_PLAN_LIMIT,
