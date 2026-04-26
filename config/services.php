@@ -41,4 +41,8 @@ return [
         'redirect' => '/auth/google/callback',
     ],
 
+    'adsense' => [
+        'client' => env('ADSENSE_CLIENT'),
+    ],
+
 ];

@@ -1,3 +1,4 @@
+import AdBanner from '@/Components/AdBanner';
 import AppHeader from '@/Components/AppHeader';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
@@ -387,6 +388,17 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         })}
                                     />
                                 </div>
+                            )}
+
+                            {!isPro && (
+                                <AdBanner
+                                    slot={
+                                        import.meta.env
+                                            .VITE_ADSENSE_SLOT_HOME ?? ''
+                                    }
+                                    format="horizontal"
+                                    className="min-h-[90px]"
+                                />
                             )}
 
                             <div className="sidebar:hidden">
