@@ -127,7 +127,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const LoopList = () => (
         <>
             {activeLoops.length === 0 ? (
-                <div className="py-12 text-center text-sm text-gray-400">
+                <div className="py-12 text-center text-sm text-gray-500 dark:text-gray-400">
                     {t('home.noLoops')}
                 </div>
             ) : (
@@ -136,7 +136,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         {activeLoops.map((loop) => (
                             <div
                                 key={loop.id}
-                                className="flex w-full items-center gap-3 rounded-xl p-2 transition-all hover:bg-gray-50 hover:shadow-sm"
+                                className="flex w-full items-center gap-3 rounded-xl p-2 transition-all hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700"
                             >
                                 <div className="relative flex-shrink-0">
                                     <img
@@ -170,15 +170,15 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     onClick={() => handleLoadLoop(loop)}
                                     className="min-w-0 flex-1 text-left"
                                 >
-                                    <p className="line-clamp-2 text-sm font-medium leading-snug">
+                                    <p className="line-clamp-2 text-sm font-medium leading-snug dark:text-gray-100">
                                         {loop.title}
                                     </p>
                                     {loop.description && (
-                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
+                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-500 dark:text-gray-400">
                                             {loop.description}
                                         </p>
                                     )}
-                                    <p className="mt-1 text-xs text-gray-400">
+                                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                         {t('home.loopRange', {
                                             start: Math.floor(loop.start_time),
                                             end: Math.floor(loop.end_time),
@@ -203,7 +203,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         {activeLoops.map((loop) => (
                             <div
                                 key={loop.id}
-                                className="rounded-xl transition-all hover:shadow-md"
+                                className="rounded-xl transition-all hover:bg-gray-50 hover:shadow-md dark:hover:bg-gray-700"
                             >
                                 <div className="relative">
                                     <button
@@ -247,11 +247,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             {loop.title}
                                         </p>
                                         {loop.description && (
-                                            <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
+                                            <p className="mt-0.5 line-clamp-1 text-xs text-gray-500 dark:text-gray-400">
                                                 {loop.description}
                                             </p>
                                         )}
-                                        <p className="mt-1 text-xs text-gray-400">
+                                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                             {t('home.loopRange', {
                                                 start: Math.floor(
                                                     loop.start_time,
@@ -282,23 +282,23 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     return (
         <>
             <Head title={t('home.title')} />
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-100">
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
                     <div className="sidebar:grid sidebar:grid-cols-3 sidebar:gap-6">
                         <div className="space-y-6 sidebar:col-span-2">
-                            <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
-                                <h2 className="mb-1 text-xl font-bold tracking-tight">
+                            <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700/70 dark:bg-gray-800">
+                                <h2 className="mb-1 text-xl font-bold tracking-tight dark:text-white">
                                     {t('home.loopPlay')}
                                 </h2>
-                                <p className="mb-5 text-sm text-gray-400">
+                                <p className="mb-5 text-sm text-gray-500 dark:text-gray-400">
                                     {t('home.loopPlayDesc')}
                                 </p>
 
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="mb-1 block text-sm font-medium text-gray-700">
+                                        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                             {t('home.youtubeUrl')}
                                         </label>
                                         <input
@@ -310,13 +310,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             placeholder={t(
                                                 'home.urlPlaceholder',
                                             )}
-                                            className="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                            className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 font-mono text-sm shadow-sm focus-visible:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-500 dark:focus-visible:ring-indigo-400"
                                         />
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
-                                            <label className="mb-1 block text-sm font-medium text-gray-700">
+                                            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                                 {t('home.startTime')}
                                             </label>
                                             <input
@@ -327,11 +327,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                                 onChange={(e) =>
                                                     setStartTime(e.target.value)
                                                 }
-                                                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus-visible:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus-visible:ring-indigo-400"
                                             />
                                         </div>
                                         <div>
-                                            <label className="mb-1 block text-sm font-medium text-gray-700">
+                                            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                                 {t('home.endTime')}
                                             </label>
                                             <input
@@ -342,13 +342,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                                 onChange={(e) =>
                                                     setEndTime(e.target.value)
                                                 }
-                                                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus-visible:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus-visible:ring-indigo-400"
                                             />
                                         </div>
                                     </div>
 
                                     {error && (
-                                        <p className="text-sm text-red-500">
+                                        <p className="text-sm text-red-600 dark:text-red-400">
                                             {error}
                                         </p>
                                     )}
@@ -356,7 +356,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     <div className="flex gap-3">
                                         <button
                                             onClick={handleStartLoop}
-                                            className="flex-1 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
+                                            className="flex-1 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-[0.98] dark:from-gray-600 dark:to-gray-700 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
                                         >
                                             {t('home.startLoop')}
                                         </button>
@@ -366,12 +366,12 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                                 disabled={
                                                     !currentVideoId || isAtLimit
                                                 }
-                                                className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-gray-300 hover:shadow-md active:scale-[0.98] disabled:opacity-40"
+                                                className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-gray-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-40 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:border-gray-500 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
                                             >
                                                 💾 {t('common.save')}
                                             </button>
                                             {isAtLimit && (
-                                                <p className="text-xs text-red-500">
+                                                <p className="text-xs text-red-600 dark:text-red-400">
                                                     {t('home.limitReached', {
                                                         limit: FREE_PLAN_LIMIT,
                                                     })}
@@ -383,7 +383,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                             </div>
 
                             {currentVideoId && (
-                                <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md">
+                                <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
                                     <YouTubePlayer
                                         videoId={currentVideoId}
                                         startTime={currentStart}
@@ -410,13 +410,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                             )}
 
                             <div className="sidebar:hidden">
-                                <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md">
+                                <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
                                     <div className="mb-4 flex items-center justify-between">
-                                        <h2 className="text-lg font-semibold">
+                                        <h2 className="text-lg font-semibold dark:text-white">
                                             {t('home.savedLoops')}
                                         </h2>
                                         {!isPro && (
-                                            <span className="text-xs text-gray-400">
+                                            <span className="text-xs text-gray-500 dark:text-gray-400">
                                                 {activeLoops.length} /{' '}
                                                 {FREE_PLAN_LIMIT}
                                             </span>
@@ -428,13 +428,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         </div>
 
                         <div className="hidden sidebar:block">
-                            <div className="sticky top-20 rounded-2xl border border-gray-200/70 bg-white p-4 shadow-md">
+                            <div className="sticky top-20 rounded-2xl border border-gray-200/70 bg-white p-4 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
                                 <div className="mb-4 flex items-center justify-between">
-                                    <h2 className="font-semibold">
+                                    <h2 className="font-semibold dark:text-white">
                                         {t('home.savedLoops')}
                                     </h2>
                                     {!isPro && (
-                                        <span className="text-xs text-gray-400">
+                                        <span className="text-xs text-gray-500 dark:text-gray-400">
                                             {activeLoops.length} /{' '}
                                             {FREE_PLAN_LIMIT}
                                         </span>
@@ -449,17 +449,17 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
 
             {showSaveDialog && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-                        <h3 className="mb-1 text-lg font-semibold">
+                    <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-800">
+                        <h3 className="mb-1 text-lg font-semibold dark:text-white">
                             {t('home.saveDialog.title')}
                         </h3>
-                        <p className="mb-4 text-sm text-gray-500">
+                        <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
                             {t('home.saveDialog.desc')}
                         </p>
 
                         <div className="space-y-4">
                             <div>
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
+                                <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     {t('home.saveDialog.titleLabel')}
                                 </label>
                                 <input
@@ -471,18 +471,18 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     placeholder={t(
                                         'home.saveDialog.titlePlaceholder',
                                     )}
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                    className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus-visible:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus-visible:ring-indigo-400"
                                     autoFocus
                                 />
                                 {errors.title && (
-                                    <p className="mt-1 text-xs text-red-500">
+                                    <p className="mt-1 text-xs text-red-600 dark:text-red-400">
                                         {errors.title}
                                     </p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
+                                <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                     {t('home.saveDialog.memoLabel')}
                                 </label>
                                 <textarea
@@ -494,11 +494,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         'home.saveDialog.memoPlaceholder',
                                     )}
                                     rows={3}
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                    className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus-visible:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus-visible:ring-indigo-400"
                                 />
                             </div>
 
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
                                 {t('home.saveDialog.range', {
                                     start: Math.floor(data.start_time),
                                     end: Math.floor(data.end_time),
@@ -509,14 +509,14 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         <div className="mt-6 flex justify-end gap-3">
                             <button
                                 onClick={() => setShowSaveDialog(false)}
-                                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus-visible:ring-gray-500 dark:focus-visible:ring-offset-gray-800"
                             >
                                 {t('common.cancel')}
                             </button>
                             <button
                                 onClick={handleSave}
                                 disabled={processing}
-                                className="rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-40"
+                                className="rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-40 dark:from-gray-600 dark:to-gray-700 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
                             >
                                 {t('common.save')}
                             </button>
