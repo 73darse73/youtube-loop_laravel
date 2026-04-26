@@ -1,2 +1,15 @@
 User-agent: *
-Disallow:
+Disallow: /home
+Disallow: /profile
+Disallow: /trash
+Disallow: /plan
+Disallow: /subscription
+Disallow: /stripe
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /confirm-password
+
+Allow: /
