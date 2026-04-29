@@ -67,6 +67,14 @@ Route::get('/auth/google/callback', function () {
 
 
 
+Route::get('/terms', function () {
+    return Inertia::render('TermsOfService');
+})->name('terms');
+
+Route::get('/privacy', function () {
+    return Inertia::render('PrivacyPolicy');
+})->name('privacy');
+
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
 
 require __DIR__.'/auth.php';
