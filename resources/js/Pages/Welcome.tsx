@@ -356,7 +356,22 @@ export default function Welcome({
                         </main>
 
                         <footer className="py-16 text-center text-sm text-black dark:text-white/70">
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
+                            <div className="flex items-center justify-center gap-4">
+                                <Link
+                                    href={route('terms')}
+                                    className="hover:underline"
+                                >
+                                    Terms of Service
+                                </Link>
+                                <span>·</span>
+                                <Link
+                                    href={route('privacy')}
+                                    className="hover:underline"
+                                >
+                                    Privacy Policy
+                                </Link>
+                            </div>
+                            <p className="mt-2 text-xs opacity-50">© {new Date().getFullYear()} Loop Player. All rights reserved.</p>
                         </footer>
                     </div>
                 </div>

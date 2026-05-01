@@ -1,3 +1,4 @@
+import AppFooter from '@/Components/AppFooter';
 import AppHeader from '@/Components/AppHeader';
 import { LoopSetting, PageProps } from '@/types';
 import { Head, router } from '@inertiajs/react';
@@ -28,7 +29,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
     return (
         <>
             <Head title={t('trash.title')} />
-            <div className="min-h-screen bg-gray-50">
+            <div className="flex min-h-screen flex-col bg-gray-50">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
@@ -115,6 +116,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                         )}
                     </div>
                 </div>
+                <AppFooter />
             </div>
         </>
     );

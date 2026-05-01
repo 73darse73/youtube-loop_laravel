@@ -1,4 +1,5 @@
 import AdBanner from '@/Components/AdBanner';
+import AppFooter from '@/Components/AppFooter';
 import AppHeader from '@/Components/AppHeader';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
@@ -282,7 +283,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     return (
         <>
             <Head title={t('home.title')} />
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+            <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
@@ -445,6 +446,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         </div>
                     </div>
                 </div>
+                <AppFooter />
             </div>
 
             {showSaveDialog && (
