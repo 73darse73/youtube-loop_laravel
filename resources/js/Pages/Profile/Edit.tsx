@@ -1,3 +1,4 @@
+import AppFooter from '@/Components/AppFooter';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PageProps } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -38,6 +39,7 @@ export default function Edit({
                     </div>
                 </div>
             </div>
+            <AppFooter />
         </AuthenticatedLayout>
     );
 }
