@@ -9,7 +9,7 @@ class PlanPageUseCase
     public function index(User $user): array
     {
         $subscription = $user->subscription('default');
-        $isCancelled = $subscription?->cancelled() ?? false;
+        $isCancelled = $subscription?->onGracePeriod() ?? false;
         $endsAt = $subscription?->ends_at?->toDateString();
 
         return [
