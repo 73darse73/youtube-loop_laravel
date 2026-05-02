@@ -21,6 +21,13 @@ class SubscriptionController extends Controller
         return Inertia::location($checkout->url);
     }
 
+    public function cancel(Request $request)
+    {
+        $request->user()->subscription('default')->cancel();
+
+        return redirect()->route('plan.index');
+    }
+
     public function success(Request $request)
     {
         return redirect()->route('plan.index')->with('success', 'Proプランへのアップグレードが完了しました！');

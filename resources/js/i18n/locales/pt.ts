@@ -60,6 +60,8 @@ export default {
         loopCount: 'Loops salvos: {{count}}',
         upgrade: 'Atualizar para Pro',
         upgradeSoon: 'Em breve',
+        cancelSubscription: 'Cancelar assinatura',
+        cancelConfirm: 'Tem certeza que deseja cancelar? Você pode continuar usando o Pro até o final do período de cobrança atual.',
         features: {
             loopPlay: 'Reprodução em loop (ilimitada)',
             saveFree: 'Salvar até 3 loops',
