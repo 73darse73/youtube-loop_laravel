@@ -60,6 +60,8 @@ export default {
         loopCount: '저장된 루프: {{count}}개',
         upgrade: 'Pro로 업그레이드',
         upgradeSoon: '곧 출시',
+        cancelSubscription: '구독 취소',
+        cancelConfirm: '정말로 취소하시겠습니까? 현재 결제 기간이 끝날 때까지 Pro 플랜을 계속 이용하실 수 있습니다.',
         features: {
             loopPlay: '루프 재생 (무제한)',
             saveFree: '루프 설정 저장 (최대 3개)',

@@ -60,6 +60,8 @@ export default {
         loopCount: '保存済みループ: {{count}}件',
         upgrade: 'Proにアップグレード',
         upgradeSoon: '近日公開',
+        cancelSubscription: 'サブスクリプションを解約する',
+        cancelConfirm: '本当に解約しますか？現在の期間終了まではProプランをご利用いただけます。',
         features: {
             loopPlay: 'ループ再生（無制限）',
             saveFree: 'ループ設定の保存（3件まで）',

@@ -24,6 +24,12 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
         });
     };
 
+    const handleCancel = () => {
+        if (confirm(t('plan.cancelConfirm'))) {
+            router.post(route('subscription.cancel'));
+        }
+    };
+
     const freeFeatures = [
         t('plan.features.loopPlay'),
         t('plan.features.saveFree'),
@@ -129,7 +135,7 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
                                         </li>
                                     ))}
                                 </ul>
-                                {!isPro && (
+                                {!isPro ? (
                                     <button
                                         onClick={handleUpgrade}
                                         disabled={processing}
@@ -138,6 +144,13 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
                                         {processing
                                             ? t('common.loading')
                                             : t('plan.upgrade')}
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleCancel}
+                                        className="w-full rounded-md border border-gray-300 py-2 text-sm font-medium text-gray-500 transition-colors hover:border-red-400 hover:text-red-500 dark:border-gray-600 dark:text-gray-400"
+                                    >
+                                        {t('plan.cancelSubscription')}
                                     </button>
                                 )}
                             </div>
