@@ -62,6 +62,7 @@ export default {
         upgradeSoon: 'Próximamente',
         cancelSubscription: 'Cancelar suscripción',
         cancelConfirm: '¿Estás seguro de que deseas cancelar? Podrás seguir usando Pro hasta el final del período de facturación actual.',
+        cancelledUntil: 'Activo hasta {{date}} (Cancelado)',
         features: {
             loopPlay: 'Reproducción en bucle (ilimitada)',
             saveFree: 'Guardar hasta 3 bucles',

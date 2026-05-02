@@ -62,6 +62,7 @@ export default {
         upgradeSoon: 'Coming Soon',
         cancelSubscription: 'Cancel Subscription',
         cancelConfirm: 'Are you sure you want to cancel? You can continue using Pro until the end of your current billing period.',
+        cancelledUntil: 'Active until {{date}} (Cancelled)',
         features: {
             loopPlay: 'Unlimited loop playback',
             saveFree: 'Save up to 3 loop settings',

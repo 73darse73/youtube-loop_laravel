@@ -11,9 +11,11 @@ const FREE_PLAN_LIMIT = 3;
 type Props = PageProps<{
     isPro: boolean;
     loopCount: number;
+    isCancelled: boolean;
+    endsAt: string | null;
 }>;
 
-export default function Plan({ auth, isPro, loopCount }: Props) {
+export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Props) {
     const { t } = useTranslation();
     const [processing, setProcessing] = useState(false);
 
@@ -145,6 +147,10 @@ export default function Plan({ auth, isPro, loopCount }: Props) {
                                             ? t('common.loading')
                                             : t('plan.upgrade')}
                                     </button>
+                                ) : isCancelled ? (
+                                    <p className="w-full py-2 text-center text-sm text-gray-400 dark:text-gray-500">
+                                        {t('plan.cancelledUntil', { date: endsAt })}
+                                    </p>
                                 ) : (
                                     <button
                                         onClick={handleCancel}

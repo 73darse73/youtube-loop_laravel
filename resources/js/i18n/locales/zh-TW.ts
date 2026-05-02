@@ -62,6 +62,7 @@ export default {
         upgradeSoon: '即將推出',
         cancelSubscription: '取消訂閱',
         cancelConfirm: '確定要取消嗎？您可以繼續使用 Pro 方案直到當前計費週期結束。',
+        cancelledUntil: '有效至 {{date}}（已取消）',
         features: {
             loopPlay: '循環播放（無限次）',
             saveFree: '儲存循環設定（最多 3 個）',

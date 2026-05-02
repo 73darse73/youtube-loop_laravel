@@ -62,6 +62,7 @@ export default {
         upgradeSoon: '近日公開',
         cancelSubscription: 'サブスクリプションを解約する',
         cancelConfirm: '本当に解約しますか？現在の期間終了まではProプランをご利用いただけます。',
+        cancelledUntil: '{{date}}まで利用可能（解約済み）',
         features: {
             loopPlay: 'ループ再生（無制限）',
             saveFree: 'ループ設定の保存（3件まで）',
