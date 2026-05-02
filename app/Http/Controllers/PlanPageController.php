@@ -16,6 +16,8 @@ class PlanPageController extends Controller
         return Inertia::render('Plan', [
             'isPro' => $results['isPro'],
             'loopCount' => $results['loopCount'],
+            'isCancelled' => $results['isCancelled'],
+            'endsAt' => $results['endsAt'],
         ]);
     }
 }
