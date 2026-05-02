@@ -9,6 +9,8 @@ class WebhookController extends CashierWebhookController
 {
     public function handleCustomerSubscriptionCreated(array $payload): void
     {
+        parent::handleCustomerSubscriptionCreated($payload);
+
         $customerId = $payload['data']['object']['customer'];
         $user = User::where('stripe_id', $customerId)->first();
         if ($user) {
@@ -18,6 +20,8 @@ class WebhookController extends CashierWebhookController
 
     public function handleCustomerSubscriptionDeleted(array $payload): void
     {
+        parent::handleCustomerSubscriptionDeleted($payload);
+
         $customerId = $payload['data']['object']['customer'];
         $user = User::where('stripe_id', $customerId)->first();
         if ($user) {
