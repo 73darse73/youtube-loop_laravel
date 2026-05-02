@@ -14,7 +14,7 @@ export default {
         loading: 'Loading...',
     },
     header: {
-        logoAlt: 'Loop Player',
+        logoAlt: 'Loop Video',
     },
     home: {
         title: 'Home',
@@ -100,7 +100,7 @@ export default {
         startFree: 'Get Started Free',
         usecases: {
             heading: 'Who is it for?',
-            desc: 'If there\'s a scene you want to watch again and again, Loop Player is for you.',
+            desc: 'If there\'s a scene you want to watch again and again, Loop Video is for you.',
             guitar: { title: 'Instrument Practice', desc: 'Loop the phrases you can\'t nail. Focus on exactly the section you need.' },
             lang: { title: 'Language Learning', desc: 'Loop the lines you can\'t catch. Great for shadowing practice.' },
             dance: { title: 'Dance Choreography', desc: 'Replay the moves you\'re learning. Never miss a detail.' },

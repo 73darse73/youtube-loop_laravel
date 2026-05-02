@@ -14,7 +14,7 @@ export default {
         loading: '読み込み中...',
     },
     header: {
-        logoAlt: 'Loop Player',
+        logoAlt: 'Loop Video',
     },
     home: {
         title: 'ホーム',
@@ -100,7 +100,7 @@ export default {
         startFree: '無料で始める',
         usecases: {
             heading: 'こんな時に使えます',
-            desc: '繰り返し見たいシーンがあるなら、Loop Player が役に立ちます。',
+            desc: '繰り返し見たいシーンがあるなら、Loop Video が役に立ちます。',
             guitar: { title: '楽器の練習', desc: '弾けないフレーズを何度もループ。再生区間だけ絞り込んで集中練習できます。' },
             lang: { title: '語学・リスニング', desc: '聞き取れないセリフをピンポイントでループ。シャドーイングにも最適。' },
             dance: { title: 'ダンスの振付確認', desc: '覚えたい振付部分だけをくり返し再生。細かい動きも見逃しません。' },

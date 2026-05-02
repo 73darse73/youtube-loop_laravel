@@ -371,7 +371,7 @@ export default function Welcome({
                                     Privacy Policy
                                 </Link>
                             </div>
-                            <p className="mt-2 text-xs opacity-50">© {new Date().getFullYear()} Loop Player. All rights reserved.</p>
+                            <p className="mt-2 text-xs opacity-50">© {new Date().getFullYear()} Loop Video. All rights reserved.</p>
                         </footer>
                     </div>
                 </div>

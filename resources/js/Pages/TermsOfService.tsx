@@ -11,7 +11,7 @@ export default function TermsOfService() {
 
     return (
         <>
-            <Head title={isJa ? '利用規約 | Loop Player' : 'Terms of Service | Loop Player'} />
+            <Head title={isJa ? '利用規約 | Loop Video' : 'Terms of Service | Loop Video'} />
             <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
                 <LegalHeader />
                 <main className="container mx-auto max-w-3xl px-4 py-12">
@@ -32,7 +32,7 @@ function JaContent() {
                 <div>
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">1. サービスについて</h2>
                     <p className="mt-2 text-sm leading-relaxed">
-                        Loop Player（以下「本サービス」）は、YouTube動画の任意の区間を繰り返し再生できるWebアプリケーションです。
+                        Loop Video（以下「本サービス」）は、YouTube動画の任意の区間を繰り返し再生できるWebアプリケーションです。
                         本サービスはGoogleおよびYouTubeと提携するものではなく、YouTube APIを通じてサービスを提供します。
                         本サービスの利用にはYouTube利用規約（<a href="https://www.youtube.com/t/terms" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">https://www.youtube.com/t/terms</a>）が適用されます。
                     </p>
@@ -105,7 +105,7 @@ function EnContent() {
                 <div>
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">1. About the Service</h2>
                     <p className="mt-2 text-sm leading-relaxed">
-                        Loop Player (the "Service") is a web application that allows you to loop any section of a YouTube video.
+                        Loop Video (the "Service") is a web application that allows you to loop any section of a YouTube video.
                         This Service is not affiliated with or endorsed by Google or YouTube. The Service uses the YouTube API, and your use of this Service is also subject to the YouTube Terms of Service (<a href="https://www.youtube.com/t/terms" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">https://www.youtube.com/t/terms</a>).
                     </p>
                 </div>

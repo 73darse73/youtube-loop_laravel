@@ -14,7 +14,7 @@ export default {
         loading: '로딩 중...',
     },
     header: {
-        logoAlt: 'Loop Player',
+        logoAlt: 'Loop Video',
     },
     home: {
         title: '홈',
@@ -100,7 +100,7 @@ export default {
         startFree: '무료로 시작',
         usecases: {
             heading: '이런 때 사용할 수 있습니다',
-            desc: '반복해서 보고 싶은 장면이 있다면, Loop Player가 도움이 됩니다.',
+            desc: '반복해서 보고 싶은 장면이 있다면, Loop Video가 도움이 됩니다.',
             guitar: { title: '악기 연습', desc: '잘 안 되는 프레이즈를 몇 번이고 루프. 재생 구간만 좁혀서 집중 연습.' },
             lang: { title: '어학·리스닝', desc: '들리지 않는 대사를 포인트로 루프. 섀도잉 연습에도 최적.' },
             dance: { title: '댄스 안무 확인', desc: '익히고 싶은 안무 부분만 반복 재생. 세세한 동작도 놓치지 않아요.' },

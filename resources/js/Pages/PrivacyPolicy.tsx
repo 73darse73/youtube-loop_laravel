@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
 
     return (
         <>
-            <Head title={isJa ? 'プライバシーポリシー | Loop Player' : 'Privacy Policy | Loop Player'} />
+            <Head title={isJa ? 'プライバシーポリシー | Loop Video' : 'Privacy Policy | Loop Video'} />
             <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
                 <LegalHeader />
                 <main className="container mx-auto max-w-3xl px-4 py-12">

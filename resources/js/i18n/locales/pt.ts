@@ -14,7 +14,7 @@ export default {
         loading: 'Carregando...',
     },
     header: {
-        logoAlt: 'Loop Player',
+        logoAlt: 'Loop Video',
     },
     home: {
         title: 'Início',
@@ -100,7 +100,7 @@ export default {
         startFree: 'Começar grátis',
         usecases: {
             heading: 'Para quem é?',
-            desc: 'Se há uma cena que você quer assistir repetidamente, o Loop Player é para você.',
+            desc: 'Se há uma cena que você quer assistir repetidamente, o Loop Video é para você.',
             guitar: { title: 'Prática de instrumentos', desc: 'Repita os trechos que você não consegue dominar. Foque exatamente na seção que precisa.' },
             lang: { title: 'Aprendizado de idiomas', desc: 'Repita as falas que não consegue entender. Ótimo para praticar shadowing.' },
             dance: { title: 'Coreografia de dança', desc: 'Reproduza os movimentos que está aprendendo. Não perca nenhum detalhe.' },

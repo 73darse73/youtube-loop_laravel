@@ -22,8 +22,8 @@
 
         <!-- OGP -->
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="Loop Player">
-        <meta property="og:title" content="Loop Player — YouTube区間ループ再生">
+        <meta property="og:site_name" content="Loop Video">
+        <meta property="og:title" content="Loop Video — YouTube区間ループ再生">
         <meta property="og:description" content="YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:image" content="{{ url('/images/ogp.png') }}">
@@ -31,7 +31,7 @@
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Loop Player — YouTube区間ループ再生">
+        <meta name="twitter:title" content="Loop Video — YouTube区間ループ再生">
         <meta name="twitter:description" content="YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。">
         <meta name="twitter:image" content="{{ url('/images/ogp.png') }}">
 

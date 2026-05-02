@@ -14,7 +14,7 @@ export default {
         loading: '載入中...',
     },
     header: {
-        logoAlt: 'Loop Player',
+        logoAlt: 'Loop Video',
     },
     home: {
         title: '首頁',
@@ -100,7 +100,7 @@ export default {
         startFree: '免費開始',
         usecases: {
             heading: '適合這些情境',
-            desc: '只要有想反覆觀看的場景，Loop Player 就能派上用場。',
+            desc: '只要有想反覆觀看的場景，Loop Video 就能派上用場。',
             guitar: { title: '樂器練習', desc: '把學不好的樂句反覆循環。只聚焦在需要練習的區間。' },
             lang: { title: '語言·聽力學習', desc: '把聽不懂的台詞精準循環。也非常適合跟讀練習。' },
             dance: { title: '舞蹈動作確認', desc: '只重複播放想學的舞蹈動作。細節一點也不會錯過。' },
