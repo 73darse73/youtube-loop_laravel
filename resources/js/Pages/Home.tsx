@@ -48,6 +48,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         .sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
 
     const isAtLimit = !isPro && activeLoops.length >= FREE_PLAN_LIMIT;
+    const canSave = !!extractVideoId(url) && startTime !== '' && endTime !== '' && !isAtLimit;
 
     const handleToggleFavorite = (loop: LoopSetting) => {
         router.post(route('home.favorite', loop.id));
@@ -72,19 +73,22 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     };
 
     const handleOpenSaveDialog = async () => {
-        if (!currentVideoId) return;
+        const videoId = currentVideoId ?? extractVideoId(url);
+        if (!videoId) return;
+        const start = parseFloat(startTime);
+        const end = parseFloat(endTime);
         setData({
-            video_id: currentVideoId,
+            video_id: videoId,
             title: '',
             description: '',
-            start_time: currentStart,
-            end_time: currentEnd,
+            start_time: isNaN(start) ? 0 : start,
+            end_time: isNaN(end) ? 0 : end,
         });
         setShowSaveDialog(true);
 
         try {
             const res = await fetch(
-                `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${currentVideoId}&format=json`,
+                `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`,
             );
             if (res.ok) {
                 const json = await res.json();
@@ -364,9 +368,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         <div className="flex flex-col items-end gap-1">
                                             <button
                                                 onClick={handleOpenSaveDialog}
-                                                disabled={
-                                                    !currentVideoId || isAtLimit
-                                                }
+                                                disabled={!canSave}
                                                 className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-gray-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-40 dark:border-transparent dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-700 dark:text-white dark:hover:brightness-110 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
                                             >
                                                 💾 {t('common.save')}
