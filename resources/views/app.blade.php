@@ -16,6 +16,11 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Favicon -->
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="alternate icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/images/ogp.png">
+
         <!-- SEO -->
         <meta name="description" content="YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。">
         <link rel="canonical" href="{{ url()->current() }}">
