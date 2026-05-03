@@ -25,24 +25,46 @@ class GenerateOgpImage extends Command
             imageline($img, 0, $y, $w, $y, imagecolorallocate($img, $r, $g, $b));
         }
 
-        // アイコン背景（赤→紫グラデーション）
-        $iconSize = 160;
-        $iconX    = 120;
+        // アイコン背景（赤→紫グラデーション・丸角）
+        $iconSize = 180;
+        $iconX    = 100;
         $iconY    = (int)(($h - $iconSize) / 2);
+        $radius   = 32;
 
         for ($y = 0; $y < $iconSize; $y++) {
             $ratio = $y / $iconSize;
             $r = (int)(239 + (147 - 239) * $ratio);
             $g = (int)(68  + (51  - 68)  * $ratio);
             $b = (int)(68  + (234 - 68)  * $ratio);
-            imageline($img, $iconX, $iconY + $y, $iconX + $iconSize, $iconY + $y, imagecolorallocate($img, $r, $g, $b));
+            $color = imagecolorallocate($img, $r, $g, $b);
+
+            // 丸角を考慮した描画幅を計算
+            $xOffset = 0;
+            if ($y < $radius) {
+                $xOffset = (int)($radius - sqrt($radius ** 2 - ($radius - $y) ** 2));
+            } elseif ($y > $iconSize - $radius) {
+                $xOffset = (int)($radius - sqrt($radius ** 2 - ($y - ($iconSize - $radius)) ** 2));
+            }
+            imageline($img, $iconX + $xOffset, $iconY + $y, $iconX + $iconSize - $xOffset, $iconY + $y, $color);
         }
 
+        // 再生ボタン（白い三角形）
         $white     = imagecolorallocate($img, 255, 255, 255);
         $grayLight = imagecolorallocate($img, 180, 180, 210);
-        $textX     = $iconX + $iconSize + 60;
 
-        // フォント（macOS → Linux → fallback の順で試す）
+        $cx = $iconX + (int)($iconSize / 2) + 8;
+        $cy = $iconY + (int)($iconSize / 2);
+        $tw = 52;
+        $th = 60;
+
+        imagefilledpolygon($img, [
+            $cx - (int)($tw * 0.3), $cy - (int)($th / 2),
+            $cx + (int)($tw * 0.7), $cy,
+            $cx - (int)($tw * 0.3), $cy + (int)($th / 2),
+        ], $white);
+
+        // テキスト
+        $textX = $iconX + $iconSize + 70;
         $fonts = [
             '/System/Library/Fonts/Helvetica.ttc',
             '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
@@ -51,8 +73,8 @@ class GenerateOgpImage extends Command
         $font = collect($fonts)->first(fn($f) => file_exists($f));
 
         if ($font) {
-            imagettftext($img, 72, 0, $textX, (int)($h / 2 - 20), $white, $font, 'Loop Video');
-            imagettftext($img, 28, 0, $textX, (int)($h / 2 + 50), $grayLight, $font, 'YouTube loop player');
+            imagettftext($img, 80, 0, $textX, (int)($h / 2 - 10), $white, $font, 'Loop Video');
+            imagettftext($img, 32, 0, $textX, (int)($h / 2 + 55), $grayLight, $font, 'YouTube loop player');
         }
 
         $dir = public_path('images');
