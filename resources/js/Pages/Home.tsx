@@ -367,7 +367,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                                 disabled={
                                                     !currentVideoId || isAtLimit
                                                 }
-                                                className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-gray-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-40 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:border-gray-500 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
+                                                className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-gray-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-40 dark:border-transparent dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-700 dark:text-white dark:hover:brightness-110 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
                                             >
                                                 💾 {t('common.save')}
                                             </button>
