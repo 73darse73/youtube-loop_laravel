@@ -59,7 +59,7 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                         </h1>
                         <p className="mb-8 text-sm text-gray-500 dark:text-gray-400">
                             {t('plan.current')}:{' '}
-                            <span className="font-medium text-gray-800">
+                            <span className="font-medium text-gray-800 dark:text-gray-100">
                                 {isPro ? 'Pro' : 'Free'}
                             </span>
                         </p>
@@ -69,24 +69,24 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                                 className={`rounded-2xl border bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800 ${!isPro ? 'border-gray-900 ring-2 ring-gray-900 dark:border-gray-400 dark:ring-gray-400' : 'border-gray-200/70 dark:border-gray-700/70'}`}
                             >
                                 <div className="mb-4 flex items-center justify-between">
-                                    <h2 className="text-lg font-semibold">
+                                    <h2 className="text-lg font-semibold dark:text-white">
                                         Free
                                     </h2>
                                     {!isPro && (
-                                        <span className="rounded-full bg-gray-900 px-2.5 py-0.5 text-xs font-medium text-white">
+                                        <span className="rounded-full bg-gray-900 px-2.5 py-0.5 text-xs font-medium text-white dark:bg-gray-200 dark:text-gray-900">
                                             {t('plan.current')}
                                         </span>
                                     )}
                                 </div>
-                                <p className="mb-4 text-2xl font-bold">
+                                <p className="mb-4 text-2xl font-bold dark:text-white">
                                     ¥0
-                                    <span className="text-sm font-normal text-gray-500">
+                                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                                         {' '}
                                         / 月
                                     </span>
                                 </p>
                                 {!isPro && (
-                                    <p className="mb-4 text-xs text-gray-500">
+                                    <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
                                         {t('plan.loopCount', {
                                             count: loopCount,
                                         })}{' '}
@@ -97,9 +97,9 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                                     {freeFeatures.map((f) => (
                                         <li
                                             key={f}
-                                            className="flex items-center gap-2 text-sm text-gray-600"
+                                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"
                                         >
-                                            <Check className="h-4 w-4 flex-shrink-0 text-gray-400" />
+                                            <Check className="h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500" />
                                             {f}
                                         </li>
                                     ))}
@@ -107,10 +107,10 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                             </div>
 
                             <div
-                                className={`rounded-2xl border bg-white p-6 shadow-md transition-shadow hover:shadow-lg ${isPro ? 'border-purple-500 ring-2 ring-purple-500' : 'border-gray-200/70'}`}
+                                className={`rounded-2xl border bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800 ${isPro ? 'border-purple-500 ring-2 ring-purple-500' : 'border-gray-200/70 dark:border-gray-700/70'}`}
                             >
                                 <div className="mb-4 flex items-center justify-between">
-                                    <h2 className="text-lg font-semibold">
+                                    <h2 className="text-lg font-semibold dark:text-white">
                                         Pro
                                     </h2>
                                     {isPro && (
@@ -119,9 +119,9 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                                         </span>
                                     )}
                                 </div>
-                                <p className="mb-4 text-2xl font-bold">
+                                <p className="mb-4 text-2xl font-bold dark:text-white">
                                     ¥300
-                                    <span className="text-sm font-normal text-gray-500">
+                                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                                         {' '}
                                         / 月
                                     </span>
@@ -130,7 +130,7 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                                     {proFeatures.map((f) => (
                                         <li
                                             key={f}
-                                            className="flex items-center gap-2 text-sm text-gray-600"
+                                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"
                                         >
                                             <Check className="h-4 w-4 flex-shrink-0 text-purple-500" />
                                             {f}
