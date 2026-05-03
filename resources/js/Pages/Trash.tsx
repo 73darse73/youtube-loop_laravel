@@ -29,24 +29,24 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
     return (
         <>
             <Head title={t('trash.title')} />
-            <div className="flex min-h-screen flex-col bg-gray-50">
+            <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
                     <div className="mx-auto max-w-2xl">
-                        <h1 className="mb-6 text-xl font-semibold">
+                        <h1 className="mb-6 text-xl font-semibold dark:text-white">
                             {t('trash.heading')}
                         </h1>
 
                         {loopSettings.length === 0 ? (
-                            <div className="rounded-xl border border-gray-200 bg-white py-16 text-center shadow-sm">
-                                <p className="text-sm text-gray-400">
+                            <div className="rounded-xl border border-gray-200 bg-white py-16 text-center shadow-sm dark:border-gray-700/70 dark:bg-gray-800">
+                                <p className="text-sm text-gray-400 dark:text-gray-500">
                                     {t('trash.empty')}
                                 </p>
                             </div>
                         ) : (
-                            <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
-                                <ul className="divide-y divide-gray-100">
+                            <div className="rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700/70 dark:bg-gray-800">
+                                <ul className="divide-y divide-gray-100 dark:divide-gray-700/70">
                                     {loopSettings.map((loop) => (
                                         <li
                                             key={loop.id}
@@ -60,15 +60,15 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                                                 className="h-16 w-28 flex-shrink-0 rounded object-cover"
                                             />
                                             <div className="min-w-0 flex-1">
-                                                <p className="line-clamp-2 text-sm font-medium leading-snug">
+                                                <p className="line-clamp-2 text-sm font-medium leading-snug dark:text-gray-100">
                                                     {loop.title}
                                                 </p>
                                                 {loop.description && (
-                                                    <p className="mt-0.5 line-clamp-1 text-xs text-gray-400">
+                                                    <p className="mt-0.5 line-clamp-1 text-xs text-gray-400 dark:text-gray-500">
                                                         {loop.description}
                                                     </p>
                                                 )}
-                                                <p className="mt-1 text-xs text-gray-400">
+                                                <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
                                                     {t('trash.loopRange', {
                                                         start: Math.floor(
                                                             loop.start_time,
@@ -84,7 +84,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                                                     onClick={() =>
                                                         handleRestore(loop)
                                                     }
-                                                    className="flex flex-col items-center gap-0.5 rounded p-1.5 text-xs text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                                                    className="flex flex-col items-center gap-0.5 rounded p-1.5 text-xs text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
                                                     aria-label={t(
                                                         'common.restore',
                                                     )}
@@ -98,7 +98,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                                                     onClick={() =>
                                                         handleForceDelete(loop)
                                                     }
-                                                    className="flex flex-col items-center gap-0.5 rounded p-1.5 text-xs text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                                    className="flex flex-col items-center gap-0.5 rounded p-1.5 text-xs text-red-400 transition-colors hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20"
                                                     aria-label={t(
                                                         'trash.forceDelete',
                                                     )}
