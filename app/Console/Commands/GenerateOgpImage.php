@@ -48,20 +48,36 @@ class GenerateOgpImage extends Command
             imageline($img, $iconX + $xOffset, $iconY + $y, $iconX + $iconSize - $xOffset, $iconY + $y, $color);
         }
 
-        // 再生ボタン（白い三角形）
         $white     = imagecolorallocate($img, 255, 255, 255);
         $grayLight = imagecolorallocate($img, 180, 180, 210);
 
-        $cx = $iconX + (int)($iconSize / 2) + 8;
-        $cy = $iconY + (int)($iconSize / 2);
-        $tw = 52;
-        $th = 60;
+        // YouTube風アイコン（白い丸角矩形 + 中の三角をグラデーション色で抜く）
+        // ファビコンSVGと同じ比率: 24ユニット空間で矩形はy:3.545〜20.455 (高さ約16.91/24)
+        $ytW = (int)($iconSize * 0.83);
+        $ytH = (int)($ytW * (16.91 / 24.0));
+        $ytX = $iconX + (int)(($iconSize - $ytW) / 2);
+        $ytY = $iconY + (int)(($iconSize - $ytH) / 2);
+        $ytR = (int)($ytW * (3.016 / 24.0));
 
+        for ($y = 0; $y < $ytH; $y++) {
+            $xOffset = 0;
+            if ($y < $ytR) {
+                $xOffset = (int)($ytR - sqrt($ytR ** 2 - ($ytR - $y) ** 2));
+            } elseif ($y > $ytH - $ytR) {
+                $xOffset = (int)($ytR - sqrt($ytR ** 2 - ($y - ($ytH - $ytR)) ** 2));
+            }
+            imageline($img, $ytX + $xOffset, $ytY + $y, $ytX + $ytW - $xOffset, $ytY + $y, $white);
+        }
+
+        // 三角形をグラデーション中央色で描画（切り抜き効果）
+        // ファビコンSVGのパス座標を ytW×ytH 空間に正規化
+        // M9.545 15.568 V8.432 L15.818 12 → 正規化: P1(0.398,0.711) P2(0.398,0.289) P3(0.659,0.500)
+        $triColor = imagecolorallocate($img, 193, 60, 151);
         imagefilledpolygon($img, [
-            $cx - (int)($tw * 0.3), $cy - (int)($th / 2),
-            $cx + (int)($tw * 0.7), $cy,
-            $cx - (int)($tw * 0.3), $cy + (int)($th / 2),
-        ], $white);
+            $ytX + (int)(0.398 * $ytW), $ytY + (int)(0.711 * $ytH),
+            $ytX + (int)(0.398 * $ytW), $ytY + (int)(0.289 * $ytH),
+            $ytX + (int)(0.659 * $ytW), $ytY + (int)(0.500 * $ytH),
+        ], $triColor);
 
         // テキスト
         $textX = $iconX + $iconSize + 70;
