@@ -188,7 +188,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 </button>
                                 <button
                                     onClick={() => handleDeleteLoop(loop)}
-                                    className="flex-shrink-0 rounded p-1.5 text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                    className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
                                     aria-label={t('common.delete')}
                                 >
                                     <span className="flex flex-col items-center gap-0.5 text-xs">
@@ -244,7 +244,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         onClick={() => handleLoadLoop(loop)}
                                         className="min-w-0 flex-1 text-left"
                                     >
-                                        <p className="line-clamp-2 text-sm font-medium leading-snug">
+                                        <p className="line-clamp-2 text-sm font-medium leading-snug dark:text-gray-100">
                                             {loop.title}
                                         </p>
                                         {loop.description && (
@@ -263,7 +263,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     </button>
                                     <button
                                         onClick={() => handleDeleteLoop(loop)}
-                                        className="flex-shrink-0 rounded p-1.5 text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                                        className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
                                         aria-label={t('common.delete')}
                                     >
                                         <span className="flex flex-col items-center gap-0.5 text-xs">
