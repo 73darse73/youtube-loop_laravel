@@ -1,3 +1,4 @@
+import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import { useTheme } from '@/hooks/useTheme';
 import { Link } from '@inertiajs/react';
 import { Moon, Sun } from 'lucide-react';
@@ -24,17 +25,20 @@ export default function LegalHeader() {
                     <span className="text-lg font-bold dark:text-white">Loop Video</span>
                 </Link>
 
-                <button
-                    onClick={toggle}
-                    className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                    aria-label="Toggle theme"
-                >
-                    {theme === 'dark' ? (
-                        <Sun className="h-4 w-4" />
-                    ) : (
-                        <Moon className="h-4 w-4" />
-                    )}
-                </button>
+                <div className="flex items-center gap-1">
+                    <button
+                        onClick={toggle}
+                        className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        aria-label="Toggle theme"
+                    >
+                        {theme === 'dark' ? (
+                            <Sun className="h-4 w-4" />
+                        ) : (
+                            <Moon className="h-4 w-4" />
+                        )}
+                    </button>
+                    <LanguageSwitcher />
+                </div>
             </div>
         </header>
     );

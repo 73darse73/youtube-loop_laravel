@@ -1,4 +1,6 @@
+import AppFooter from '@/Components/AppFooter';
 import InputError from '@/Components/InputError';
+import LegalHeader from '@/Components/LegalHeader';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
@@ -23,8 +25,10 @@ export default function Login({
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-white via-white to-gray-100 px-4">
+        <div className="flex min-h-screen flex-col bg-gradient-to-br from-white via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
             <Head title="ログイン" />
+            <LegalHeader />
+            <div className="flex flex-1 items-center justify-center px-4 py-8">
 
             <div className="w-full max-w-md">
                 <div className="mb-8 text-center">
@@ -169,6 +173,8 @@ export default function Login({
                     </a>
                 </div>
             </div>
+            </div>
+            <AppFooter />
         </div>
     );
 }
