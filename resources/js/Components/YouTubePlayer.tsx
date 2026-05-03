@@ -269,7 +269,7 @@ export default function YouTubePlayer({
                     <button
                         onClick={isAtLimit ? undefined : onSave}
                         disabled={isAtLimit}
-                        className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-40"
+                        className="rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-3 py-1.5 text-sm font-medium text-white transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-40 dark:from-gray-600 dark:to-gray-700"
                     >
                         💾 {t('common.save')}
                     </button>
