@@ -18,6 +18,7 @@ class PlanPageController extends Controller
             'loopCount' => $results['loopCount'],
             'isCancelled' => $results['isCancelled'],
             'endsAt' => $results['endsAt'],
+            'nextBillingDate' => $results['nextBillingDate'],
         ]);
     }
 }

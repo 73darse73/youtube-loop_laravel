@@ -63,6 +63,7 @@ export default {
         cancelSubscription: 'Cancelar suscripción',
         cancelConfirm: '¿Estás seguro de que deseas cancelar? Podrás seguir usando Pro hasta el final del período de facturación actual.',
         cancelledUntil: 'Activo hasta {{date}} (Cancelado)',
+        nextBillingDate: 'Próxima fecha de cobro: {{date}}',
         features: {
             loopPlay: 'Reproducción en bucle (ilimitada)',
             saveFree: 'Guardar hasta 3 bucles',

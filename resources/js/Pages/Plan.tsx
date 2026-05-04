@@ -13,9 +13,10 @@ type Props = PageProps<{
     loopCount: number;
     isCancelled: boolean;
     endsAt: string | null;
+    nextBillingDate: string | null;
 }>;
 
-export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Props) {
+export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, nextBillingDate }: Props) {
     const { t } = useTranslation();
     const [processing, setProcessing] = useState(false);
 
@@ -152,12 +153,19 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt }: Pr
                                         {t('plan.cancelledUntil', { date: endsAt })}
                                     </p>
                                 ) : (
-                                    <button
-                                        onClick={handleCancel}
-                                        className="w-full rounded-md border border-gray-300 py-2 text-sm font-medium text-gray-500 transition-colors hover:border-red-400 hover:text-red-500 dark:border-gray-600 dark:text-gray-400"
-                                    >
-                                        {t('plan.cancelSubscription')}
-                                    </button>
+                                    <>
+                                        <button
+                                            onClick={handleCancel}
+                                            className="w-full rounded-md border border-gray-300 py-2 text-sm font-medium text-gray-500 transition-colors hover:border-red-400 hover:text-red-500 dark:border-gray-600 dark:text-gray-400"
+                                        >
+                                            {t('plan.cancelSubscription')}
+                                        </button>
+                                        {nextBillingDate && (
+                                            <p className="mt-2 text-center text-xs text-gray-400 dark:text-gray-500">
+                                                {t('plan.nextBillingDate', { date: nextBillingDate })}
+                                            </p>
+                                        )}
+                                    </>
                                 )}
                             </div>
                         </div>
