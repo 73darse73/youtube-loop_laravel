@@ -10,7 +10,6 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PlanPageController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TrashPageController;
-use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\WebhookController;
 
 Route::get('/', function () {
@@ -74,7 +73,10 @@ Route::get('/privacy', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('privacy');
 
-Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/sitemap.xml', function () {
+    return response(view('sitemap'), 200)
+        ->header('Content-Type', 'application/xml');
+});
 
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
 

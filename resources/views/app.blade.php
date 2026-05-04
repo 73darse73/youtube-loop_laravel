@@ -52,7 +52,7 @@
             "name": "Loop Video",
             "url": "https://loop-video.com",
             "description": "YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。",
-            "applicationCategory": "EducationApplication",
+            "applicationCategory": "MultimediaApplication",
             "operatingSystem": "Web",
             "offers": [
                 {
