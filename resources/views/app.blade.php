@@ -44,6 +44,34 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Loop Video",
+            "url": "https://loop-video.com",
+            "description": "YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。",
+            "applicationCategory": "EducationApplication",
+            "operatingSystem": "Web",
+            "offers": [
+                {
+                    "@type": "Offer",
+                    "name": "無料プラン",
+                    "price": "0",
+                    "priceCurrency": "JPY"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Proプラン",
+                    "description": "ループ設定の無制限保存"
+                }
+            ],
+            "inLanguage": ["ja", "en"],
+            "image": "https://loop-video.com/images/ogp.png"
+        }
+        </script>
+
         <!-- Google Analytics -->
         @if(config('services.google.analytics_id'))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics_id') }}"></script>
