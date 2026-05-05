@@ -19,6 +19,7 @@ class LoopSetting extends Model
         'is_favorite',
         'start_time',
         'end_time',
+        'share_token',
     ];
 
     protected $casts = [
@@ -30,5 +31,12 @@ class LoopSetting extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function generateShareToken(): string
+    {
+        $token = \Illuminate\Support\Str::uuid()->toString();
+        $this->update(['share_token' => $token]);
+        return $token;
     }
 }

@@ -4,6 +4,7 @@ export default {
         cancel: 'キャンセル',
         delete: '削除',
         restore: '元に戻す',
+        share: 'シェア',
         favorite: 'お気に入り',
         logout: 'ログアウト',
         trash: 'ゴミ箱',
@@ -131,5 +132,11 @@ export default {
             heading: 'さっそく使ってみましょう',
             desc: '無料・クレジットカード不要',
         },
+    },
+    share: {
+        tryFree: '無料で試す',
+        ctaText: 'あなたもYouTubeの好きな区間をループ再生・保存できます',
+        ctaButton: '無料で始める',
+        copySuccess: 'URLをコピーしました',
     },
 };

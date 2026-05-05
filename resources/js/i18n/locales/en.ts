@@ -4,6 +4,7 @@ export default {
         cancel: 'Cancel',
         delete: 'Delete',
         restore: 'Restore',
+        share: 'Share',
         favorite: 'Favorite',
         logout: 'Logout',
         trash: 'Trash',
@@ -131,5 +132,11 @@ export default {
             heading: 'Ready to start?',
             desc: 'Free — no credit card required',
         },
+    },
+    share: {
+        tryFree: 'Try for free',
+        ctaText: 'Create and save your own YouTube loop sections',
+        ctaButton: 'Get started free',
+        copySuccess: 'URL copied to clipboard',
     },
 };

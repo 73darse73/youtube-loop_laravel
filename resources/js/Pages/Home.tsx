@@ -4,7 +4,7 @@ import AppHeader from '@/Components/AppHeader';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
-import { Star, Trash2 } from 'lucide-react';
+import { Link2, Star, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -120,6 +120,19 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         router.post(route('home.destroy', loop.id));
     };
 
+    const handleShare = async (loop: LoopSetting) => {
+        const res = await fetch(route('share.generate', loop.id), {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content ?? '',
+                'Accept': 'application/json',
+            },
+        });
+        const { url } = await res.json();
+        await navigator.clipboard.writeText(url);
+        alert(t('share.copySuccess'));
+    };
+
     const handleLoadLoop = (loop: LoopSetting) => {
         setCurrentVideoId(loop.video_id);
         setCurrentStart(loop.start_time);
@@ -191,6 +204,16 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     </p>
                                 </button>
                                 <button
+                                    onClick={() => handleShare(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                    aria-label={t('share.tryFree')}
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Link2 className="h-4 w-4" />
+                                        <span>{t('common.share')}</span>
+                                    </span>
+                                </button>
+                                <button
                                     onClick={() => handleDeleteLoop(loop)}
                                     className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
                                     aria-label={t('common.delete')}
@@ -245,6 +268,16 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             end: Math.floor(loop.end_time),
                                         })}
                                     </p>
+                                </button>
+                                <button
+                                    onClick={() => handleShare(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                    aria-label={t('common.share')}
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Link2 className="h-4 w-4" />
+                                        <span>{t('common.share')}</span>
+                                    </span>
                                 </button>
                                 <button
                                     onClick={() => handleDeleteLoop(loop)}

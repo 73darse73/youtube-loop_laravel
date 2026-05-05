@@ -10,6 +10,7 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PlanPageController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TrashPageController;
+use App\Http\Controllers\SharedLoopController;
 use App\Http\Controllers\WebhookController;
 
 Route::get('/', function () {
@@ -72,6 +73,14 @@ Route::get('/terms', function () {
 Route::get('/privacy', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('privacy');
+
+// 共有URL（ログイン不要）
+Route::get('/s/{token}', [SharedLoopController::class, 'show'])->name('share.show');
+
+// 共有トークン生成（ログイン必要）
+Route::post('/home/share/{loopSetting}', [SharedLoopController::class, 'generateToken'])
+    ->middleware('auth')
+    ->name('share.generate');
 
 Route::get('/sitemap.xml', function () {
     return response(view('sitemap'), 200)
