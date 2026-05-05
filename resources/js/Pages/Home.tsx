@@ -4,6 +4,7 @@ import AppHeader from '@/Components/AppHeader';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
+import axios from 'axios';
 import { Link2, Star, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -121,15 +122,8 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     };
 
     const handleShare = async (loop: LoopSetting) => {
-        const res = await fetch(route('share.generate', loop.id), {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content ?? '',
-                'Accept': 'application/json',
-            },
-        });
-        const { url } = await res.json();
-        await navigator.clipboard.writeText(url);
+        const { data } = await axios.post(route('share.generate', loop.id));
+        await navigator.clipboard.writeText(data.url);
         alert(t('share.copySuccess'));
     };
 
