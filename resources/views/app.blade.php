@@ -45,6 +45,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Structured Data -->
+        @verbatim
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -71,6 +72,7 @@
             "image": "https://loop-video.com/images/ogp.png"
         }
         </script>
+        @endverbatim
 
         <!-- Google Analytics -->
         @if(config('services.google.analytics_id'))
