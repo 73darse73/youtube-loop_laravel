@@ -2,7 +2,7 @@ import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { useTheme } from '@/hooks/useTheme';
 import { Head, Link } from '@inertiajs/react';
-import { Check, Menu, Repeat, X } from 'lucide-react';
+import { Check, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -126,14 +126,6 @@ function AppScreenshot() {
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-red-500/10 to-purple-600/10 blur-2xl" />
             <div className="relative overflow-hidden rounded-2xl border border-gray-200 shadow-2xl">
                 <img src="/images/screenshot-player.png" alt="Loop Video アプリ画面" className="w-full" />
-                <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-green-500/90 px-3 py-1 backdrop-blur-sm shadow-lg">
-                    <Repeat className="h-3 w-3 text-white" />
-                    <span className="text-xs font-semibold text-white">ループ中</span>
-                </div>
-            </div>
-            <div className="absolute -bottom-3 -left-3 rounded-xl border border-gray-200 bg-white px-4 py-2.5 shadow-xl">
-                <p className="text-xs text-gray-500 mb-0.5">ループ区間</p>
-                <p className="text-sm font-mono font-bold text-purple-600">12s – 45s</p>
             </div>
         </div>
     );
