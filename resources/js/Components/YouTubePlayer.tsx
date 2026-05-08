@@ -6,6 +6,7 @@ interface Props {
     videoId: string;
     startTime: number;
     endTime: number;
+    autoPlay?: boolean;
     onSave?: () => void;
     onRangeChange?: (start: number, end: number) => void;
     isAtLimit?: boolean;
@@ -114,6 +115,7 @@ export default function YouTubePlayer({
     videoId,
     startTime,
     endTime,
+    autoPlay = true,
     onSave,
     onRangeChange,
     isAtLimit = false,
@@ -142,7 +144,7 @@ export default function YouTubePlayer({
         width: '100%',
         playerVars: {
             start: Math.floor(startTime),
-            autoplay: 1,
+            autoplay: autoPlay ? 1 : 0,
         },
     };
 

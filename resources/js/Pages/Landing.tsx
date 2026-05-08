@@ -68,6 +68,7 @@ function TryItSection() {
                         videoId={currentVideoId ?? extractVideoId(DEFAULT_VIDEO_URL)!}
                         startTime={currentStart}
                         endTime={currentEnd}
+                        autoPlay={false}
                         onRangeChange={handleRangeChange}
                         onSave={() => window.location.href = route('register')}
                     />
