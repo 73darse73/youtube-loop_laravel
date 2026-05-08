@@ -93,36 +93,16 @@ await page.keyboard.type('8', { delay: 80 });
 await page.waitForTimeout(400);
 
 // ─── ループ開始 ──────────────────────────────────────────────
-const loopBtn = page.locator('button').filter({ hasText: /Start Loop|ループ再生/ });
+const loopBtn = page.locator('button').filter({ hasText: /Set Loop|ループをセット/ });
 await clickAt(loopBtn);
 
-// ─── YouTube の再生ボタンが出るまで待ってすぐクリック ─────────
+// ─── autoplay=1 で自動再生されるので待つだけ ─────────────────
 await page.waitForSelector('iframe[src*="youtube"]', { timeout: 10000 }).catch(() => {});
-await page.waitForTimeout(3000); // プレーヤー初期化を待つ
-
-const iframeLocator = page.locator('iframe[src*="youtube"]');
-const ytFrame = page.frameLocator('iframe[src*="youtube"]');
-
-// iframe 全体をクリックしてフォーカスを与える
-await clickAt(iframeLocator);
-console.log('Clicked iframe to focus');
-await page.waitForTimeout(1200);
-
-// YouTube postMessage API で再生（cross-origin でも動作）
-await page.evaluate(() => {
-    const iframe = document.querySelector('iframe[src*="youtube"]');
-    if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage(
-            JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
-            '*'
-        );
-    }
-});
-console.log('Sent postMessage playVideo');
-await page.waitForTimeout(500);
+await page.waitForTimeout(2000); // プレーヤー初期化を待つ
+console.log('YouTube autoplay started');
 
 // ─── 15秒ループ再生を見せる ──────────────────────────────────
-await page.waitForTimeout(15000);
+await page.waitForTimeout(12000);
 
 // ─── 保存ボタンをクリック ────────────────────────────────────
 const saveBtn = page.locator('button').filter({ hasText: /💾|保存|Save/ }).first();
@@ -206,10 +186,10 @@ await page.waitForTimeout(800);
 const lineMockUrl = `${BASE_URL}/line-mock.html?url=${encodeURIComponent(shareUrl)}`;
 await page.goto(lineMockUrl, { waitUntil: 'domcontentloaded' });
 await injectCursor();
-await page.waitForTimeout(2500); // リンクカードが届くアニメーションを見せる
+await page.waitForTimeout(6000); // リンクカードが届くアニメーションを見せる
 
 // ─── リンクカードをクリック → シェアページへ ─────────────────
-await page.locator('#share-link').click();
+await clickAt(page.locator('#share-link'));
 await page.waitForTimeout(3500); // 受け取った側のシェアページを見せる
 
 await context.close();
