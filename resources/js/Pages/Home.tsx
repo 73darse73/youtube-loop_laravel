@@ -35,6 +35,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const [currentEnd, setCurrentEnd] = useState(30);
     const [error, setError] = useState('');
     const [showSaveDialog, setShowSaveDialog] = useState(false);
+    const [showCopied, setShowCopied] = useState(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         video_id: '',
@@ -124,7 +125,8 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const handleShare = async (loop: LoopSetting) => {
         const { data } = await axios.post(route('share.generate', loop.id));
         await navigator.clipboard.writeText(data.url);
-        alert(t('share.copySuccess'));
+        setShowCopied(true);
+        setTimeout(() => setShowCopied(false), 2000);
     };
 
     const handleLoadLoop = (loop: LoopSetting) => {
@@ -294,6 +296,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     return (
         <>
             <Head title={t('home.title')} />
+            {showCopied && (
+                <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-medium text-white shadow-lg dark:bg-gray-100 dark:text-gray-900">
+                    {t('share.copySuccess')}
+                </div>
+            )}
             <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 
@@ -325,6 +332,31 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 font-mono text-sm shadow-sm focus-visible:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-500 dark:focus-visible:ring-indigo-400"
                                         />
                                     </div>
+
+                                    {currentVideoId ? (
+                                        <YouTubePlayer
+                                            videoId={currentVideoId}
+                                            startTime={currentStart}
+                                            endTime={currentEnd}
+                                            onSave={handleOpenSaveDialog}
+                                            onRangeChange={handleRangeChange}
+                                            isAtLimit={isAtLimit}
+                                            limitMessage={t('home.limitReached', {
+                                                limit: FREE_PLAN_LIMIT,
+                                            })}
+                                        />
+                                    ) : (
+                                        <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900/50">
+                                            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+                                                <svg viewBox="0 0 24 24" className="h-7 w-7 fill-gray-400">
+                                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                                </svg>
+                                            </div>
+                                            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                {t('home.loopPlayDesc')}
+                                            </p>
+                                        </div>
+                                    )}
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
@@ -391,22 +423,6 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     </div>
                                 </div>
                             </div>
-
-                            {currentVideoId && (
-                                <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
-                                    <YouTubePlayer
-                                        videoId={currentVideoId}
-                                        startTime={currentStart}
-                                        endTime={currentEnd}
-                                        onSave={handleOpenSaveDialog}
-                                        onRangeChange={handleRangeChange}
-                                        isAtLimit={isAtLimit}
-                                        limitMessage={t('home.limitReached', {
-                                            limit: FREE_PLAN_LIMIT,
-                                        })}
-                                    />
-                                </div>
-                            )}
 
                             {!isPro && (
                                 <AdBanner

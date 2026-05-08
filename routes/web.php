@@ -14,11 +14,8 @@ use App\Http\Controllers\SharedLoopController;
 use App\Http\Controllers\WebhookController;
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('home.index');
-    }
-    return redirect()->route('login');
-});
+    return Inertia::render('Landing');
+})->name('landing');
 
 
 Route::middleware('auth')->group(function () {

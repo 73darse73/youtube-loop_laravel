@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import YouTube, { YouTubeEvent, YouTubeProps } from 'react-youtube';
 
 interface Props {
@@ -119,7 +118,6 @@ export default function YouTubePlayer({
     isAtLimit = false,
     limitMessage,
 }: Props) {
-    const { t } = useTranslation();
     const playerRef = useRef<ReturnType<
         YouTubeEvent['target']['getIframe']
     > | null>(null);
@@ -258,26 +256,6 @@ export default function YouTubePlayer({
                 onDragEnd={() => playerRef.current?.playVideo()}
             />
 
-            <div className="flex items-center justify-center gap-4">
-                <button
-                    onClick={handlePlayPause}
-                    className="inline-flex items-center gap-2 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-700"
-                >
-                    {isPlaying ? t('player.pause') : t('player.play')}
-                </button>
-                <div className="flex flex-col items-end gap-1">
-                    <button
-                        onClick={isAtLimit ? undefined : onSave}
-                        disabled={isAtLimit}
-                        className="rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-3 py-1.5 text-sm font-medium text-white transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-40 dark:from-gray-600 dark:to-gray-700"
-                    >
-                        💾 {t('common.save')}
-                    </button>
-                    {isAtLimit && limitMessage && (
-                        <p className="text-xs text-red-500">{limitMessage}</p>
-                    )}
-                </div>
-            </div>
         </div>
     );
 }

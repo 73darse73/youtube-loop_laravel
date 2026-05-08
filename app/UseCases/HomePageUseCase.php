@@ -9,7 +9,7 @@ class HomePageUseCase
 {
     public function index(User $user): array
     {
-        $loopSettings = $user->loopSettings()->orderBy('is_favorite', 'desc')->get();
+        $loopSettings = $user->loopSettings()->orderBy('is_favorite', 'desc')->orderBy('created_at', 'desc')->get();
 
         return [
             'loopSettings' => $loopSettings,

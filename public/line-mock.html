@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Helvetica Neue', sans-serif; background: #8BBAD1; height: 100vh; display: flex; flex-direction: column; max-width: 420px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.4); }
+
+  /* Header */
+  .header {
+    background: #00B900;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .back-btn { color: white; font-size: 22px; cursor: pointer; padding: 4px; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: #fff; overflow: hidden; flex-shrink: 0; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .header-info { flex: 1; }
+  .header-name { color: white; font-size: 15px; font-weight: bold; }
+  .header-sub { color: rgba(255,255,255,0.7); font-size: 11px; }
+  .header-icons { display: flex; gap: 18px; color: white; font-size: 20px; }
+
+  /* Chat area */
+  .chat { flex: 1; overflow-y: auto; padding: 16px 12px; display: flex; flex-direction: column; gap: 12px; }
+
+  .date-label {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 3px 10px;
+    align-self: center;
+  }
+
+  /* Message row */
+  .msg-row { display: flex; align-items: flex-end; gap: 8px; }
+  .msg-row.me { flex-direction: row-reverse; }
+
+  .bubble-avatar { width: 36px; height: 36px; border-radius: 50%; background: #ccc; flex-shrink: 0; overflow: hidden; }
+  .bubble-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .bubble-wrap { display: flex; flex-direction: column; gap: 3px; max-width: 72%; }
+  .msg-row.me .bubble-wrap { align-items: flex-end; }
+  .sender-name { font-size: 11px; color: rgba(255,255,255,0.85); margin-bottom: 2px; }
+
+  .bubble {
+    padding: 10px 13px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    word-break: break-all;
+  }
+  .bubble.them { background: white; border-radius: 4px 18px 18px 18px; color: #333; }
+  .bubble.me   { background: #00B900; border-radius: 18px 4px 18px 18px; color: white; }
+
+  .time { font-size: 10px; color: rgba(255,255,255,0.7); }
+
+  /* Link card */
+  .link-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    max-width: 260px;
+    text-decoration: none;
+    display: block;
+    transition: opacity 0.15s;
+  }
+  .link-card:hover { opacity: 0.85; }
+  .link-card-thumb {
+    width: 100%;
+    height: 130px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .link-card-thumb-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .yt-icon {
+    width: 42px;
+    height: 30px;
+    background: #FF0000;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .yt-icon::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 12px solid white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 3px;
+  }
+  .loop-badge {
+    background: rgba(147,51,234,0.8);
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  .link-card-body { padding: 10px 12px; }
+  .link-card-title { font-size: 13px; font-weight: bold; color: #222; margin-bottom: 3px; }
+  .link-card-url { font-size: 11px; color: #999; }
+
+  /* Input bar */
+  .input-bar {
+    background: #F5F5F5;
+    border-top: 1px solid #ddd;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .input-field {
+    flex: 1;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 14px;
+    outline: none;
+  }
+  .send-btn {
+    width: 36px;
+    height: 36px;
+    background: #00B900;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-btn { font-size: 22px; color: #888; cursor: pointer; }
+
+  /* 新着メッセージのアニメーション */
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .new-msg { animation: fadeSlideIn 0.35s ease forwards; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="back-btn">‹</div>
+  <div class="avatar">
+    <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Yuki" onerror="this.style.background='#88cc88'">
+  </div>
+  <div class="header-info">
+    <div class="header-name">ゆき</div>
+    <div class="header-sub">トーク</div>
+  </div>
+  <div class="header-icons">
+    <span>📞</span>
+    <span>☰</span>
+  </div>
+</div>
+
+<div class="chat" id="chat">
+  <div class="date-label">2026年5月6日</div>
+</div>
+
+<div class="input-bar">
+  <span class="icon-btn">+</span>
+  <input class="input-field" type="text" placeholder="メッセージを入力">
+  <span class="icon-btn">😊</span>
+  <button class="send-btn">➤</button>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const shareUrl = params.get('url') || 'http://localhost/s/demo';
+  const chat = document.getElementById('chat');
+
+  function addMsg(html, delay) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.innerHTML = html;
+        const node = el.firstElementChild;
+        node.classList.add('new-msg');
+        chat.appendChild(node);
+        chat.scrollTop = chat.scrollHeight;
+        resolve();
+      }, delay);
+    });
+  }
+
+  const THEM_AVATAR = `<div class="bubble-avatar"><img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Yuki" onerror="this.style.background='#88cc88'"></div>`;
+
+  const messages = [
+    { delay: 400,  html: `<div class="msg-row">${THEM_AVATAR}<div class="bubble-wrap"><div class="sender-name">ゆき</div><div class="bubble them">最近何か練習してる？</div><div class="time">14:22</div></div></div>` },
+    { delay: 1200, html: `<div class="msg-row me"><div class="bubble-wrap"><div class="bubble me">完全感覚ドリーマーのイントロ部分を練習してる！</div><div class="time">14:23</div></div></div>` },
+    { delay: 2000, html: `<div class="msg-row">${THEM_AVATAR}<div class="bubble-wrap"><div class="sender-name">ゆき</div><div class="bubble them">何のアプリ使ってるの？</div><div class="time">14:24</div></div></div>` },
+    { delay: 2900, html: `<div class="msg-row me"><div class="bubble-wrap"><div class="bubble me">Loop Videoってやつ！区間指定してループできるよ シェアもできるから送るね👇</div><div class="time">14:25</div></div></div>` },
+    { delay: 4000, html: `<div class="msg-row me"><div class="bubble-wrap"><a class="link-card" href="${shareUrl}" id="share-link"><div class="link-card-thumb"><div class="link-card-thumb-inner"><div class="yt-icon"></div><div class="loop-badge">🔁 ループ再生</div></div></div><div class="link-card-body"><div class="link-card-title">完全感覚Dreamer イントロ</div><div class="link-card-url">loop-video.app</div></div></a><div class="time">14:25</div></div></div>` },
+  ];
+
+  messages.forEach(m => addMsg(m.html, m.delay));
+</script>
+</body>
+</html>
