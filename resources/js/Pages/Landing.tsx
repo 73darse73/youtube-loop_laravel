@@ -2,7 +2,7 @@ import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { useTheme } from '@/hooks/useTheme';
 import { Head, Link } from '@inertiajs/react';
-import { Check, Menu, X } from 'lucide-react';
+import { Check, Menu, Repeat, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
