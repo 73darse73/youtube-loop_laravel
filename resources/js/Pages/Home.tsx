@@ -148,7 +148,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const LoopList = () => (
         <>
             {activeLoops.length === 0 ? (
-                <div className="py-12 text-center text-sm text-gray-500 dark:text-gray-400">
+                <div className="py-12 text-center text-sm text-gray-700 dark:text-gray-400">
                     {t('home.noLoops')}
                 </div>
             ) : (
@@ -195,11 +195,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         {loop.title}
                                     </p>
                                     {loop.description && (
-                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-500 dark:text-gray-400">
+                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-700 dark:text-gray-400">
                                             {loop.description}
                                         </p>
                                     )}
-                                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    <p className="mt-1 text-xs text-gray-700 dark:text-gray-400">
                                         {t('home.loopRange', {
                                             start: Math.floor(loop.start_time),
                                             end: Math.floor(loop.end_time),
@@ -208,7 +208,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 </button>
                                 <button
                                     onClick={() => handleShare(loop)}
-                                    className="flex-shrink-0 rounded p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                    className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
                                     aria-label={t('share.tryFree')}
                                 >
                                     <span className="flex flex-col items-center gap-0.5 text-xs">
@@ -261,11 +261,11 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         {loop.title}
                                     </p>
                                     {loop.description && (
-                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-500 dark:text-gray-400">
+                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-700 dark:text-gray-400">
                                             {loop.description}
                                         </p>
                                     )}
-                                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    <p className="mt-1 text-xs text-gray-700 dark:text-gray-400">
                                         {t('home.loopRange', {
                                             start: Math.floor(loop.start_time),
                                             end: Math.floor(loop.end_time),
@@ -274,7 +274,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 </button>
                                 <button
                                     onClick={() => handleShare(loop)}
-                                    className="flex-shrink-0 rounded p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                    className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
                                     aria-label={t('common.share')}
                                 >
                                     <span className="flex flex-col items-center gap-0.5 text-xs">
@@ -324,7 +324,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 <h2 className="mb-1 text-xl font-bold tracking-tight dark:text-white">
                                     {t('home.loopPlay')}
                                 </h2>
-                                <p className="mb-5 text-sm text-gray-500 dark:text-gray-400">
+                                <p className="mb-5 text-sm text-gray-700 dark:text-gray-400">
                                     {t('home.loopPlayDesc')}
                                 </p>
 
@@ -365,7 +365,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                                                 </svg>
                                             </div>
-                                            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                            <p className="text-sm font-medium text-gray-700 dark:text-gray-400">
                                                 {t('home.loopPlayDesc')}
                                             </p>
                                         </div>
@@ -455,7 +455,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             {t('home.savedLoops')}
                                         </h2>
                                         {!isPro && (
-                                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                                            <span className="text-xs text-gray-700 dark:text-gray-400">
                                                 {activeLoops.length} /{' '}
                                                 {FREE_PLAN_LIMIT}
                                             </span>
@@ -473,7 +473,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         {t('home.savedLoops')}
                                     </h2>
                                     {!isPro && (
-                                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                                        <span className="text-xs text-gray-700 dark:text-gray-400">
                                             {activeLoops.length} /{' '}
                                             {FREE_PLAN_LIMIT}
                                         </span>
@@ -493,7 +493,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         <h3 className="mb-1 text-lg font-semibold dark:text-white">
                             {t('home.saveDialog.title')}
                         </h3>
-                        <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                        <p className="mb-4 text-sm text-gray-700 dark:text-gray-400">
                             {t('home.saveDialog.desc')}
                         </p>
 
@@ -538,7 +538,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 />
                             </div>
 
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <p className="text-xs text-gray-700 dark:text-gray-400">
                                 {t('home.saveDialog.range', {
                                     start: Math.floor(data.start_time),
                                     end: Math.floor(data.end_time),

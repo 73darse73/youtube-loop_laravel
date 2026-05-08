@@ -102,9 +102,9 @@ function LoopRangeSlider({
                     onPointerDown={handlePointerDown('end')}
                 />
             </div>
-            <div className="mt-2 flex justify-between text-xs text-gray-400">
+            <div className="mt-2 flex justify-between text-xs text-gray-700">
                 <span>{formatTime(startTime)}</span>
-                <span className="text-gray-300">{formatTime(duration)}</span>
+                <span className="text-gray-800">{formatTime(duration)}</span>
                 <span>{formatTime(endTime)}</span>
             </div>
         </div>

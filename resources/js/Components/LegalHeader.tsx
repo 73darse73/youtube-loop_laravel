@@ -28,7 +28,7 @@ export default function LegalHeader() {
                 <div className="flex items-center gap-1">
                     <button
                         onClick={toggle}
-                        className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         aria-label="Toggle theme"
                     >
                         {theme === 'dark' ? (

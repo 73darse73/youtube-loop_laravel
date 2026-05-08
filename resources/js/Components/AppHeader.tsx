@@ -36,7 +36,7 @@ export default function AppHeader({ userName, isPro = false }: Props) {
 
                 {/* Desktop nav */}
                 <div className="hidden items-center gap-1 md:flex">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="text-sm text-gray-700 dark:text-gray-400">
                         {userName}
                     </span>
                     {isPro && (
@@ -46,19 +46,19 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                     )}
                     <button
                         onClick={toggle}
-                        className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         aria-label="Toggle theme"
                     >
                         {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                     </button>
                     <LanguageSwitcher />
-                    <Link href="/trash" className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                    <Link href="/trash" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
                         {t('common.trash')}
                     </Link>
-                    <Link href="/plan" className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                    <Link href="/plan" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
                         {t('common.plan')}
                     </Link>
-                    <Link href="/logout" method="post" as="button" className="rounded-md px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                    <Link href="/logout" method="post" as="button" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
                         {t('common.logout')}
                     </Link>
                 </div>
@@ -72,14 +72,14 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                     )}
                     <button
                         onClick={toggle}
-                        className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         aria-label="Toggle theme"
                     >
                         {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                     </button>
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         aria-label="Toggle menu"
                     >
                         {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -91,21 +91,21 @@ export default function AppHeader({ userName, isPro = false }: Props) {
             {menuOpen && (
                 <div className="border-t border-gray-200/80 bg-white/95 px-4 py-3 dark:border-gray-700/80 dark:bg-gray-900/95 md:hidden">
                     <div className="mb-3 flex items-center justify-between">
-                        <span className="text-sm text-gray-500 dark:text-gray-400">{userName}</span>
+                        <span className="text-sm text-gray-700 dark:text-gray-400">{userName}</span>
                         <LanguageSwitcher />
                     </div>
                     <div className="space-y-1">
                         <Link
                             href="/trash"
                             onClick={() => setMenuOpen(false)}
-                            className="block rounded-md px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                            className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         >
                             {t('common.trash')}
                         </Link>
                         <Link
                             href="/plan"
                             onClick={() => setMenuOpen(false)}
-                            className="block rounded-md px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                            className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         >
                             {t('common.plan')}
                         </Link>
@@ -113,7 +113,7 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                             href="/logout"
                             method="post"
                             as="button"
-                            className="block w-full rounded-md px-3 py-2 text-left text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                            className="block w-full rounded-md px-3 py-2 text-left text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         >
                             {t('common.logout')}
                         </Link>

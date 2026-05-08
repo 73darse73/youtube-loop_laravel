@@ -20,7 +20,7 @@ export default function LanguageSwitcher() {
         <div className="relative">
             <button
                 onClick={() => setOpen((v) => !v)}
-                className="flex items-center gap-1 rounded-md px-2 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+                className="flex items-center gap-1 rounded-md px-2 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
             >
                 <span>🌐</span>
                 <span>{current.label}</span>

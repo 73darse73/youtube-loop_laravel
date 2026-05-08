@@ -49,7 +49,7 @@ function TryItSection() {
             <div className="mx-auto max-w-3xl px-6">
                 <div className="mb-10 text-center">
                     <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">{t('landing.tryItTitle')}</h2>
-                    <p className="text-gray-600">{t('landing.tryItDesc')}</p>
+                    <p className="text-gray-800">{t('landing.tryItDesc')}</p>
                 </div>
 
                 <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm space-y-4">
@@ -106,7 +106,7 @@ function TryItSection() {
                     </button>
 
                     <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 text-center">
-                        <p className="mb-2 text-sm text-gray-600">{t('landing.tryItSavePrompt')}</p>
+                        <p className="mb-2 text-sm text-gray-800">{t('landing.tryItSavePrompt')}</p>
                         <Link
                             href={route('register')}
                             className="inline-block rounded-lg bg-gradient-to-r from-red-500 to-purple-600 px-6 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
@@ -137,7 +137,7 @@ function UsecaseCard({ emoji, keyword, title, desc }: { emoji: string; keyword: 
         <div className="rounded-2xl border border-gray-200 bg-white p-6 flex flex-col gap-3 shadow-sm">
             <span className="text-3xl">{emoji}</span>
             <h3 className="text-base font-bold text-gray-900">{title}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-800 leading-relaxed">
                 {parts.map((part, i) => (
                     <span key={i}>
                         {part}
@@ -177,7 +177,7 @@ export default function Landing() {
                         {/* Desktop nav */}
                         <div className="hidden items-center gap-3 md:flex">
                             <LanguageSwitcher />
-                            <Link href={route('login')} className="text-sm text-gray-600 transition-colors hover:text-gray-900">
+                            <Link href={route('login')} className="text-sm text-gray-800 transition-colors hover:text-gray-900">
                                 {t('auth.login')}
                             </Link>
                             <Link href={route('register')} className="rounded-lg bg-gradient-to-r from-red-500 to-purple-600 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90">
@@ -186,7 +186,7 @@ export default function Landing() {
                         </div>
 
                         {/* Mobile hamburger */}
-                        <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-md p-1.5 text-gray-600 transition-colors hover:bg-gray-100 md:hidden" aria-label="Toggle menu">
+                        <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-md p-1.5 text-gray-800 transition-colors hover:bg-gray-100 md:hidden" aria-label="Toggle menu">
                             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                         </button>
                     </div>
@@ -198,7 +198,7 @@ export default function Landing() {
                                 <LanguageSwitcher />
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Link href={route('login')} onClick={() => setMenuOpen(false)} className="text-sm text-gray-600 transition-colors hover:text-gray-900">
+                                <Link href={route('login')} onClick={() => setMenuOpen(false)} className="text-sm text-gray-800 transition-colors hover:text-gray-900">
                                     {t('auth.login')}
                                 </Link>
                                 <Link href={route('register')} onClick={() => setMenuOpen(false)} className="rounded-lg bg-gradient-to-r from-red-500 to-purple-600 px-4 py-2.5 text-center text-sm font-medium text-white transition-opacity hover:opacity-90">
@@ -224,7 +224,7 @@ export default function Landing() {
                                     {t('landing.heroHighlight')}
                                 </span>
                             </h1>
-                            <p className="mb-8 text-lg text-gray-600 leading-relaxed">
+                            <p className="mb-8 text-lg text-gray-800 leading-relaxed">
                                 {t('landing.heroDescPre')}<br className="sm:hidden" />{t('landing.heroDescPost')}
                             </p>
                             <div className="flex flex-col gap-3 sm:flex-row">
@@ -235,7 +235,7 @@ export default function Landing() {
                                     {t('auth.login')}
                                 </Link>
                             </div>
-                            <p className="mt-3 text-sm text-gray-500">{t('landing.noCard')}</p>
+                            <p className="mt-3 text-sm text-gray-700">{t('landing.noCard')}</p>
                         </div>
                         <div className="flex justify-center lg:justify-end">
                             <AppScreenshot />
@@ -246,7 +246,7 @@ export default function Landing() {
                 {/* Social proof bar */}
                 <div className="border-y border-gray-200 bg-gray-50">
                     <div className="mx-auto max-w-5xl px-6 py-4">
-                        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600">
+                        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-800">
                             {(t('landing.socialProof', { returnObjects: true }) as string[]).map((item) => (
                                 <span key={item} className="whitespace-nowrap">{item}</span>
                             ))}
@@ -258,7 +258,7 @@ export default function Landing() {
                 <section className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
                     <div className="mb-10 text-center">
                         <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">{t('landing.demoTitle')}</h2>
-                        <p className="text-gray-600">{t('landing.demoDescPre')}<br className="sm:hidden" />{t('landing.demoDescPost')}</p>
+                        <p className="text-gray-800">{t('landing.demoDescPre')}<br className="sm:hidden" />{t('landing.demoDescPost')}</p>
                     </div>
                     <div className="relative mx-auto max-w-3xl">
                         <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-red-500/10 to-purple-600/10 blur-xl" />
@@ -272,7 +272,7 @@ export default function Landing() {
                 <section className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
                     <div className="mb-12 text-center">
                         <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">{t('landing.usecaseTitle')}</h2>
-                        <p className="text-gray-600">{t('landing.usecaseSubtitlePre')}<br className="sm:hidden" />{t('landing.usecaseSubtitlePost')}</p>
+                        <p className="text-gray-800">{t('landing.usecaseSubtitlePre')}<br className="sm:hidden" />{t('landing.usecaseSubtitlePost')}</p>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <UsecaseCard emoji="📖" keyword={t('landing.usecase1Keyword')} title={t('landing.usecase1Title')} desc={t('landing.usecase1Desc')} />
@@ -287,7 +287,7 @@ export default function Landing() {
                     <div className="mx-auto max-w-5xl px-6">
                         <div className="mb-12 text-center">
                             <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">{t('landing.howTitle')}</h2>
-                            <p className="text-gray-600">{t('landing.howSubtitlePre')}<br className="sm:hidden" />{t('landing.howSubtitlePost')}</p>
+                            <p className="text-gray-800">{t('landing.howSubtitlePre')}<br className="sm:hidden" />{t('landing.howSubtitlePost')}</p>
                         </div>
                         <div className="grid gap-6 sm:grid-cols-3">
                             {[
@@ -301,12 +301,12 @@ export default function Landing() {
                                     )}
                                     <div className="rounded-2xl border border-gray-200 bg-white p-6 h-full shadow-sm">
                                         <div className="mb-4 flex items-center gap-3">
-                                            <span className="text-2xl font-bold text-gray-400">{step}</span>
+                                            <span className="text-2xl font-bold text-gray-700">{step}</span>
                                             <span className="text-2xl">{icon}</span>
                                         </div>
                                         <h3 className="mb-2 font-semibold text-gray-900">{title}</h3>
-                                        <p className="text-sm text-gray-600 mb-3 leading-relaxed">{desc}</p>
-                                        <p className="text-xs text-gray-500 border-t border-gray-100 pt-3">{detail}</p>
+                                        <p className="text-sm text-gray-800 mb-3 leading-relaxed">{desc}</p>
+                                        <p className="text-xs text-gray-700 border-t border-gray-100 pt-3">{detail}</p>
                                     </div>
                                 </div>
                             ))}
@@ -321,20 +321,20 @@ export default function Landing() {
                 <section className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
                     <div className="mb-12 text-center">
                         <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">{t('landing.pricingTitle')}</h2>
-                        <p className="text-gray-600">{t('landing.pricingDescPre')}<br className="sm:hidden" />{t('landing.pricingDescPost')}</p>
+                        <p className="text-gray-800">{t('landing.pricingDescPre')}<br className="sm:hidden" />{t('landing.pricingDescPost')}</p>
                     </div>
                     <div className="mx-auto grid max-w-2xl gap-5 sm:grid-cols-2">
                         {/* Free */}
                         <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
                             <div className="mb-1">
-                                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">Free</span>
+                                <span className="text-xs font-medium text-gray-700 uppercase tracking-wider">Free</span>
                             </div>
                             <p className="mb-1 text-4xl font-bold text-gray-900">¥0</p>
-                            <p className="mb-6 text-sm text-gray-500">{t('landing.freeForever')}</p>
+                            <p className="mb-6 text-sm text-gray-700">{t('landing.freeForever')}</p>
                             <ul className="mb-8 space-y-3">
                                 {freeFeatures.map((f) => (
-                                    <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600">
-                                        <Check className="h-4 w-4 flex-shrink-0 text-gray-400" />
+                                    <li key={f} className="flex items-center gap-2.5 text-sm text-gray-800">
+                                        <Check className="h-4 w-4 flex-shrink-0 text-gray-700" />
                                         {f}
                                     </li>
                                 ))}
@@ -347,14 +347,14 @@ export default function Landing() {
                         {/* Pro */}
                         <div className="relative rounded-2xl border border-purple-300 bg-gradient-to-br from-red-50 to-purple-50 p-8 shadow-sm" style={{ boxShadow: '0 0 40px rgba(147,51,234,0.1)' }}>
                             <div className="mb-1 flex items-center gap-2">
-                                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">Pro</span>
+                                <span className="text-xs font-medium text-gray-700 uppercase tracking-wider">Pro</span>
                                 <span className="rounded-full bg-gradient-to-r from-red-500 to-purple-600 px-2.5 py-0.5 text-xs font-medium text-white">{t('landing.recommended')}</span>
                             </div>
                             <p className="mb-1 text-4xl font-bold text-gray-900">¥300</p>
-                            <p className="mb-6 text-sm text-gray-500">{t('landing.proInterval')}</p>
+                            <p className="mb-6 text-sm text-gray-700">{t('landing.proInterval')}</p>
                             <ul className="space-y-3">
                                 {proFeatures.map((f) => (
-                                    <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600">
+                                    <li key={f} className="flex items-center gap-2.5 text-sm text-gray-800">
                                         <Check className="h-4 w-4 flex-shrink-0 text-purple-500" />
                                         {f}
                                     </li>
@@ -369,7 +369,7 @@ export default function Landing() {
                     <div className="mx-auto max-w-5xl px-6 py-14 sm:py-24 text-center">
                         <div className="mx-auto max-w-xl">
                             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">{t('landing.ctaTitlePre')}<br className="sm:hidden" />{t('landing.ctaTitlePost')}</h2>
-                            <p className="mb-8 text-gray-600">{t('landing.ctaDesc')}</p>
+                            <p className="mb-8 text-gray-800">{t('landing.ctaDesc')}</p>
                             <Link href={route('register')} className="inline-block rounded-xl bg-gradient-to-r from-red-500 to-purple-600 px-10 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90">
                                 {t('landing.startFree')}
                             </Link>
@@ -378,7 +378,7 @@ export default function Landing() {
                 </section>
 
                 {/* Footer */}
-                <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-500">
+                <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-700">
                     <div className="flex justify-center gap-6 mb-4">
                         <Link href={route('terms')} className="hover:text-gray-700 transition-colors">{t('common.terms') ?? '利用規約'}</Link>
                         <Link href={route('privacy')} className="hover:text-gray-700 transition-colors">{t('common.privacy') ?? 'プライバシーポリシー'}</Link>

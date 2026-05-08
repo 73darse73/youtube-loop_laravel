@@ -26,7 +26,7 @@ function JaContent() {
     return (
         <div className="prose prose-gray max-w-none dark:prose-invert">
             <h1 className="text-2xl font-bold dark:text-white">利用規約</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">最終更新日: {UPDATED_AT_JA}</p>
+            <p className="text-sm text-gray-700 dark:text-gray-400">最終更新日: {UPDATED_AT_JA}</p>
 
             <section className="mt-8 space-y-6 text-gray-700 dark:text-gray-300">
                 <div>
@@ -99,7 +99,7 @@ function EnContent() {
     return (
         <div className="prose prose-gray max-w-none dark:prose-invert">
             <h1 className="text-2xl font-bold dark:text-white">Terms of Service</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Last updated: {UPDATED_AT_EN}</p>
+            <p className="text-sm text-gray-700 dark:text-gray-400">Last updated: {UPDATED_AT_EN}</p>
 
             <section className="mt-8 space-y-6 text-gray-700 dark:text-gray-300">
                 <div>

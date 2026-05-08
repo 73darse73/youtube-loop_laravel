@@ -58,7 +58,7 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                         <h1 className="mb-2 text-2xl font-bold tracking-tight dark:text-white">
                             {t('plan.heading')}
                         </h1>
-                        <p className="mb-8 text-sm text-gray-500 dark:text-gray-400">
+                        <p className="mb-8 text-sm text-gray-700 dark:text-gray-400">
                             {t('plan.current')}:{' '}
                             <span className="font-medium text-gray-800 dark:text-gray-100">
                                 {isPro ? 'Pro' : 'Free'}
@@ -81,13 +81,13 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                                 </div>
                                 <p className="mb-4 text-2xl font-bold dark:text-white">
                                     ¥0
-                                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                    <span className="text-sm font-normal text-gray-700 dark:text-gray-400">
                                         {' '}
                                         / 月
                                     </span>
                                 </p>
                                 {!isPro && (
-                                    <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
+                                    <p className="mb-4 text-xs text-gray-700 dark:text-gray-400">
                                         {t('plan.loopCount', {
                                             count: loopCount,
                                         })}{' '}
@@ -98,9 +98,9 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                                     {freeFeatures.map((f) => (
                                         <li
                                             key={f}
-                                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"
+                                            className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300"
                                         >
-                                            <Check className="h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500" />
+                                            <Check className="h-4 w-4 flex-shrink-0 text-gray-700 dark:text-gray-500" />
                                             {f}
                                         </li>
                                     ))}
@@ -122,7 +122,7 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                                 </div>
                                 <p className="mb-4 text-2xl font-bold dark:text-white">
                                     ¥300
-                                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                    <span className="text-sm font-normal text-gray-700 dark:text-gray-400">
                                         {' '}
                                         / 月
                                     </span>
@@ -131,7 +131,7 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                                     {proFeatures.map((f) => (
                                         <li
                                             key={f}
-                                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"
+                                            className="flex items-center gap-2 text-sm text-gray-800 dark:text-gray-300"
                                         >
                                             <Check className="h-4 w-4 flex-shrink-0 text-purple-500" />
                                             {f}
@@ -149,19 +149,19 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                                             : t('plan.upgrade')}
                                     </button>
                                 ) : isCancelled ? (
-                                    <p className="w-full py-2 text-center text-sm text-gray-400 dark:text-gray-500">
+                                    <p className="w-full py-2 text-center text-sm text-gray-700 dark:text-gray-500">
                                         {t('plan.cancelledUntil', { date: endsAt })}
                                     </p>
                                 ) : (
                                     <>
                                         <button
                                             onClick={handleCancel}
-                                            className="w-full rounded-md border border-gray-300 py-2 text-sm font-medium text-gray-500 transition-colors hover:border-red-400 hover:text-red-500 dark:border-gray-600 dark:text-gray-400"
+                                            className="w-full rounded-md border border-gray-300 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-red-400 hover:text-red-500 dark:border-gray-600 dark:text-gray-400"
                                         >
                                             {t('plan.cancelSubscription')}
                                         </button>
                                         {nextBillingDate && (
-                                            <p className="mt-2 text-center text-xs text-gray-400 dark:text-gray-500">
+                                            <p className="mt-2 text-center text-xs text-gray-700 dark:text-gray-500">
                                                 {t('plan.nextBillingDate', { date: nextBillingDate })}
                                             </p>
                                         )}

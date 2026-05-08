@@ -42,7 +42,7 @@ export default function Login({
                         </svg>
                     </div>
                     <h1 className="mb-2 text-3xl font-bold dark:text-white">Loop Video</h1>
-                    <p className="text-gray-500 dark:text-gray-400">動画の指定区間をループ再生</p>
+                    <p className="text-gray-700 dark:text-gray-400">動画の指定区間をループ再生</p>
                 </div>
 
                 <div className="mb-4 grid grid-cols-2 rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
@@ -51,7 +51,7 @@ export default function Login({
                     </span>
                     <Link
                         href={route('register')}
-                        className="rounded-md py-2 text-center text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        className="rounded-md py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
                         新規登録
                     </Link>
@@ -59,7 +59,7 @@ export default function Login({
 
                 <div className="rounded-xl border border-gray-200 bg-white px-6 py-6 shadow-sm">
                     <h2 className="mb-1 text-lg font-semibold">ログイン</h2>
-                    <p className="mb-6 text-sm text-gray-500">
+                    <p className="mb-6 text-sm text-gray-700">
                         アカウントにログインしてください
                     </p>
 
@@ -120,7 +120,7 @@ export default function Login({
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <label className="flex items-center gap-2 text-sm text-gray-600">
+                            <label className="flex items-center gap-2 text-sm text-gray-800">
                                 <input
                                     type="checkbox"
                                     name="remember"
@@ -138,7 +138,7 @@ export default function Login({
                             {canResetPassword && (
                                 <Link
                                     href={route('password.request')}
-                                    className="text-sm text-gray-500 underline hover:text-gray-700"
+                                    className="text-sm text-gray-700 underline hover:text-gray-700"
                                 >
                                     パスワードを忘れた方
                                 </Link>
@@ -159,7 +159,7 @@ export default function Login({
                             <span className="w-full border-t border-gray-200" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-white px-2 text-gray-400">
+                            <span className="bg-white px-2 text-gray-700">
                                 または
                             </span>
                         </div>

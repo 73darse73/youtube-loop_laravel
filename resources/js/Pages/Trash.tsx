@@ -54,7 +54,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
 
                         {loopSettings.length === 0 ? (
                             <div className="rounded-xl border border-gray-200 bg-white py-16 text-center shadow-sm dark:border-gray-700/70 dark:bg-gray-800">
-                                <p className="text-sm text-gray-400 dark:text-gray-500">
+                                <p className="text-sm text-gray-700 dark:text-gray-500">
                                     {t('trash.empty')}
                                 </p>
                             </div>
@@ -74,11 +74,11 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                                                         {loop.title}
                                                     </p>
                                                     {loop.description && (
-                                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-500 dark:text-gray-400">
+                                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-700 dark:text-gray-400">
                                                             {loop.description}
                                                         </p>
                                                     )}
-                                                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                                    <p className="mt-1 text-xs text-gray-700 dark:text-gray-400">
                                                         {t('trash.loopRange', {
                                                             start: Math.floor(loop.start_time),
                                                             end: Math.floor(loop.end_time),
@@ -89,7 +89,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                                                 <div className="hidden flex-shrink-0 items-center gap-2 sm:flex">
                                                     <button
                                                         onClick={() => handleRestore(loop)}
-                                                        className="flex flex-col items-center gap-0.5 rounded p-1.5 text-xs text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                                        className="flex flex-col items-center gap-0.5 rounded p-1.5 text-xs text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
                                                     >
                                                         <RotateCcw className="h-4 w-4" />
                                                         <span>{t('common.restore')}</span>
@@ -107,7 +107,7 @@ export default function Trash({ auth, loopSettings, isPro }: Props) {
                                             <div className="mt-3 flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 sm:hidden">
                                                 <button
                                                     onClick={() => handleRestore(loop)}
-                                                    className="flex flex-1 items-center justify-center gap-1.5 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
+                                                    className="flex flex-1 items-center justify-center gap-1.5 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
                                                 >
                                                     <RotateCcw className="h-4 w-4" />
                                                     {t('common.restore')}
