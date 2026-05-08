@@ -28,7 +28,7 @@ export default {
         urlPlaceholder: 'https://www.youtube.com/watch?v=...',
         startTime: 'Start Time (sec)',
         endTime: 'End Time (sec)',
-        startLoop: '▶ Start Loop',
+        startLoop: 'Set Loop',
         invalidUrl: 'Please enter a valid YouTube URL',
         invalidTime: 'Start time must be less than end time',
         limitReached: 'You have reached the limit ({{limit}} items)',
@@ -77,8 +77,8 @@ export default {
         },
     },
     player: {
-        play: '▶ Play',
-        pause: '⏸ Pause',
+        play: 'Play',
+        pause: 'Pause',
         loopRange: 'Loop: {{start}}s – {{end}}s',
     },
     auth: {

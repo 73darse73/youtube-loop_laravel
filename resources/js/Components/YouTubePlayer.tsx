@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import YouTube, { YouTubeEvent, YouTubeProps } from 'react-youtube';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     videoId: string;
@@ -118,6 +119,7 @@ export default function YouTubePlayer({
     isAtLimit = false,
     limitMessage,
 }: Props) {
+    const { t } = useTranslation();
     const playerRef = useRef<ReturnType<
         YouTubeEvent['target']['getIframe']
     > | null>(null);
@@ -258,6 +260,15 @@ export default function YouTubePlayer({
                 onChange={handleRangeChange}
                 onDragEnd={() => playerRef.current?.playVideo()}
             />
+
+            <div className="flex justify-center pt-1">
+                <button
+                    onClick={handlePlayPause}
+                    className="flex items-center gap-2 rounded-full bg-gray-800 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600"
+                >
+                    {isPlaying ? '⏸ ' + t('player.pause') : '▶ ' + t('player.play')}
+                </button>
+            </div>
 
         </div>
     );

@@ -28,7 +28,7 @@ export default {
         urlPlaceholder: 'https://www.youtube.com/watch?v=...',
         startTime: '開始時間（秒）',
         endTime: '終了時間（秒）',
-        startLoop: '▶ ループ再生開始',
+        startLoop: 'ループをセット',
         invalidUrl: '有効なYouTube URLを入力してください',
         invalidTime: '開始時間は終了時間より小さい値を入力してください',
         limitReached: '上限（{{limit}}件）に達しています',
@@ -77,8 +77,8 @@ export default {
         },
     },
     player: {
-        play: '▶ 再生',
-        pause: '⏸ 一時停止',
+        play: '再生',
+        pause: '一時停止',
         loopRange: 'ループ区間: {{start}}秒 〜 {{end}}秒',
     },
     auth: {

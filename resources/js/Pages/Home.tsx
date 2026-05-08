@@ -402,7 +402,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             onClick={handleStartLoop}
                                             className="flex-1 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-[0.98] dark:from-gray-600 dark:to-gray-700 dark:focus-visible:ring-gray-400 dark:focus-visible:ring-offset-gray-800"
                                         >
-                                            {t('home.startLoop')}
+                                            ▶ {t('home.startLoop')}
                                         </button>
                                         <div className="flex flex-col items-end gap-1">
                                             <button

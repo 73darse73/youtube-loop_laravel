@@ -24,7 +24,7 @@ export default {
         urlPlaceholder: 'https://www.youtube.com/watch?v=...',
         startTime: '開始時間（秒）',
         endTime: '結束時間（秒）',
-        startLoop: '▶ 開始循環播放',
+        startLoop: '設定循環',
         invalidUrl: '請輸入有效的 YouTube 網址',
         invalidTime: '開始時間必須小於結束時間',
         limitReached: '已達到上限（{{limit}} 個）',
@@ -73,8 +73,8 @@ export default {
         },
     },
     player: {
-        play: '▶ 播放',
-        pause: '⏸ 暫停',
+        play: '播放',
+        pause: '暫停',
         loopRange: '循環區間：{{start}}秒 – {{end}}秒',
     },
     auth: {

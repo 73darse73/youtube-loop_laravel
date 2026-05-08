@@ -24,7 +24,7 @@ export default {
         urlPlaceholder: 'https://www.youtube.com/watch?v=...',
         startTime: '시작 시간 (초)',
         endTime: '종료 시간 (초)',
-        startLoop: '▶ 루프 재생 시작',
+        startLoop: '루프 설정',
         invalidUrl: '유효한 YouTube URL을 입력하세요',
         invalidTime: '시작 시간은 종료 시간보다 작아야 합니다',
         limitReached: '저장 한도({{limit}}개)에 도달했습니다',
@@ -73,8 +73,8 @@ export default {
         },
     },
     player: {
-        play: '▶ 재생',
-        pause: '⏸ 일시정지',
+        play: '재생',
+        pause: '일시정지',
         loopRange: '루프 구간: {{start}}초 ~ {{end}}초',
     },
     auth: {

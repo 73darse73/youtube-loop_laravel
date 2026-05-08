@@ -24,7 +24,7 @@ export default {
         urlPlaceholder: 'https://www.youtube.com/watch?v=...',
         startTime: 'Tiempo de inicio (seg)',
         endTime: 'Tiempo de fin (seg)',
-        startLoop: '▶ Iniciar bucle',
+        startLoop: 'Configurar bucle',
         invalidUrl: 'Por favor ingresa una URL de YouTube válida',
         invalidTime: 'El tiempo de inicio debe ser menor al tiempo de fin',
         limitReached: 'Has alcanzado el límite ({{limit}} elementos)',
@@ -73,8 +73,8 @@ export default {
         },
     },
     player: {
-        play: '▶ Reproducir',
-        pause: '⏸ Pausar',
+        play: 'Reproducir',
+        pause: 'Pausar',
         loopRange: 'Bucle: {{start}}s – {{end}}s',
     },
     auth: {
