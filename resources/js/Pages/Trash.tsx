@@ -1,8 +1,10 @@
 import AppFooter from '@/Components/AppFooter';
 import AppHeader from '@/Components/AppHeader';
+import ConfirmDialog from '@/Components/ConfirmDialog';
 import { LoopSetting, PageProps } from '@/types';
 import { Head, router } from '@inertiajs/react';
 import { RotateCcw, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type Props = PageProps<{
@@ -16,19 +18,31 @@ function thumbnailUrl(videoId: string): string {
 
 export default function Trash({ auth, loopSettings, isPro }: Props) {
     const { t } = useTranslation();
+    const [deleteTarget, setDeleteTarget] = useState<LoopSetting | null>(null);
 
     const handleRestore = (loop: LoopSetting) => {
         router.post(route('trash.restore', loop.id));
     };
 
     const handleForceDelete = (loop: LoopSetting) => {
-        if (!window.confirm(t('trash.forceDeleteConfirm'))) return;
-        router.delete(route('trash.destroy', loop.id));
+        setDeleteTarget(loop);
+    };
+
+    const confirmDelete = () => {
+        if (!deleteTarget) return;
+        router.delete(route('trash.destroy', deleteTarget.id));
+        setDeleteTarget(null);
     };
 
     return (
         <>
             <Head title={t('trash.title')} />
+            <ConfirmDialog
+                show={deleteTarget !== null}
+                message={t('trash.forceDeleteConfirm')}
+                onConfirm={confirmDelete}
+                onCancel={() => setDeleteTarget(null)}
+            />
             <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
                 <AppHeader userName={auth.user.name} isPro={isPro} />
 

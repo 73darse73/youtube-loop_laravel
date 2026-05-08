@@ -1,6 +1,7 @@
 import AdBanner from '@/Components/AdBanner';
 import AppFooter from '@/Components/AppFooter';
 import AppHeader from '@/Components/AppHeader';
+import ConfirmDialog from '@/Components/ConfirmDialog';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { LoopSetting, PageProps } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
@@ -36,6 +37,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const [error, setError] = useState('');
     const [showSaveDialog, setShowSaveDialog] = useState(false);
     const [showCopied, setShowCopied] = useState(false);
+    const [deleteTarget, setDeleteTarget] = useState<LoopSetting | null>(null);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         video_id: '',
@@ -118,8 +120,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     };
 
     const handleDeleteLoop = (loop: LoopSetting) => {
-        if (!window.confirm(t('home.deleteConfirm'))) return;
-        router.post(route('home.destroy', loop.id));
+        setDeleteTarget(loop);
+    };
+
+    const confirmDelete = () => {
+        if (!deleteTarget) return;
+        router.post(route('home.destroy', deleteTarget.id));
+        setDeleteTarget(null);
     };
 
     const handleShare = async (loop: LoopSetting) => {
@@ -130,12 +137,12 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     };
 
     const handleLoadLoop = (loop: LoopSetting) => {
-        setCurrentVideoId(loop.video_id);
-        setCurrentStart(loop.start_time);
-        setCurrentEnd(loop.end_time);
         setUrl(`https://www.youtube.com/watch?v=${loop.video_id}`);
         setStartTime(loop.start_time.toString());
         setEndTime(loop.end_time.toString());
+        setCurrentStart(loop.start_time);
+        setCurrentEnd(loop.end_time);
+        setCurrentVideoId(loop.video_id);
     };
 
     const LoopList = () => (
@@ -296,6 +303,12 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     return (
         <>
             <Head title={t('home.title')} />
+            <ConfirmDialog
+                show={deleteTarget !== null}
+                message={t('home.deleteConfirm')}
+                onConfirm={confirmDelete}
+                onCancel={() => setDeleteTarget(null)}
+            />
             {showCopied && (
                 <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-medium text-white shadow-lg dark:bg-gray-100 dark:text-gray-900">
                     {t('share.copySuccess')}
