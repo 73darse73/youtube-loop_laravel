@@ -140,7 +140,7 @@ export default function YouTubePlayer({
         width: '100%',
         playerVars: {
             start: Math.floor(startTime),
-            autoplay: 0,
+            autoplay: 1,
         },
     };
 
@@ -218,11 +218,14 @@ export default function YouTubePlayer({
         };
     }, []);
 
-    // 動画が切り替わった時だけリセット
+    // 動画が切り替わった時だけリセットして再生
     useEffect(() => {
         stopLoop();
-        playerRef.current?.seekTo(startTime, true);
         setCurrentTime(startTime);
+        if (playerRef.current) {
+            playerRef.current.seekTo(startTime, true);
+            playerRef.current.playVideo();
+        }
     }, [videoId]);
 
     // 区間が変わった時は範囲外にいる場合だけシーク（再生は止めない）
