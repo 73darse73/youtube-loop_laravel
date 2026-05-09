@@ -6,6 +6,7 @@ Disallow: /subscription
 Disallow: /stripe
 Disallow: /verify-email
 Disallow: /confirm-password
+Disallow: /admin
 
 Allow: /
 
