@@ -16,6 +16,7 @@ jobs:
           host: 18.180.46.254
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          command_timeout: 30m
           script: |
             node --version | grep -q 'v2[2-9]\.' || (curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs)
             cd /var/www/loop-video
