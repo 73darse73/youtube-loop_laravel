@@ -17,6 +17,8 @@
 /public/hot
 /public/storage
 /public/images/page@*.webm
+/storage/app/ga4-oauth-client.json
+/storage/app/ga4-token.json
 /storage/*.key
 /storage/pail
 /vendor
