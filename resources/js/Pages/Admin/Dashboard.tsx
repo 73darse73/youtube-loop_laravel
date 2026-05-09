@@ -18,6 +18,34 @@ interface SignupPoint {
     count: number;
 }
 
+interface Ga4Overview {
+    pageViews: number;
+    sessions: number;
+    activeUsers: number;
+    bounceRate: number;
+    avgSessionDuration: number;
+}
+
+interface Ga4Channel {
+    channel: string;
+    sessions: number;
+}
+
+interface Ga4Page {
+    path: string;
+    views: number;
+}
+
+interface Ga4Device {
+    device: string;
+    sessions: number;
+}
+
+interface Ga4Country {
+    country: string;
+    sessions: number;
+}
+
 interface VideoRank {
     video_id: string;
     title: string | null;
@@ -70,7 +98,16 @@ interface Metrics {
     users: AdminUser[];
 }
 
-type Props = PageProps<{ metrics: Metrics }>;
+interface Ga4Data {
+    overview: Ga4Overview;
+    dailyPv: SignupPoint[];
+    channels: Ga4Channel[];
+    topPages: Ga4Page[];
+    devices: Ga4Device[];
+    countries: Ga4Country[];
+}
+
+type Props = PageProps<{ metrics: Metrics; ga4: Ga4Data }>;
 
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
     return (
@@ -127,7 +164,21 @@ function VideoRankTable({ data, countKey, countLabel }: { data: VideoRank[]; cou
     );
 }
 
-export default function Dashboard({ metrics }: Props) {
+function formatDuration(seconds: number): string {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}m ${s}s`;
+}
+
+const CHANNEL_COLORS: Record<string, string> = {
+    'Organic Search': '#4ade80',
+    'Direct': '#60a5fa',
+    'Organic Social': '#f472b6',
+    'Referral': '#fb923c',
+    'Unassigned': '#94a3b8',
+};
+
+export default function Dashboard({ metrics, ga4 }: Props) {
     const { acquisition, engagement, features, revenue, popularVideos, favoriteVideos, users } = metrics;
 
     const authPieData = [
@@ -151,6 +202,102 @@ export default function Dashboard({ metrics }: Props) {
             <div className="min-h-screen bg-gray-50 p-8">
                 <div className="mx-auto max-w-6xl space-y-10">
                     <h1 className="text-2xl font-bold text-gray-900">📊 Admin Dashboard</h1>
+
+                    {/* GA4 */}
+                    {ga4.overview && Object.keys(ga4.overview).length > 0 && (
+                        <section>
+                            <SectionTitle>アクセス解析 / Google Analytics（過去30日）</SectionTitle>
+                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-5">
+                                <StatCard label="ページビュー" value={ga4.overview.pageViews?.toLocaleString()} />
+                                <StatCard label="セッション" value={ga4.overview.sessions?.toLocaleString()} />
+                                <StatCard label="アクティブユーザー" value={ga4.overview.activeUsers?.toLocaleString()} />
+                                <StatCard label="直帰率" value={`${ga4.overview.bounceRate}%`} />
+                                <StatCard label="平均セッション時間" value={formatDuration(ga4.overview.avgSessionDuration)} />
+                            </div>
+
+                            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                                {/* 日別PVグラフ */}
+                                <div className="col-span-2 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                                    <p className="mb-4 text-xs font-medium uppercase tracking-wide text-gray-500">日別PV（過去30日）</p>
+                                    <ResponsiveContainer width="100%" height={180}>
+                                        <BarChart data={ga4.dailyPv.map(d => ({ ...d, date: d.date.slice(5) }))}>
+                                            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                                            <XAxis dataKey="date" tick={{ fontSize: 10 }} interval={4} stroke="#9ca3af" />
+                                            <YAxis tick={{ fontSize: 10 }} stroke="#9ca3af" allowDecimals={false} />
+                                            <Tooltip />
+                                            <Bar dataKey="count" fill="#4ade80" radius={[3, 3, 0, 0]} name="PV" />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </div>
+
+                                {/* 流入元 */}
+                                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                                    <p className="mb-3 text-xs font-medium uppercase tracking-wide text-gray-500">流入元</p>
+                                    <ResponsiveContainer width="100%" height={140}>
+                                        <PieChart>
+                                            <Pie data={ga4.channels} cx="50%" cy="50%" innerRadius={35} outerRadius={55} dataKey="sessions" nameKey="channel">
+                                                {ga4.channels.map((c, i) => (
+                                                    <Cell key={i} fill={CHANNEL_COLORS[c.channel] ?? '#a78bfa'} />
+                                                ))}
+                                            </Pie>
+                                            <Tooltip formatter={(v, n) => [v, n]} />
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                    <div className="mt-2 space-y-1">
+                                        {ga4.channels.slice(0, 4).map((c, i) => (
+                                            <div key={i} className="flex items-center justify-between text-xs text-gray-600">
+                                                <span className="flex items-center gap-1">
+                                                    <span className="inline-block h-2 w-2 rounded-full" style={{ background: CHANNEL_COLORS[c.channel] ?? '#a78bfa' }} />
+                                                    {c.channel}
+                                                </span>
+                                                <span className="font-semibold">{c.sessions}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                                {/* トップページ */}
+                                <div className="col-span-2 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                                    <p className="mb-3 text-xs font-medium uppercase tracking-wide text-gray-500">トップページ</p>
+                                    <table className="w-full text-sm">
+                                        <tbody>
+                                            {ga4.topPages.map((p, i) => (
+                                                <tr key={i} className="border-b border-gray-50 last:border-0">
+                                                    <td className="py-1.5 pr-3 text-gray-400 text-xs">{i + 1}</td>
+                                                    <td className="py-1.5 pr-3 font-mono text-xs text-gray-700 truncate max-w-xs">{p.path}</td>
+                                                    <td className="py-1.5 text-right font-semibold text-gray-700 text-xs">{p.views.toLocaleString()}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                {/* デバイス・国 */}
+                                <div className="space-y-4">
+                                    <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                                        <p className="mb-3 text-xs font-medium uppercase tracking-wide text-gray-500">デバイス</p>
+                                        {ga4.devices.map((d, i) => (
+                                            <div key={i} className="flex items-center justify-between text-xs text-gray-600 py-1">
+                                                <span className="capitalize">{d.device}</span>
+                                                <span className="font-semibold">{d.sessions}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                                        <p className="mb-3 text-xs font-medium uppercase tracking-wide text-gray-500">国別TOP5</p>
+                                        {ga4.countries.slice(0, 5).map((c, i) => (
+                                            <div key={i} className="flex items-center justify-between text-xs text-gray-600 py-1">
+                                                <span>{c.country}</span>
+                                                <span className="font-semibold">{c.sessions}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    )}
 
                     {/* 獲得 */}
                     <section>

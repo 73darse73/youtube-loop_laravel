@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\LoopSetting;
 use App\Models\User;
+use App\Services\Ga4Service;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -12,6 +13,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $ga4 = new Ga4Service();
+        $ga4Overview = rescue(fn() => $ga4->getOverview(), []);
+        $ga4DailyPv = rescue(fn() => $ga4->getDailyPageViews(), []);
+        $ga4Channels = rescue(fn() => $ga4->getChannels(), []);
+        $ga4TopPages = rescue(fn() => $ga4->getTopPages(), []);
+        $ga4Devices = rescue(fn() => $ga4->getDevices(), []);
+        $ga4Countries = rescue(fn() => $ga4->getCountries(), []);
         $now = now();
 
         // ユーザー獲得
@@ -129,6 +137,14 @@ class DashboardController extends Controller
                 'popularVideos' => $popularVideos,
                 'favoriteVideos' => $favoriteVideos,
                 'users' => $users,
+            ],
+            'ga4' => [
+                'overview'   => $ga4Overview,
+                'dailyPv'    => $ga4DailyPv,
+                'channels'   => $ga4Channels,
+                'topPages'   => $ga4TopPages,
+                'devices'    => $ga4Devices,
+                'countries'  => $ga4Countries,
             ],
         ]);
     }

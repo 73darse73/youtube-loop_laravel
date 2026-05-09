@@ -55,6 +55,7 @@ function JaContent() {
                     <p className="mt-2 text-sm leading-relaxed">本サービスは以下の第三者サービスを利用しています：</p>
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
                         <li><strong>Google / YouTube API</strong>：動画の再生に利用。<a href="https://policies.google.com/privacy" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">Googleプライバシーポリシー</a>が適用されます</li>
+                        <li><strong>Google Analytics（GA4）</strong>：サービス改善のためのアクセス解析に利用。IPアドレス等の情報を収集します。<a href="https://policies.google.com/privacy" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">Googleプライバシーポリシー</a>が適用されます。<a href="https://tools.google.com/dlpage/gaoptout" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">オプトアウト</a>も可能です</li>
                         <li><strong>Google AdSense</strong>：無料プランユーザーへの広告表示に利用。Googleが広告配信のためにCookieを使用します</li>
                         <li><strong>Stripe</strong>：Proプランの決済処理に利用。<a href="https://stripe.com/privacy" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">Stripeプライバシーポリシー</a>が適用されます</li>
                     </ul>
@@ -127,6 +128,7 @@ function EnContent() {
                     <p className="mt-2 text-sm leading-relaxed">We use the following third-party services:</p>
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
                         <li><strong>Google / YouTube API</strong>: Used for video playback. Subject to <a href="https://policies.google.com/privacy" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a></li>
+                        <li><strong>Google Analytics (GA4)</strong>: Used for access analysis to improve the Service. Collects data such as IP addresses. Subject to <a href="https://policies.google.com/privacy" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>. You may <a href="https://tools.google.com/dlpage/gaoptout" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">opt out</a></li>
                         <li><strong>Google AdSense</strong>: Used to display ads for Free plan users. Google uses cookies for ad delivery</li>
                         <li><strong>Stripe</strong>: Used to process Pro plan payments. Subject to <a href="https://stripe.com/privacy" className="text-red-500 hover:underline" target="_blank" rel="noopener noreferrer">Stripe's Privacy Policy</a></li>
                     </ul>

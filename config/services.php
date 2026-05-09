@@ -46,4 +46,11 @@ return [
         'client' => env('ADSENSE_CLIENT'),
     ],
 
+    'ga4' => [
+        'property_id'   => env('GA4_PROPERTY_ID'),
+        'client_id'     => env('GA4_CLIENT_ID'),
+        'client_secret' => env('GA4_CLIENT_SECRET'),
+        'refresh_token' => env('GA4_REFRESH_TOKEN'),
+    ],
+
 ];
