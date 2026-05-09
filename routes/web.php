@@ -73,6 +73,10 @@ Route::get('/privacy', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('privacy');
 
+Route::get('/commercial-disclosure', function () {
+    return Inertia::render('CommercialDisclosure');
+})->name('commercial-disclosure');
+
 // 共有URL（ログイン不要）
 Route::get('/s/{token}', [SharedLoopController::class, 'show'])->name('share.show');
 
