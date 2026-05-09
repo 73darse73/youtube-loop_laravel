@@ -12,6 +12,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TrashPageController;
 use App\Http\Controllers\SharedLoopController;
 use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return Inertia::render('Landing');
@@ -71,6 +73,10 @@ Route::get('/privacy', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('privacy');
 
+Route::get('/commercial-disclosure', function () {
+    return Inertia::render('CommercialDisclosure');
+})->name('commercial-disclosure');
+
 // 共有URL（ログイン不要）
 Route::get('/s/{token}', [SharedLoopController::class, 'show'])->name('share.show');
 
@@ -85,5 +91,9 @@ Route::get('/sitemap.xml', function () {
 });
 
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
+
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+});
 
 require __DIR__.'/auth.php';
