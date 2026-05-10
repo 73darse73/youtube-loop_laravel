@@ -158,17 +158,18 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         {activeLoops.map((loop) => (
                             <div
                                 key={loop.id}
-                                className="flex w-full flex-col gap-1.5 rounded-xl p-2 transition-all hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700"
+                                onClick={() => handleLoadLoop(loop)}
+                                className="flex w-full cursor-pointer flex-col gap-1.5 rounded-xl p-2 transition-all hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700"
                             >
-                                <div className="flex items-center gap-3">
-                                    <div className="relative flex-shrink-0">
+                                <div className="flex items-center gap-2">
+                                    <div className="relative min-w-0 flex-1">
                                         <img
                                             src={thumbnailUrl(loop.video_id)}
                                             alt={loop.title ?? ''}
-                                            className="h-16 w-28 rounded object-cover"
+                                            className="h-16 w-full rounded object-cover"
                                         />
                                         <button
-                                            onClick={() => handleToggleFavorite(loop)}
+                                            onClick={(e) => { e.stopPropagation(); handleToggleFavorite(loop); }}
                                             className="absolute right-1 top-1 rounded-full bg-black/40 p-0.5 transition-colors hover:bg-black/60"
                                             aria-label={t('common.favorite')}
                                         >
@@ -179,9 +180,8 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             />
                                         </button>
                                     </div>
-                                    <div className="flex-1" />
                                     <button
-                                        onClick={() => handleShare(loop)}
+                                        onClick={(e) => { e.stopPropagation(); handleShare(loop); }}
                                         className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
                                         aria-label={t('common.share')}
                                     >
@@ -191,7 +191,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         </span>
                                     </button>
                                     <button
-                                        onClick={() => handleDeleteLoop(loop)}
+                                        onClick={(e) => { e.stopPropagation(); handleDeleteLoop(loop); }}
                                         className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
                                         aria-label={t('common.delete')}
                                     >
@@ -201,10 +201,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         </span>
                                     </button>
                                 </div>
-                                <button
-                                    onClick={() => handleLoadLoop(loop)}
-                                    className="w-full text-left"
-                                >
+                                <div className="text-left">
                                     <p className="line-clamp-2 text-sm font-medium leading-snug dark:text-gray-100">
                                         {loop.title}
                                     </p>
@@ -219,7 +216,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             end: Math.floor(loop.end_time),
                                         })}
                                     </p>
-                                </button>
+                                </div>
                             </div>
                         ))}
                     </div>
