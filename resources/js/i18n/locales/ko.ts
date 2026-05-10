@@ -12,6 +12,9 @@ export default {
         pro: 'PRO',
         free: 'FREE',
         loading: '로딩 중...',
+        terms: '이용약관',
+        privacy: '개인정보 처리방침',
+        commercial: '특정상거래법에 관한 표기',
     },
     header: {
         logoAlt: 'Loop Video',

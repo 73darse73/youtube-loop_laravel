@@ -15,6 +15,7 @@ export default {
         loading: '読み込み中...',
         terms: '利用規約',
         privacy: 'プライバシーポリシー',
+        commercial: '特定商取引法に基づく表記',
         login: 'ログイン',
     },
     header: {

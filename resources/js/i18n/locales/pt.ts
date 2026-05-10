@@ -12,6 +12,9 @@ export default {
         pro: 'PRO',
         free: 'FREE',
         loading: 'Carregando...',
+        terms: 'Termos de serviço',
+        privacy: 'Política de privacidade',
+        commercial: 'Transações comerciais específicas',
     },
     header: {
         logoAlt: 'Loop Video',

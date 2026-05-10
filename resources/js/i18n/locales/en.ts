@@ -15,6 +15,7 @@ export default {
         loading: 'Loading...',
         terms: 'Terms of Service',
         privacy: 'Privacy Policy',
+        commercial: 'Specified Commercial Transactions',
         login: 'Log in',
     },
     header: {

@@ -12,6 +12,9 @@ export default {
         pro: 'PRO',
         free: 'FREE',
         loading: '載入中...',
+        terms: '服務條款',
+        privacy: '隱私權政策',
+        commercial: '特定商業交易相關表記',
     },
     header: {
         logoAlt: 'Loop Video',
