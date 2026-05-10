@@ -166,7 +166,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         <img
                                             src={thumbnailUrl(loop.video_id)}
                                             alt={loop.title ?? ''}
-                                            className="h-16 w-full rounded object-cover"
+                                            className="aspect-video w-full rounded object-cover"
                                         />
                                         <button
                                             onClick={(e) => { e.stopPropagation(); handleToggleFavorite(loop); }}
