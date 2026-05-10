@@ -279,7 +279,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 >
                                     <span className="flex flex-col items-center gap-0.5 text-xs">
                                         <Link2 className="h-4 w-4" />
-                                        <span>{t('common.share')}</span>
+                                        <span className="md:hidden">{t('common.share')}</span>
                                     </span>
                                 </button>
                                 <button
@@ -289,7 +289,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 >
                                     <span className="flex flex-col items-center gap-0.5 text-xs">
                                         <Trash2 className="h-4 w-4" />
-                                        <span>{t('common.delete')}</span>
+                                        <span className="md:hidden">{t('common.delete')}</span>
                                     </span>
                                 </button>
                             </div>
