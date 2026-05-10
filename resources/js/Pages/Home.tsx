@@ -260,37 +260,42 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                         {loop.title}
                                     </p>
                                     {loop.description && (
-                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-700 dark:text-gray-400">
+                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-500 dark:text-gray-400">
                                             {loop.description}
                                         </p>
                                     )}
-                                    <p className="mt-1 text-xs text-gray-700 dark:text-gray-400">
+                                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                         {t('home.loopRange', {
                                             start: Math.floor(loop.start_time),
                                             end: Math.floor(loop.end_time),
                                         })}
                                     </p>
                                 </button>
-                                <button
-                                    onClick={() => handleShare(loop)}
-                                    className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
-                                    aria-label={t('common.share')}
-                                >
-                                    <span className="flex flex-col items-center gap-0.5 text-xs">
-                                        <Link2 className="h-4 w-4" />
-                                        <span>{t('common.share')}</span>
-                                    </span>
-                                </button>
-                                <button
-                                    onClick={() => handleDeleteLoop(loop)}
-                                    className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
-                                    aria-label={t('common.delete')}
-                                >
-                                    <span className="flex flex-col items-center gap-0.5 text-xs">
-                                        <Trash2 className="h-4 w-4" />
-                                        <span>{t('common.delete')}</span>
-                                    </span>
-                                </button>
+                                <div className="flex-shrink-0">
+                                    <Dropdown>
+                                        <Dropdown.Trigger>
+                                            <button className="rounded p-1 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-200">
+                                                <MoreVertical className="h-4 w-4" />
+                                            </button>
+                                        </Dropdown.Trigger>
+                                        <Dropdown.Content contentClasses="py-1 bg-white dark:bg-gray-800">
+                                            <button
+                                                onClick={() => handleShare(loop)}
+                                                className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-gray-700 transition hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+                                            >
+                                                <Link2 className="h-4 w-4" />
+                                                {t('common.share')}
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteLoop(loop)}
+                                                className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-red-500 transition hover:bg-gray-100 dark:hover:bg-gray-700"
+                                            >
+                                                <Trash2 className="h-4 w-4" />
+                                                {t('common.delete')}
+                                            </button>
+                                        </Dropdown.Content>
+                                    </Dropdown>
+                                </div>
                             </div>
                         ))}
                     </div>
