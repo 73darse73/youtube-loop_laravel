@@ -220,7 +220,8 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         ))}
                     </div>
 
-                    <div className="divide-y divide-gray-100 dark:divide-gray-700 sidebar:hidden">
+                    {/* iPad only (768px–999px): two-row layout */}
+                    <div className="hidden divide-y divide-gray-100 dark:divide-gray-700 md:block sidebar:hidden">
                         {activeLoops.map((loop) => (
                             <div key={loop.id} className="flex flex-col gap-2 py-3">
                                 <div className="flex items-center gap-3">
@@ -284,6 +285,73 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             end: Math.floor(loop.end_time),
                                         })}
                                     </p>
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Mobile only (<768px): original one-row layout */}
+                    <div className="divide-y divide-gray-100 dark:divide-gray-700 md:hidden">
+                        {activeLoops.map((loop) => (
+                            <div key={loop.id} className="flex items-center gap-3 py-3">
+                                <div className="relative flex-shrink-0">
+                                    <button onClick={() => handleLoadLoop(loop)}>
+                                        <img
+                                            src={thumbnailUrl(loop.video_id)}
+                                            alt={loop.title ?? ''}
+                                            className="h-16 w-28 rounded-lg object-cover"
+                                        />
+                                    </button>
+                                    <button
+                                        onClick={() => handleToggleFavorite(loop)}
+                                        className="absolute right-1 top-1 rounded-full bg-black/40 p-1 transition-colors hover:bg-black/60"
+                                        aria-label={t('common.favorite')}
+                                    >
+                                        <Star
+                                            className="h-3.5 w-3.5"
+                                            fill={loop.is_favorite ? '#facc15' : 'none'}
+                                            stroke={loop.is_favorite ? '#facc15' : 'white'}
+                                        />
+                                    </button>
+                                </div>
+                                <button
+                                    onClick={() => handleLoadLoop(loop)}
+                                    className="min-w-0 flex-1 text-left"
+                                >
+                                    <p className="line-clamp-2 text-sm font-medium leading-snug dark:text-gray-100">
+                                        {loop.title}
+                                    </p>
+                                    {loop.description && (
+                                        <p className="mt-0.5 line-clamp-1 text-xs text-gray-700 dark:text-gray-400">
+                                            {loop.description}
+                                        </p>
+                                    )}
+                                    <p className="mt-1 text-xs text-gray-700 dark:text-gray-400">
+                                        {t('home.loopRange', {
+                                            start: Math.floor(loop.start_time),
+                                            end: Math.floor(loop.end_time),
+                                        })}
+                                    </p>
+                                </button>
+                                <button
+                                    onClick={() => handleShare(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                    aria-label={t('common.share')}
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Link2 className="h-4 w-4" />
+                                        <span>{t('common.share')}</span>
+                                    </span>
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteLoop(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
+                                    aria-label={t('common.delete')}
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Trash2 className="h-4 w-4" />
+                                        <span>{t('common.delete')}</span>
+                                    </span>
                                 </button>
                             </div>
                         ))}
