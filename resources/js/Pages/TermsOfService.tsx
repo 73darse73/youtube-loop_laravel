@@ -2,8 +2,8 @@ import LegalHeader from '@/Components/LegalHeader';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
-const UPDATED_AT_JA = '2026年4月29日';
-const UPDATED_AT_EN = 'April 29, 2026';
+const UPDATED_AT_JA = '2026年5月10日';
+const UPDATED_AT_EN = 'May 10, 2026';
 
 export default function TermsOfService() {
     const { i18n } = useTranslation();
@@ -80,14 +80,26 @@ function JaContent() {
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">6. サービスの変更・終了</h2>
                     <p className="mt-2 text-sm leading-relaxed">
                         運営者は事前通知なしにサービス内容の変更、一時停止、終了を行う場合があります。
-                        また本利用規約は予告なく変更される場合があります。変更後も継続してご利用いただいた場合、変更に同意したものとみなします。
+                        また本利用規約は予告なく変更される場合があります。変更はサービス上での掲示をもって通知とし、変更後も継続してご利用いただいた場合、変更に同意したものとみなします。
                     </p>
                 </div>
 
                 <div>
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">7. 準拠法</h2>
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">7. アカウントの停止・削除</h2>
                     <p className="mt-2 text-sm leading-relaxed">
-                        本利用規約は日本法に準拠し、解釈されます。
+                        運営者は、以下の場合にユーザーのアカウントを事前通知なく停止または削除することができます。
+                    </p>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
+                        <li>本利用規約または関係法令に違反した場合</li>
+                        <li>不正行為やシステムへの攻撃が認められた場合</li>
+                        <li>その他、運営者が不適切と判断した場合</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">8. 準拠法・管轄裁判所</h2>
+                    <p className="mt-2 text-sm leading-relaxed">
+                        本利用規約は日本法に準拠し、解釈されます。本利用規約に関する紛争については、福岡地方裁判所を第一審の専属的合意管轄裁判所とします。
                     </p>
                 </div>
             </section>
@@ -150,14 +162,26 @@ function EnContent() {
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">6. Changes to the Service and Terms</h2>
                     <p className="mt-2 text-sm leading-relaxed">
                         We reserve the right to modify or discontinue the Service at any time without notice.
-                        We may update these Terms at any time. Continued use of the Service after changes constitutes acceptance of the new Terms.
+                        We may update these Terms at any time. Changes will be announced by posting the updated Terms on the Service. Continued use of the Service after changes constitutes acceptance of the new Terms.
                     </p>
                 </div>
 
                 <div>
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">7. Governing Law</h2>
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">7. Account Suspension and Termination</h2>
                     <p className="mt-2 text-sm leading-relaxed">
-                        These Terms are governed by and construed in accordance with the laws of Japan.
+                        We reserve the right to suspend or terminate your account without prior notice if:
+                    </p>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
+                        <li>You violate these Terms or any applicable law</li>
+                        <li>We detect fraudulent activity or attacks on the Service</li>
+                        <li>We determine, at our sole discretion, that your use is inappropriate</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">8. Governing Law and Jurisdiction</h2>
+                    <p className="mt-2 text-sm leading-relaxed">
+                        These Terms are governed by and construed in accordance with the laws of Japan. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the Fukuoka District Court as the court of first instance.
                     </p>
                 </div>
             </section>
