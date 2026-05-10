@@ -157,52 +157,29 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                         {activeLoops.map((loop) => (
                             <div
                                 key={loop.id}
-                                className="flex w-full flex-col gap-1.5 rounded-xl p-2 transition-all hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700"
+                                className="flex w-full items-center gap-3 rounded-xl p-2 transition-all hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700"
                             >
-                                <div className="flex items-center gap-3">
-                                    <div className="relative flex-shrink-0">
-                                        <img
-                                            src={thumbnailUrl(loop.video_id)}
-                                            alt={loop.title ?? ''}
-                                            className="h-16 w-28 rounded object-cover"
+                                <div className="relative flex-shrink-0">
+                                    <img
+                                        src={thumbnailUrl(loop.video_id)}
+                                        alt={loop.title ?? ''}
+                                        className="h-16 w-28 rounded object-cover"
+                                    />
+                                    <button
+                                        onClick={() => handleToggleFavorite(loop)}
+                                        className="absolute right-1 top-1 rounded-full bg-black/40 p-0.5 transition-colors hover:bg-black/60"
+                                        aria-label={t('common.favorite')}
+                                    >
+                                        <Star
+                                            className="h-3.5 w-3.5"
+                                            fill={loop.is_favorite ? '#facc15' : 'none'}
+                                            stroke={loop.is_favorite ? '#facc15' : 'white'}
                                         />
-                                        <button
-                                            onClick={() => handleToggleFavorite(loop)}
-                                            className="absolute right-1 top-1 rounded-full bg-black/40 p-0.5 transition-colors hover:bg-black/60"
-                                            aria-label={t('common.favorite')}
-                                        >
-                                            <Star
-                                                className="h-3.5 w-3.5"
-                                                fill={loop.is_favorite ? '#facc15' : 'none'}
-                                                stroke={loop.is_favorite ? '#facc15' : 'white'}
-                                            />
-                                        </button>
-                                    </div>
-                                    <div className="flex-1" />
-                                    <button
-                                        onClick={() => handleShare(loop)}
-                                        className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
-                                        aria-label={t('common.share')}
-                                    >
-                                        <span className="flex flex-col items-center gap-0.5 text-xs">
-                                            <Link2 className="h-4 w-4" />
-                                            <span>{t('common.share')}</span>
-                                        </span>
-                                    </button>
-                                    <button
-                                        onClick={() => handleDeleteLoop(loop)}
-                                        className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
-                                        aria-label={t('common.delete')}
-                                    >
-                                        <span className="flex flex-col items-center gap-0.5 text-xs">
-                                            <Trash2 className="h-4 w-4" />
-                                            <span>{t('common.delete')}</span>
-                                        </span>
                                     </button>
                                 </div>
                                 <button
                                     onClick={() => handleLoadLoop(loop)}
-                                    className="w-full text-left"
+                                    className="min-w-0 flex-1 text-left"
                                 >
                                     <p className="line-clamp-2 text-sm font-medium leading-snug dark:text-gray-100">
                                         {loop.title}
@@ -218,6 +195,26 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             end: Math.floor(loop.end_time),
                                         })}
                                     </p>
+                                </button>
+                                <button
+                                    onClick={() => handleShare(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                    aria-label={t('common.share')}
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Link2 className="h-4 w-4" />
+                                        <span>{t('common.share')}</span>
+                                    </span>
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteLoop(loop)}
+                                    className="flex-shrink-0 rounded p-1.5 text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
+                                    aria-label={t('common.delete')}
+                                >
+                                    <span className="flex flex-col items-center gap-0.5 text-xs">
+                                        <Trash2 className="h-4 w-4" />
+                                        <span>{t('common.delete')}</span>
+                                    </span>
                                 </button>
                             </div>
                         ))}
