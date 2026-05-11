@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->validateCsrfTokens(except: [
             'stripe/webhook',
+            'api/admin/report/notify',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
