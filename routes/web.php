@@ -14,6 +14,7 @@ use App\Http\Controllers\SharedLoopController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ReportNotifyController;
 use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
@@ -98,5 +99,6 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 });
 
 Route::get('/api/admin/report/daily', [ReportController::class, 'daily']);
+Route::post('/api/admin/report/notify', [ReportNotifyController::class, 'notify']);
 
 require __DIR__.'/auth.php';
