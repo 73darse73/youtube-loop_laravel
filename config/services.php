@@ -53,4 +53,8 @@ return [
         'refresh_token' => env('GA4_REFRESH_TOKEN'),
     ],
 
+    'report' => [
+        'token' => env('REPORT_API_TOKEN'),
+    ],
+
 ];
