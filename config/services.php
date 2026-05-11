@@ -57,4 +57,9 @@ return [
         'token' => env('REPORT_API_TOKEN'),
     ],
 
+    'notion' => [
+        'token'   => env('NOTION_API_TOKEN'),
+        'page_id' => env('NOTION_REPORT_PAGE_ID'),
+    ],
+
 ];
