@@ -17,7 +17,7 @@ export default function CommercialDisclosure() {
                         <div className="mt-8 overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                             <table className="w-full text-sm">
                                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                                    <Row label="販売業者">児玉 勇哉</Row>
+                                    <Row label="販売業者">兒玉 侑也</Row>
                                     <Row label="所在地">
                                         公開していません。お問い合わせいただいた場合、遅滞なく開示いたします。
                                     </Row>
