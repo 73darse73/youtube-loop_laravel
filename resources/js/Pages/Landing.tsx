@@ -159,7 +159,9 @@ export default function Landing() {
 
     return (
         <>
-            <Head title={t('landing.pageTitle')} />
+            <Head title={t('landing.pageTitle')}>
+                <link rel="canonical" href="https://loop-video.com/" />
+            </Head>
             <div className="min-h-screen bg-white text-gray-900" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(147,51,234,0.07) 0%, transparent 60%), #ffffff' }}>
 
                 {/* Header */}
