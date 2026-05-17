@@ -12,10 +12,6 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TrashPageController;
 use App\Http\Controllers\SharedLoopController;
 use App\Http\Controllers\WebhookController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\ReportNotifyController;
-use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return Inertia::render('Landing');
@@ -94,11 +90,5 @@ Route::get('/sitemap.xml', function () {
 
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
 
-Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-});
-
-Route::get('/api/admin/report/daily', [ReportController::class, 'daily']);
-Route::post('/api/admin/report/notify', [ReportNotifyController::class, 'notify']);
 
 require __DIR__.'/auth.php';
