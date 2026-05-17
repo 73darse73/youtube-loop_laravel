@@ -15,7 +15,9 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $localeMap = ['zh-TW' => 'zh_TW'];
         $locale = $request->header('X-Locale', 'ja');
+        $locale = $localeMap[$locale] ?? $locale;
         $hasLangFile = is_dir(lang_path($locale));
 
         app()->setLocale($hasLangFile ? $locale : 'en');
