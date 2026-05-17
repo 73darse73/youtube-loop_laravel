@@ -1,5 +1,5 @@
 import AppFooter from '@/Components/AppFooter';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AppHeader from '@/Components/AppHeader';
 import { PageProps } from '@/types';
 import { Head } from '@inertiajs/react';
 import DeleteUserForm from './Partials/DeleteUserForm';
@@ -7,22 +7,23 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 
 export default function Edit({
+    auth,
     mustVerifyEmail,
     status,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
+    isPro,
+}: PageProps<{ mustVerifyEmail: boolean; status?: string; isPro: boolean }>) {
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Profile
-                </h2>
-            }
-        >
-            <Head title="Profile" />
+        <>
+            <Head title="設定" />
+            <AppHeader userName={auth.user.name} isPro={isPro} />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+            <main className="min-h-screen bg-gray-50 py-10 dark:bg-gray-950">
+                <div className="mx-auto max-w-2xl space-y-6 px-4">
+                    <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
+                        設定
+                    </h1>
+
+                    <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
@@ -30,16 +31,17 @@ export default function Edit({
                         />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+                    <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
                         <UpdatePasswordForm className="max-w-xl" />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+                    <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
                         <DeleteUserForm className="max-w-xl" />
                     </div>
                 </div>
-            </div>
+            </main>
+
             <AppFooter />
-        </AuthenticatedLayout>
+        </>
     );
 }
