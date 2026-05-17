@@ -1,16 +1,20 @@
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import { useTheme } from '@/hooks/useTheme';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Moon, Sun } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function LegalHeader() {
     const { theme, toggle } = useTheme();
+    const { t } = useTranslation();
+    const { auth } = usePage().props as any;
+    const isLoggedIn = !!auth?.user;
 
     return (
         <header className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/95 shadow-sm backdrop-blur dark:border-gray-700/80 dark:bg-gray-900/95">
             <div className="container mx-auto flex items-center justify-between px-4 py-3">
                 <Link
-                    href="/"
+                    href={isLoggedIn ? '/home' : '/'}
                     className="flex items-center gap-2 transition-opacity hover:opacity-80"
                 >
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-purple-600">
@@ -26,6 +30,22 @@ export default function LegalHeader() {
                 </Link>
 
                 <div className="flex items-center gap-1">
+                    {isLoggedIn && (
+                        <>
+                            <Link
+                                href="/home"
+                                className="rounded-md px-3 py-1.5 text-sm text-gray-900 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+                            >
+                                {t('common.home')}
+                            </Link>
+                            <Link
+                                href="/plan"
+                                className="rounded-md px-3 py-1.5 text-sm text-gray-900 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+                            >
+                                {t('common.plan')}
+                            </Link>
+                        </>
+                    )}
                     <button
                         onClick={toggle}
                         className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
