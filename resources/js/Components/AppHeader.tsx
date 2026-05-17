@@ -58,6 +58,9 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                     <Link href="/plan" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
                         {t('common.plan')}
                     </Link>
+                    <Link href="/profile" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                        {t('common.settings')}
+                    </Link>
                     <Link href="/logout" method="post" as="button" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
                         {t('common.logout')}
                     </Link>
@@ -108,6 +111,13 @@ export default function AppHeader({ userName, isPro = false }: Props) {
                             className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                         >
                             {t('common.plan')}
+                        </Link>
+                        <Link
+                            href="/profile"
+                            onClick={() => setMenuOpen(false)}
+                            className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        >
+                            {t('common.settings')}
                         </Link>
                         <Link
                             href="/logout"

@@ -5,6 +5,7 @@ export default {
         delete: '삭제',
         restore: '복원',
         favorite: '즐겨찾기',
+        settings: '설정',
         logout: '로그아웃',
         trash: '휴지통',
         plan: '플랜',

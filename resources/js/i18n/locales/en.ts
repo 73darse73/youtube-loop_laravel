@@ -6,6 +6,7 @@ export default {
         restore: 'Restore',
         share: 'Share',
         favorite: 'Favorite',
+        settings: 'Settings',
         logout: 'Logout',
         trash: 'Trash',
         plan: 'Plan',

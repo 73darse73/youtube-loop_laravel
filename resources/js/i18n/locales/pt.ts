@@ -5,6 +5,7 @@ export default {
         delete: 'Excluir',
         restore: 'Restaurar',
         favorite: 'Favorito',
+        settings: 'Configurações',
         logout: 'Sair',
         trash: 'Lixeira',
         plan: 'Plano',

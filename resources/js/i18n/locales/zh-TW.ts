@@ -5,6 +5,7 @@ export default {
         delete: '刪除',
         restore: '還原',
         favorite: '我的最愛',
+        settings: '設定',
         logout: '登出',
         trash: '垃圾桶',
         plan: '方案',

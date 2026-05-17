@@ -6,6 +6,7 @@ export default {
         restore: '元に戻す',
         share: 'シェア',
         favorite: 'お気に入り',
+        settings: '設定',
         logout: 'ログアウト',
         trash: 'ゴミ箱',
         plan: 'プラン',
