@@ -15,7 +15,7 @@ class PlanPageUseCase
         $nextBillingDate = null;
         if ($subscription && !$isCancelled) {
             $stripeSubscription = $subscription->asStripeSubscription();
-            $nextBillingDate = date('Y-m-d', $stripeSubscription->current_period_end);
+            $nextBillingDate = \Carbon\Carbon::createFromTimestamp($stripeSubscription->current_period_end, 'Asia/Tokyo')->toDateString();
         }
 
         return [
