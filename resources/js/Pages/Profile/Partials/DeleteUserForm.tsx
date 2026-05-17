@@ -10,8 +10,10 @@ import { useTranslation } from 'react-i18next';
 
 export default function DeleteUserForm({
     className = '',
+    hasPassword = true,
 }: {
     className?: string;
+    hasPassword?: boolean;
 }) {
     const { t } = useTranslation();
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -65,21 +67,23 @@ export default function DeleteUserForm({
                         {t('profile.deleteConfirmDesc')}
                     </p>
 
-                    <div className="mt-6">
-                        <InputLabel htmlFor="password" value={t('profile.password')} className="sr-only" />
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-3/4"
-                            isFocused
-                            placeholder={t('profile.password')}
-                        />
-                        <InputError message={errors.password} className="mt-2" />
-                    </div>
+                    {hasPassword && (
+                        <div className="mt-6">
+                            <InputLabel htmlFor="password" value={t('profile.password')} className="sr-only" />
+                            <TextInput
+                                id="password"
+                                type="password"
+                                name="password"
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                className="mt-1 block w-3/4"
+                                isFocused
+                                placeholder={t('profile.password')}
+                            />
+                            <InputError message={errors.password} className="mt-2" />
+                        </div>
+                    )}
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>

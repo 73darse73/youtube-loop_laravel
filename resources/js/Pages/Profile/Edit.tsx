@@ -39,7 +39,7 @@ export default function Edit({
                     )}
 
                     <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
-                        <DeleteUserForm className="max-w-xl" />
+                        <DeleteUserForm className="max-w-xl" hasPassword={hasPassword} />
                     </div>
                 </div>
             </main>
