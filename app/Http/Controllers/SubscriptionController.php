@@ -36,6 +36,8 @@ class SubscriptionController extends Controller
 
     public function success(Request $request)
     {
+        $request->user()->update(['is_pro' => true]);
+
         return redirect()->route('plan.index')->with('success', 'Proプランへのアップグレードが完了しました！');
     }
 }
