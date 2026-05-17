@@ -98,6 +98,9 @@ export default {
         loginDesc: 'Log in to your account',
         registerDesc: 'Create your account',
         loopPlayDesc: 'Loop any section of a YouTube video',
+        passwordMin: 'Password (min. 6 characters)',
+        createAccount: 'Create account',
+        or: 'or',
     },
     welcome: {
         catchcopy: 'Your favorite moments,',

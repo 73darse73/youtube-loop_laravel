@@ -96,6 +96,9 @@ export default {
         loginDesc: '登入您的帳號',
         registerDesc: '建立您的帳號',
         loopPlayDesc: '重複播放 YouTube 影片的指定區間',
+        passwordMin: '密碼（最少6個字元）',
+        createAccount: '建立帳號',
+        or: '或',
     },
     welcome: {
         catchcopy: '喜歡的場景，',

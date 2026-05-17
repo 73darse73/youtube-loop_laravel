@@ -96,6 +96,9 @@ export default {
         loginDesc: '계정에 로그인하세요',
         registerDesc: '계정을 만드세요',
         loopPlayDesc: '동영상의 지정 구간을 루프 재생',
+        passwordMin: '비밀번호 (최소 6자)',
+        createAccount: '계정 만들기',
+        or: '또는',
     },
     welcome: {
         catchcopy: '좋아하는 장면을,',

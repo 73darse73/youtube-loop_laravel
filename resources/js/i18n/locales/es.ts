@@ -96,6 +96,9 @@ export default {
         loginDesc: 'Inicia sesión en tu cuenta',
         registerDesc: 'Crea tu cuenta',
         loopPlayDesc: 'Repite cualquier sección de un video de YouTube',
+        passwordMin: 'Contraseña (mín. 6 caracteres)',
+        createAccount: 'Crear cuenta',
+        or: 'o',
     },
     welcome: {
         catchcopy: 'Tu momento favorito,',

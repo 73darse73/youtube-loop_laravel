@@ -98,6 +98,9 @@ export default {
         loginDesc: 'アカウントにログインしてください',
         registerDesc: 'アカウントを作成してください',
         loopPlayDesc: '動画の指定区間をループ再生',
+        passwordMin: 'パスワード（6文字以上）',
+        createAccount: 'アカウント作成',
+        or: 'または',
     },
     welcome: {
         catchcopy: '好きな場面を、',
