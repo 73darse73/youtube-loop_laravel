@@ -1,25 +1,30 @@
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import { useTheme } from '@/hooks/useTheme';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-    userName: string;
+    userName?: string;
     isPro?: boolean;
 }
 
-export default function AppHeader({ userName, isPro = false }: Props) {
+export default function AppHeader({ userName, isPro }: Props) {
     const { t } = useTranslation();
     const { theme, toggle } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
+    const { auth } = usePage().props as any;
+
+    const resolvedName = userName ?? auth?.user?.name ?? '';
+    const resolvedPro = isPro ?? auth?.user?.is_pro ?? false;
+    const isLoggedIn = !!auth?.user;
 
     return (
         <header className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/95 shadow-sm backdrop-blur dark:border-gray-700/80 dark:bg-gray-900/95">
             <div className="container mx-auto flex items-center justify-between px-4 py-3">
                 <Link
-                    href="/home"
+                    href={isLoggedIn ? '/home' : '/'}
                     className="flex items-center gap-2 transition-opacity hover:opacity-80"
                 >
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-purple-600">
@@ -36,39 +41,54 @@ export default function AppHeader({ userName, isPro = false }: Props) {
 
                 {/* Desktop nav */}
                 <div className="hidden items-center gap-1 md:flex">
-                    <span className="text-sm text-gray-700 dark:text-gray-400">
-                        {userName}
-                    </span>
-                    {isPro && (
-                        <span className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-2 py-0.5 text-xs font-medium text-white">
-                            PRO
-                        </span>
+                    {isLoggedIn ? (
+                        <>
+                            <span className="text-sm text-gray-700 dark:text-gray-400">
+                                {resolvedName}
+                            </span>
+                            {resolvedPro && (
+                                <span className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-2 py-0.5 text-xs font-medium text-white">
+                                    PRO
+                                </span>
+                            )}
+                            <button
+                                onClick={toggle}
+                                className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                                aria-label="Toggle theme"
+                            >
+                                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                            </button>
+                            <LanguageSwitcher />
+                            <Link href="/trash" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.trash')}
+                            </Link>
+                            <Link href="/plan" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.plan')}
+                            </Link>
+                            <Link href="/profile" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.settings')}
+                            </Link>
+                            <Link href="/logout" method="post" as="button" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.logout')}
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                onClick={toggle}
+                                className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                                aria-label="Toggle theme"
+                            >
+                                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                            </button>
+                            <LanguageSwitcher />
+                        </>
                     )}
-                    <button
-                        onClick={toggle}
-                        className="rounded-md p-1.5 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                        aria-label="Toggle theme"
-                    >
-                        {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                    </button>
-                    <LanguageSwitcher />
-                    <Link href="/trash" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
-                        {t('common.trash')}
-                    </Link>
-                    <Link href="/plan" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
-                        {t('common.plan')}
-                    </Link>
-                    <Link href="/profile" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
-                        {t('common.settings')}
-                    </Link>
-                    <Link href="/logout" method="post" as="button" className="rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
-                        {t('common.logout')}
-                    </Link>
                 </div>
 
                 {/* Mobile right side */}
                 <div className="flex items-center gap-1 md:hidden">
-                    {isPro && (
+                    {isLoggedIn && resolvedPro && (
                         <span className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-2 py-0.5 text-xs font-medium text-white">
                             PRO
                         </span>
@@ -94,40 +114,25 @@ export default function AppHeader({ userName, isPro = false }: Props) {
             {menuOpen && (
                 <div className="border-t border-gray-200/80 bg-white/95 px-4 py-3 dark:border-gray-700/80 dark:bg-gray-900/95 md:hidden">
                     <div className="mb-3 flex items-center justify-between">
-                        <span className="text-sm text-gray-700 dark:text-gray-400">{userName}</span>
+                        {isLoggedIn && <span className="text-sm text-gray-700 dark:text-gray-400">{resolvedName}</span>}
                         <LanguageSwitcher />
                     </div>
-                    <div className="space-y-1">
-                        <Link
-                            href="/trash"
-                            onClick={() => setMenuOpen(false)}
-                            className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                        >
-                            {t('common.trash')}
-                        </Link>
-                        <Link
-                            href="/plan"
-                            onClick={() => setMenuOpen(false)}
-                            className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                        >
-                            {t('common.plan')}
-                        </Link>
-                        <Link
-                            href="/profile"
-                            onClick={() => setMenuOpen(false)}
-                            className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                        >
-                            {t('common.settings')}
-                        </Link>
-                        <Link
-                            href="/logout"
-                            method="post"
-                            as="button"
-                            className="block w-full rounded-md px-3 py-2 text-left text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                        >
-                            {t('common.logout')}
-                        </Link>
-                    </div>
+                    {isLoggedIn && (
+                        <div className="space-y-1">
+                            <Link href="/trash" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.trash')}
+                            </Link>
+                            <Link href="/plan" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.plan')}
+                            </Link>
+                            <Link href="/profile" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2 text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.settings')}
+                            </Link>
+                            <Link href="/logout" method="post" as="button" className="block w-full rounded-md px-3 py-2 text-left text-sm text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                {t('common.logout')}
+                            </Link>
+                        </div>
+                    )}
                 </div>
             )}
         </header>

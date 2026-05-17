@@ -1,4 +1,4 @@
-import LegalHeader from '@/Components/LegalHeader';
+import AppHeader from '@/Components/AppHeader';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
         <>
             <Head title={isJa ? 'プライバシーポリシー | Loop Video' : 'Privacy Policy | Loop Video'} />
             <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-                <LegalHeader />
+                <AppHeader />
                 <main className="container mx-auto max-w-3xl px-4 py-12">
                     {isJa ? <JaContent /> : <EnContent />}
                 </main>
