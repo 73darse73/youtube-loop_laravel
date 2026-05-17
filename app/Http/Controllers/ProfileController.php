@@ -22,6 +22,7 @@ class ProfileController extends Controller
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'isPro' => (bool) $request->user()->is_pro,
+            'hasPassword' => !is_null($request->user()->password),
         ]);
     }
 

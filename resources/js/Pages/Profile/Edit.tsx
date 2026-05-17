@@ -11,7 +11,8 @@ export default function Edit({
     mustVerifyEmail,
     status,
     isPro,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string; isPro: boolean }>) {
+    hasPassword,
+}: PageProps<{ mustVerifyEmail: boolean; status?: string; isPro: boolean; hasPassword: boolean }>) {
     return (
         <>
             <Head title="設定" />
@@ -31,9 +32,11 @@ export default function Edit({
                         />
                     </div>
 
-                    <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </div>
+                    {hasPassword && (
+                        <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
+                            <UpdatePasswordForm className="max-w-xl" />
+                        </div>
+                    )}
 
                     <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-900">
                         <DeleteUserForm className="max-w-xl" />
