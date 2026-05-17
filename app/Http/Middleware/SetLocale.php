@@ -15,12 +15,10 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $supported = ['ja', 'en', 'es', 'ko', 'pt', 'zh-TW'];
         $locale = $request->header('X-Locale', 'ja');
+        $hasLangFile = is_dir(lang_path($locale));
 
-        if (in_array($locale, $supported)) {
-            app()->setLocale($locale);
-        }
+        app()->setLocale($hasLangFile ? $locale : 'en');
 
         return $next($request);
     }
