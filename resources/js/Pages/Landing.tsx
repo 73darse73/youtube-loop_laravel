@@ -178,7 +178,7 @@ export default function Landing() {
 
                         {/* Desktop nav */}
                         <div className="hidden items-center gap-3 md:flex">
-                            <LanguageSwitcher />
+                            <LanguageSwitcher forcedLight />
                             <Link href={route('login')} className="text-sm text-gray-800 transition-colors hover:text-gray-900">
                                 {t('auth.login')}
                             </Link>
@@ -197,7 +197,7 @@ export default function Landing() {
                     {menuOpen && (
                         <div className="border-t border-gray-200 bg-white/95 px-6 py-4 md:hidden">
                             <div className="mb-4">
-                                <LanguageSwitcher />
+                                <LanguageSwitcher forcedLight />
                             </div>
                             <div className="flex flex-col gap-3">
                                 <Link href={route('login')} onClick={() => setMenuOpen(false)} className="text-sm text-gray-800 transition-colors hover:text-gray-900">

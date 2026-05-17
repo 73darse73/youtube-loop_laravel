@@ -1,4 +1,4 @@
-import LegalHeader from '@/Components/LegalHeader';
+import AppHeader from '@/Components/AppHeader';
 import { Head } from '@inertiajs/react';
 
 const UPDATED_AT = '2026年5月9日';
@@ -8,7 +8,7 @@ export default function CommercialDisclosure() {
         <>
             <Head title="特定商取引法に基づく表記 | Loop Video" />
             <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-                <LegalHeader />
+                <AppHeader />
                 <main className="container mx-auto max-w-3xl px-4 py-12">
                     <div className="prose prose-gray max-w-none dark:prose-invert">
                         <h1 className="text-2xl font-bold dark:text-white">特定商取引法に基づく表記</h1>

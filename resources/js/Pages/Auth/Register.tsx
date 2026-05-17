@@ -1,10 +1,12 @@
 import AppFooter from '@/Components/AppFooter';
 import InputError from '@/Components/InputError';
-import LegalHeader from '@/Components/LegalHeader';
+import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { FormEventHandler } from 'react';
 
 export default function Register() {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -21,8 +23,13 @@ export default function Register() {
 
     return (
         <div className="flex min-h-screen flex-col bg-gradient-to-br from-white via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-            <Head title="新規登録" />
-            <LegalHeader />
+            <Head title={t('auth.register')} />
+            <header className="flex items-center justify-between px-6 py-4">
+                <Link href="/" className="text-lg font-bold dark:text-white">
+                    Loop Video
+                </Link>
+                <LanguageSwitcher />
+            </header>
             <div className="flex flex-1 items-center justify-center px-4 py-8">
             <div className="w-full max-w-md">
                 <div className="mb-8 text-center">
@@ -36,7 +43,7 @@ export default function Register() {
                         </svg>
                     </div>
                     <h1 className="mb-2 text-3xl font-bold dark:text-white">Loop Video</h1>
-                    <p className="text-gray-700 dark:text-gray-400">動画の指定区間をループ再生</p>
+                    <p className="text-gray-700 dark:text-gray-400">{t('auth.loopPlayDesc')}</p>
                 </div>
 
                 <div className="mb-4 grid grid-cols-2 rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
@@ -44,26 +51,26 @@ export default function Register() {
                         href={route('login')}
                         className="rounded-md py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                        ログイン
+                        {t('auth.login')}
                     </Link>
                     <span className="cursor-default rounded-md bg-white py-2 text-center text-sm font-medium shadow dark:bg-gray-700 dark:text-white">
-                        新規登録
+                        {t('auth.register')}
                     </span>
                 </div>
 
-                <div className="rounded-xl border border-gray-200 bg-white px-6 py-6 shadow-sm">
-                    <h2 className="mb-1 text-lg font-semibold">新規登録</h2>
-                    <p className="mb-6 text-sm text-gray-700">
-                        新しいアカウントを作成してください
+                <div className="rounded-xl border border-gray-200 bg-white px-6 py-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <h2 className="mb-1 text-lg font-semibold dark:text-white">{t('auth.register')}</h2>
+                    <p className="mb-6 text-sm text-gray-700 dark:text-gray-400">
+                        {t('auth.registerDesc')}
                     </p>
 
                     <form onSubmit={submit} className="space-y-4">
                         <div className="space-y-1">
                             <label
                                 htmlFor="name"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                             >
-                                名前
+                                {t('auth.name')}
                             </label>
                             <input
                                 id="name"
@@ -75,7 +82,7 @@ export default function Register() {
                                 onChange={(e) =>
                                     setData('name', e.target.value)
                                 }
-                                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             />
                             <InputError
                                 message={errors.name}
@@ -86,9 +93,9 @@ export default function Register() {
                         <div className="space-y-1">
                             <label
                                 htmlFor="email"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                             >
-                                メールアドレス
+                                {t('auth.email')}
                             </label>
                             <input
                                 id="email"
@@ -99,7 +106,7 @@ export default function Register() {
                                 onChange={(e) =>
                                     setData('email', e.target.value)
                                 }
-                                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             />
                             <InputError
                                 message={errors.email}
@@ -110,9 +117,9 @@ export default function Register() {
                         <div className="space-y-1">
                             <label
                                 htmlFor="password"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                             >
-                                パスワード（6文字以上）
+                                {t('auth.passwordMin')}
                             </label>
                             <input
                                 id="password"
@@ -123,7 +130,7 @@ export default function Register() {
                                 onChange={(e) =>
                                     setData('password', e.target.value)
                                 }
-                                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             />
                             <InputError
                                 message={errors.password}
@@ -134,9 +141,9 @@ export default function Register() {
                         <div className="space-y-1">
                             <label
                                 htmlFor="password_confirmation"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                             >
-                                パスワード（確認）
+                                {t('auth.passwordConfirm')}
                             </label>
                             <input
                                 id="password_confirmation"
@@ -150,7 +157,7 @@ export default function Register() {
                                         e.target.value,
                                     )
                                 }
-                                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             />
                             <InputError
                                 message={errors.password_confirmation}
@@ -163,26 +170,26 @@ export default function Register() {
                             disabled={processing}
                             className="w-full rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50"
                         >
-                            アカウント作成
+                            {t('auth.createAccount')}
                         </button>
                     </form>
 
                     <div className="relative my-4">
                         <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t border-gray-200" />
+                            <span className="w-full border-t border-gray-200 dark:border-gray-600" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-white px-2 text-gray-700">
-                                または
+                            <span className="bg-white px-2 text-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                                {t('auth.or')}
                             </span>
                         </div>
                     </div>
 
                     <a
                         href="/auth/redirect"
-                        className="block w-full rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="block w-full rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                     >
-                        Googleでサインアップ
+                        {t('auth.googleRegister')}
                     </a>
                 </div>
             </div>
