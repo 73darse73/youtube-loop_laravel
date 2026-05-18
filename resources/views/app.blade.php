@@ -22,22 +22,33 @@
         <link rel="apple-touch-icon" href="/images/ogp.png">
 
         <!-- SEO -->
-        <meta name="description" content="YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。">
+        @php
+            $isJa = str_starts_with(app()->getLocale(), 'ja');
+            $metaDescription = $isJa
+                ? 'YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。'
+                : 'Loop any section of YouTube videos and save your loops. Perfect for language learning, music practice, and dance. Free to use.';
+            $metaTitle = $isJa
+                ? 'Loop Video — YouTube区間ループ再生'
+                : 'Loop Video — YouTube Loop Player';
+            $ogLocale = $isJa ? 'ja_JP' : 'en_US';
+        @endphp
+        <meta name="description" content="{{ $metaDescription }}">
         <link rel="canonical" href="{{ url()->current() }}">
 
         <!-- OGP -->
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="Loop Video">
-        <meta property="og:title" content="Loop Video — YouTube区間ループ再生">
-        <meta property="og:description" content="YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。">
+        <meta property="og:title" content="{{ $metaTitle }}">
+        <meta property="og:description" content="{{ $metaDescription }}">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:image" content="{{ url('/images/ogp.png') }}">
-        <meta property="og:locale" content="ja_JP">
+        <meta property="og:locale" content="{{ $ogLocale }}">
+        <meta property="og:locale:alternate" content="{{ $isJa ? 'en_US' : 'ja_JP' }}">
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Loop Video — YouTube区間ループ再生">
-        <meta name="twitter:description" content="YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。">
+        <meta name="twitter:title" content="{{ $metaTitle }}">
+        <meta name="twitter:description" content="{{ $metaDescription }}">
         <meta name="twitter:image" content="{{ url('/images/ogp.png') }}">
 
         <!-- Fonts -->
