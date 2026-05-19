@@ -26,9 +26,15 @@ class SubscriptionController extends Controller
     public function cancel(Request $request)
     {
         $user = $request->user();
-        $user->subscription('default')->cancel();
+        $subscription = $user->subscription('default');
 
-        $endsAt = $user->subscription('default')->ends_at?->format('Y年m月d日') ?? '';
+        if (!$subscription) {
+            return redirect()->route('plan.index');
+        }
+
+        $subscription->cancel();
+
+        $endsAt = $subscription->ends_at?->format('Y年m月d日') ?? '';
         Mail::to($user->email)->send(new SubscriptionCancelledMail($user, $endsAt));
 
         return redirect()->route('plan.index');
@@ -36,7 +42,13 @@ class SubscriptionController extends Controller
 
     public function resume(Request $request)
     {
-        $request->user()->subscription('default')->resume();
+        $subscription = $request->user()->subscription('default');
+
+        if (!$subscription) {
+            return redirect()->route('plan.index');
+        }
+
+        $subscription->resume();
 
         return redirect()->route('plan.index');
     }
