@@ -33,6 +33,10 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
         }
     };
 
+    const handleResume = () => {
+        router.post(route('subscription.resume'));
+    };
+
     const freeFeatures = [
         t('plan.features.loopPlay'),
         t('plan.features.saveFree'),
@@ -149,9 +153,17 @@ export default function Plan({ auth, isPro, loopCount, isCancelled, endsAt, next
                                             : t('plan.upgrade')}
                                     </button>
                                 ) : isCancelled ? (
-                                    <p className="w-full py-2 text-center text-sm text-gray-700 dark:text-gray-500">
-                                        {t('plan.cancelledUntil', { date: endsAt })}
-                                    </p>
+                                    <div className="space-y-2">
+                                        <p className="w-full py-1 text-center text-sm text-gray-700 dark:text-gray-500">
+                                            {t('plan.cancelledUntil', { date: endsAt })}
+                                        </p>
+                                        <button
+                                            onClick={handleResume}
+                                            className="w-full rounded-md bg-gradient-to-r from-purple-500 to-pink-500 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                                        >
+                                            {t('plan.resumeSubscription')}
+                                        </button>
+                                    </div>
                                 ) : (
                                     <>
                                         <button

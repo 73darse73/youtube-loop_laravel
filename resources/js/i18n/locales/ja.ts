@@ -69,6 +69,7 @@ export default {
         cancelSubscription: 'サブスクリプションを解約する',
         cancelConfirm: '本当に解約しますか？現在の期間終了まではProプランをご利用いただけます。',
         cancelledUntil: '{{date}}まで利用可能（解約済み）',
+        resumeSubscription: 'サブスクリプションを再開する',
         nextBillingDate: '次回請求日: {{date}}',
         features: {
             loopPlay: 'ループ再生（無制限）',
@@ -98,7 +99,7 @@ export default {
         loginDesc: 'アカウントにログインしてください',
         registerDesc: 'アカウントを作成してください',
         loopPlayDesc: '動画の指定区間をループ再生',
-        passwordMin: 'パスワード（6文字以上）',
+        passwordMin: 'パスワード（8文字以上）',
         createAccount: 'アカウント作成',
         or: 'または',
     },

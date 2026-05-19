@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/plan', [PlanPageController::class, 'index'])->name('plan.index');
     Route::post('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
     Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
+    Route::post('/subscription/resume', [SubscriptionController::class, 'resume'])->name('subscription.resume');
     Route::get('/subscription/success', [SubscriptionController::class, 'success'])->name('subscription.success');
     Route::get('/trash', [TrashPageController::class, 'index'])->name('trash.index');
     Route::post('/trash/restore/{loopSetting}', [TrashPageController::class, 'restore'])->name('trash.restore')->withTrashed();

@@ -69,6 +69,7 @@ export default {
         cancelSubscription: 'Cancel Subscription',
         cancelConfirm: 'Are you sure you want to cancel? You can continue using Pro until the end of your current billing period.',
         cancelledUntil: 'Active until {{date}} (Cancelled)',
+        resumeSubscription: 'Resume Subscription',
         nextBillingDate: 'Next billing date: {{date}}',
         features: {
             loopPlay: 'Unlimited loop playback',
@@ -98,7 +99,7 @@ export default {
         loginDesc: 'Log in to your account',
         registerDesc: 'Create your account',
         loopPlayDesc: 'Loop any section of a YouTube video',
-        passwordMin: 'Password (min. 6 characters)',
+        passwordMin: 'Password (min. 8 characters)',
         createAccount: 'Create account',
         or: 'or',
     },
