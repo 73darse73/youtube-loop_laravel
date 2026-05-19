@@ -34,6 +34,13 @@ class SubscriptionController extends Controller
         return redirect()->route('plan.index');
     }
 
+    public function resume(Request $request)
+    {
+        $request->user()->subscription('default')->resume();
+
+        return redirect()->route('plan.index');
+    }
+
     public function success(Request $request)
     {
         $request->user()->update(['is_pro' => true]);
