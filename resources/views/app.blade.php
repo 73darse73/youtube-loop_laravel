@@ -85,8 +85,8 @@
         </script>
         @endverbatim
 
-        <!-- Google Analytics -->
-        @if(config('services.google.analytics_id'))
+        <!-- Google Analytics (ZAPスキャン時は除外) -->
+        @if(config('services.google.analytics_id') && !str_contains(request()->userAgent() ?? '', 'ZAP'))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics_id') }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
