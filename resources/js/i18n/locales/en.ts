@@ -47,6 +47,10 @@ export default {
             memoPlaceholder: 'Add a note...',
             range: 'Range: {{start}}s – {{end}}s',
         },
+        guestSavePrompt: 'Sign up free to save your loop settings and access them anytime.',
+        guestSaveButton: 'Sign up free to save',
+        loginRequired: 'Login required to save',
+        loginRequiredDesc: 'Create a free account to save your loop settings and access them anytime.',
     },
     trash: {
         title: 'Trash',
@@ -151,6 +155,7 @@ export default {
     landing: {
         startFree: 'Get started free',
         noCard: 'No credit card required',
+        tryWithoutLogin: 'Try without signing up →',
         badge: 'YouTube Loop Player',
         heroTitle: 'Loop any section of',
         heroHighlight: 'any YouTube video',

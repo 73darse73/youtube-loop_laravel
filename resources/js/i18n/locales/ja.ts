@@ -47,6 +47,10 @@ export default {
             memoPlaceholder: 'メモを入力...',
             range: '区間: {{start}}秒 〜 {{end}}秒',
         },
+        guestSavePrompt: 'ループ設定を保存するにはログインが必要です。無料で登録できます。',
+        guestSaveButton: '無料で登録して保存する',
+        loginRequired: '保存にはログインが必要です',
+        loginRequiredDesc: '無料登録すると、ループ設定を保存していつでも呼び出せます。',
     },
     trash: {
         title: 'ゴミ箱',
@@ -151,6 +155,7 @@ export default {
     landing: {
         startFree: '無料で始める',
         noCard: 'クレジットカード不要',
+        tryWithoutLogin: '登録なしで試す →',
         badge: 'YouTube区間ループ再生',
         heroTitle: 'YouTubeの好きな区間を',
         heroHighlight: '何度でもリピート',

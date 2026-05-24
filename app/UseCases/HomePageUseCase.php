@@ -7,8 +7,12 @@ use App\Models\User;
 
 class HomePageUseCase
 {
-    public function index(User $user): array
+    public function index(?User $user): array
     {
+        if (!$user) {
+            return ['loopSettings' => [], 'isPro' => false];
+        }
+
         $loopSettings = $user->loopSettings()->orderBy('is_favorite', 'desc')->orderBy('created_at', 'desc')->get();
 
         return [

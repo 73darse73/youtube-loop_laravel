@@ -237,7 +237,12 @@ export default function Landing() {
                                     {t('auth.login')}
                                 </Link>
                             </div>
-                            <p className="mt-3 text-sm text-gray-700">{t('landing.noCard')}</p>
+                            <p className="mt-3 text-sm text-gray-700">
+                                {t('landing.noCard')} ·{' '}
+                                <Link href={route('home.index')} className="underline underline-offset-2 hover:text-gray-900">
+                                    {t('landing.tryWithoutLogin')}
+                                </Link>
+                            </p>
                         </div>
                         <div className="flex justify-center lg:justify-end">
                             <AppScreenshot />

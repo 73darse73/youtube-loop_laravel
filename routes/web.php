@@ -18,11 +18,12 @@ Route::get('/', function () {
 })->name('landing');
 
 
+Route::get('/home', [HomePageController::class, 'index'])->name('home.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/home', [HomePageController::class, 'index'])->name('home.index');
     Route::post('/home', [HomePageController::class, 'store'])->name('home.store');
     Route::post('/home/destroy/{loopSetting}', [HomePageController::class, 'destroy'])->name('home.destroy');
     Route::post('/home/favorite/{loopSetting}', [HomePageController::class, 'favorite'])->name('home.favorite');

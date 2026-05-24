@@ -28,3 +28,11 @@ export type PageProps<
         user: User;
     };
 };
+
+export type GuestPageProps<
+    T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
+    auth: {
+        user: User | null;
+    };
+};
