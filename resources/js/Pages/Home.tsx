@@ -4,11 +4,11 @@ import AppHeader from '@/Components/AppHeader';
 import ConfirmDialog from '@/Components/ConfirmDialog';
 import Dropdown from '@/Components/Dropdown';
 import YouTubePlayer from '@/Components/YouTubePlayer';
-import { LoopSetting, PageProps } from '@/types';
-import { Head, router, useForm } from '@inertiajs/react';
+import { GuestPageProps, LoopSetting } from '@/types';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 import axios from 'axios';
 import { Link2, MoreVertical, Star, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const FREE_PLAN_LIMIT = 3;
@@ -22,7 +22,7 @@ function thumbnailUrl(videoId: string): string {
     return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 }
 
-type Props = PageProps<{
+type Props = GuestPageProps<{
     loopSettings: LoopSetting[];
     isPro: boolean;
 }>;
@@ -37,8 +37,10 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     const [currentEnd, setCurrentEnd] = useState(30);
     const [error, setError] = useState('');
     const [showSaveDialog, setShowSaveDialog] = useState(false);
+    const [showLoginPrompt, setShowLoginPrompt] = useState(false);
     const [showCopied, setShowCopied] = useState(false);
     const [deleteTarget, setDeleteTarget] = useState<LoopSetting | null>(null);
+    const applyDurationToEndTime = useRef(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         video_id: '',
@@ -48,11 +50,13 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
         end_time: 0,
     });
 
+    const isGuest = !auth.user;
+
     const activeLoops = loopSettings
         .filter((l) => !l.deleted_at)
         .sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
 
-    const isAtLimit = !isPro && activeLoops.length >= FREE_PLAN_LIMIT;
+    const isAtLimit = !isPro && !isGuest && activeLoops.length >= FREE_PLAN_LIMIT;
     const canSave = !!extractVideoId(url) && startTime !== '' && endTime !== '' && !isAtLimit;
 
     const handleToggleFavorite = (loop: LoopSetting) => {
@@ -72,12 +76,25 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
             return;
         }
         setError('');
+        applyDurationToEndTime.current = true;
         setCurrentVideoId(videoId);
         setCurrentStart(start);
         setCurrentEnd(end);
     };
 
+    const handleDurationReady = (duration: number) => {
+        if (applyDurationToEndTime.current) {
+            setEndTime(duration.toFixed(1));
+            setCurrentEnd(duration);
+            applyDurationToEndTime.current = false;
+        }
+    };
+
     const handleOpenSaveDialog = async () => {
+        if (isGuest) {
+            setShowLoginPrompt(true);
+            return;
+        }
         const videoId = currentVideoId ?? extractVideoId(url);
         if (!videoId) return;
         const start = parseFloat(startTime);
@@ -138,6 +155,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
     };
 
     const handleLoadLoop = (loop: LoopSetting) => {
+        applyDurationToEndTime.current = false;
         setUrl(`https://www.youtube.com/watch?v=${loop.video_id}`);
         setStartTime(loop.start_time.toString());
         setEndTime(loop.end_time.toString());
@@ -319,7 +337,7 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                 </div>
             )}
             <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-                <AppHeader userName={auth.user.name} isPro={isPro} />
+                <AppHeader userName={auth.user?.name} isPro={isPro} />
 
                 <div className="container mx-auto px-4 py-8">
                     <div className="sidebar:grid sidebar:grid-cols-3 sidebar:gap-6">
@@ -355,8 +373,10 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                             videoId={currentVideoId}
                                             startTime={currentStart}
                                             endTime={currentEnd}
+                                            autoPlay={false}
                                             onSave={handleOpenSaveDialog}
                                             onRangeChange={handleRangeChange}
+                                            onDurationReady={handleDurationReady}
                                             isAtLimit={isAtLimit}
                                             limitMessage={t('home.limitReached', {
                                                 limit: FREE_PLAN_LIMIT,
@@ -441,6 +461,20 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 </div>
                             </div>
 
+                            {isGuest && (
+                                <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 dark:border-purple-800 dark:bg-purple-900/20">
+                                    <p className="mb-2 text-sm text-gray-800 dark:text-gray-200">
+                                        {t('home.guestSavePrompt')}
+                                    </p>
+                                    <Link
+                                        href={route('register')}
+                                        className="inline-block rounded-lg bg-gradient-to-r from-red-500 to-purple-600 px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                                    >
+                                        {t('home.guestSaveButton')}
+                                    </Link>
+                                </div>
+                            )}
+
                             {!isPro && (
                                 <AdBanner
                                     slot={
@@ -452,10 +486,31 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                 />
                             )}
 
-                            <div className="sidebar:hidden">
-                                <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
+                            {!isGuest && (
+                                <div className="sidebar:hidden">
+                                    <div className="rounded-2xl border border-gray-200/70 bg-white p-6 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
+                                        <div className="mb-4 flex items-center justify-between">
+                                            <h2 className="text-lg font-semibold dark:text-white">
+                                                {t('home.savedLoops')}
+                                            </h2>
+                                            {!isPro && (
+                                                <span className="text-xs text-gray-700 dark:text-gray-400">
+                                                    {activeLoops.length} /{' '}
+                                                    {FREE_PLAN_LIMIT}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <LoopList />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {!isGuest && (
+                            <div className="hidden sidebar:block">
+                                <div className="sticky top-20 rounded-2xl border border-gray-200/70 bg-white p-4 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
                                     <div className="mb-4 flex items-center justify-between">
-                                        <h2 className="text-lg font-semibold dark:text-white">
+                                        <h2 className="font-semibold dark:text-white">
                                             {t('home.savedLoops')}
                                         </h2>
                                         {!isPro && (
@@ -468,28 +523,34 @@ export default function Home({ auth, loopSettings, isPro }: Props) {
                                     <LoopList />
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="hidden sidebar:block">
-                            <div className="sticky top-20 rounded-2xl border border-gray-200/70 bg-white p-4 shadow-md dark:border-gray-700/70 dark:bg-gray-800">
-                                <div className="mb-4 flex items-center justify-between">
-                                    <h2 className="font-semibold dark:text-white">
-                                        {t('home.savedLoops')}
-                                    </h2>
-                                    {!isPro && (
-                                        <span className="text-xs text-gray-700 dark:text-gray-400">
-                                            {activeLoops.length} /{' '}
-                                            {FREE_PLAN_LIMIT}
-                                        </span>
-                                    )}
-                                </div>
-                                <LoopList />
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
                 <AppFooter />
             </div>
+
+            {showLoginPrompt && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                    <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-800">
+                        <h3 className="mb-2 text-lg font-semibold dark:text-white">{t('home.loginRequired')}</h3>
+                        <p className="mb-6 text-sm text-gray-700 dark:text-gray-400">{t('home.loginRequiredDesc')}</p>
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => setShowLoginPrompt(false)}
+                                className="flex-1 rounded-md border border-gray-300 py-2 text-sm font-medium text-gray-700 dark:border-gray-600 dark:text-gray-300"
+                            >
+                                {t('common.cancel')}
+                            </button>
+                            <Link
+                                href={route('register')}
+                                className="flex-1 rounded-lg bg-gradient-to-r from-red-500 to-purple-600 py-2 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                            >
+                                {t('home.guestSaveButton')}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {showSaveDialog && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">

@@ -9,6 +9,7 @@ interface Props {
     autoPlay?: boolean;
     onSave?: () => void;
     onRangeChange?: (start: number, end: number) => void;
+    onDurationReady?: (duration: number) => void;
     isAtLimit?: boolean;
     limitMessage?: string;
 }
@@ -118,6 +119,7 @@ export default function YouTubePlayer({
     autoPlay = true,
     onSave,
     onRangeChange,
+    onDurationReady,
     isAtLimit = false,
     limitMessage,
 }: Props) {
@@ -184,7 +186,10 @@ export default function YouTubePlayer({
     const onReady: YouTubeProps['onReady'] = (event) => {
         playerRef.current = event.target;
         const d = event.target.getDuration();
-        if (d > 0) setDuration(d);
+        if (d > 0) {
+            setDuration(d);
+            onDurationReady?.(d);
+        }
     };
 
     const onStateChange: YouTubeProps['onStateChange'] = (event) => {
@@ -222,13 +227,13 @@ export default function YouTubePlayer({
         };
     }, []);
 
-    // 動画が切り替わった時だけリセットして再生
+    // 動画が切り替わった時だけリセット（autoPlayがtrueの場合のみ再生）
     useEffect(() => {
         stopLoop();
         setCurrentTime(startTime);
         if (playerRef.current) {
             playerRef.current.seekTo(startTime, true);
-            playerRef.current.playVideo();
+            if (autoPlay) playerRef.current.playVideo();
         }
     }, [videoId]);
 
