@@ -28,7 +28,9 @@ export default function Login({
 
     return (
         <div className="flex min-h-screen flex-col bg-gradient-to-br from-white via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-            <Head title={t('auth.login')} />
+            <Head title={t('auth.login')}>
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
             <header className="flex items-center justify-between px-6 py-4">
                 <Link href="/" className="text-lg font-bold dark:text-white">
                     Loop Video
