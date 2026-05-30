@@ -4,6 +4,8 @@ type Theme = 'light' | 'dark';
 
 export function useTheme() {
     const [theme, setTheme] = useState<Theme>(() => {
+        // SSR環境（Node.js）ではlocalStorageが存在しないためガードする
+        if (typeof window === 'undefined') return 'light';
         const saved = localStorage.getItem('theme') as Theme | null;
         if (saved) return saved;
         return 'light';
