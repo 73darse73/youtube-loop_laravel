@@ -4,6 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "tsc && vite build",
+        "build:ssr": "vite build --ssr",
         "dev": "vite",
         "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix"
     },

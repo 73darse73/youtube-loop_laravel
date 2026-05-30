@@ -1,0 +1,20 @@
+[Unit]
+Description=Inertia SSR Server for loop-video.com
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/var/www/loop-video
+ExecStart=/usr/bin/node /var/www/loop-video/bootstrap/ssr/ssr.js
+Restart=on-failure
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=inertia-ssr
+
+# SSRサーバーはポート13714で起動する（@inertiajs/coreのデフォルト）
+Environment=NODE_ENV=production
+Environment=PORT=13714
+
+[Install]
+WantedBy=multi-user.target

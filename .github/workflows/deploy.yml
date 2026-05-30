@@ -18,13 +18,15 @@ jobs:
           node-version: '22'
 
       - name: Install JS dependencies and build
-        run: npm ci && npm run build
+        run: npm ci && npm run build && npm run build:ssr
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: public/build
+          path: |
+            public/build
+            bootstrap/ssr
 
   deploy:
     runs-on: ubuntu-latest
@@ -37,7 +39,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
-          path: public/build
 
       - name: Copy build to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -45,7 +46,7 @@ jobs:
           host: 18.180.46.254
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: public/build
+          source: "public/build,bootstrap/ssr"
           target: /var/www/loop-video
 
       - name: Deploy via SSH
@@ -64,3 +65,5 @@ jobs:
             php artisan route:cache
             php artisan view:cache
             sudo systemctl reload php8.4-fpm
+            # SSRサーバーを再起動する
+            sudo systemctl restart inertia-ssr
