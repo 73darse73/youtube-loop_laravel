@@ -25,11 +25,11 @@
         @php
             $isJa = str_starts_with(app()->getLocale(), 'ja');
             $metaDescription = $isJa
-                ? 'YouTubeの好きな区間をループ再生・保存できるサービス。語学学習・楽器練習・ダンス練習に。無料で使えます。'
-                : 'Loop any section of YouTube videos and save your loops. Perfect for language learning, music practice, and dance. Free to use.';
+                ? 'YouTubeをABリピート・区間ループ再生できる無料Webサービス。ログイン不要で今すぐ使えます。繰り返し設定を保存して語学学習・楽器練習・ダンス練習に。'
+                : 'Free YouTube AB repeat & loop player. Set any start/end time, loop any section instantly — no login required. Save loops for language learning, music & dance practice.';
             $metaTitle = $isJa
-                ? 'Loop Video — YouTube区間ループ再生'
-                : 'Loop Video — YouTube Loop Player';
+                ? 'Loop Video — YouTube ABリピート・区間ループ再生'
+                : 'Loop Video — Free YouTube AB Repeat & Loop Player';
             $ogLocale = $isJa ? 'ja_JP' : 'en_US';
         @endphp
         <meta name="description" content="{{ $metaDescription }}">
