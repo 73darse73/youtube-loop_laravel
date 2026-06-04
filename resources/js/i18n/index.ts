@@ -10,39 +10,41 @@ import zhTW from './locales/zh-TW';
 
 const isServer = typeof window === 'undefined';
 
-// SSR環境（Node.js）ではlocalStorage/navigatorが存在しないため
-// LanguageDetectorを使わずデフォルト言語で初期化する
-const i18nInstance = i18n.use(initReactI18next);
+const resources = {
+    ja: { translation: ja },
+    en: { translation: en },
+    ko: { translation: ko },
+    es: { translation: es },
+    pt: { translation: pt },
+    'zh-TW': { translation: zhTW },
+};
 
-if (!isServer) {
-    // クライアントのみ: 動的importでLanguageDetectorを追加
-    // initより前に登録する必要があるため同期的に処理する
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const LanguageDetector = require('i18next-browser-languagedetector').default;
-    i18nInstance.use(LanguageDetector);
+if (isServer) {
+    // SSR環境（Node.js）: LanguageDetectorは不要。同期的に初期化する
+    i18n.use(initReactI18next).init({
+        resources,
+        lng: 'en',
+        fallbackLng: 'en',
+        interpolation: { escapeValue: false },
+    });
+} else {
+    // クライアント環境: require() はESMバンドルでエラーになるため
+    // 動的 import() で LanguageDetector を読み込んでから初期化する
+    import('i18next-browser-languagedetector').then(({ default: LanguageDetector }) => {
+        i18n
+            .use(LanguageDetector)
+            .use(initReactI18next)
+            .init({
+                resources,
+                fallbackLng: 'en',
+                interpolation: { escapeValue: false },
+                detection: {
+                    order: ['localStorage', 'navigator'],
+                    caches: ['localStorage'],
+                },
+            });
+    });
 }
-
-i18nInstance.init({
-    resources: {
-        ja: { translation: ja },
-        en: { translation: en },
-        ko: { translation: ko },
-        es: { translation: es },
-        pt: { translation: pt },
-        'zh-TW': { translation: zhTW },
-    },
-    lng: isServer ? 'en' : undefined,
-    fallbackLng: 'en',
-    interpolation: {
-        escapeValue: false,
-    },
-    detection: isServer
-        ? undefined
-        : {
-              order: ['localStorage', 'navigator'],
-              caches: ['localStorage'],
-          },
-});
 
 export default i18n;
 
