@@ -19,6 +19,10 @@ jobs:
 
       - name: Install JS dependencies and build
         run: npm ci && npm run build && npm run build:ssr
+        env:
+          VITE_ADSENSE_CLIENT: ${{ secrets.VITE_ADSENSE_CLIENT }}
+          VITE_ADSENSE_SLOT_HOME: ${{ secrets.VITE_ADSENSE_SLOT_HOME }}
+          VITE_ADSENSE_SLOT_SHARE: ${{ secrets.VITE_ADSENSE_SLOT_SHARE }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
