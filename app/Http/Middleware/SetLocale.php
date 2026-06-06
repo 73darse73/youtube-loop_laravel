@@ -21,7 +21,7 @@ class SetLocale
             $locale = $request->header('X-Locale');
         } else {
             $preferred = $request->getPreferredLanguage(['ja', 'en']);
-            $locale = $preferred ?? 'ja';
+            $locale = $preferred ?? 'en';
         }
 
         $locale = $localeMap[$locale] ?? $locale;
