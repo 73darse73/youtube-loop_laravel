@@ -17,9 +17,9 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" href="/favicon.png" type="image/png">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="alternate icon" href="/favicon.ico">
-        <link rel="apple-touch-icon" href="/favicon.png">
+        <link rel="apple-touch-icon" href="/images/ogp.png">
 
         <!-- SEO -->
         @php
