@@ -1,3 +1,4 @@
+import AdBanner from '@/Components/AdBanner';
 import YouTubePlayer from '@/Components/YouTubePlayer';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
@@ -47,6 +48,13 @@ export default function Share({ loop }: Props) {
                         videoId={loop.video_id}
                         startTime={loop.start_time}
                         endTime={loop.end_time}
+                    />
+
+                    {/* Ad */}
+                    <AdBanner
+                        slot={import.meta.env.VITE_ADSENSE_SLOT_SHARE ?? ''}
+                        format="horizontal"
+                        className="mt-6 min-h-[90px]"
                     />
 
                     {/* CTA */}
