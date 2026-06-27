@@ -121,6 +121,12 @@ export default function Guide() {
                                 <a href="https://loop-video.com" className="text-purple-600 dark:text-purple-400 hover:underline">Loop Video</a>は、YouTubeの動画URLを貼り付けるだけで区間リピート再生ができるWebアプリです。ログインなしでも使えます。
                             </p>
 
+                            <img
+                                src="/images/guide/step1-url-input.png"
+                                alt="Loop VideoにYouTube URLを貼り付けた画面"
+                                className="mb-6 w-full rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm"
+                            />
+
                             <div className="space-y-4 mb-6">
                                 <div className="flex items-start gap-4">
                                     <span className="flex-shrink-0 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-purple-600 text-xs font-bold text-white">
@@ -178,6 +184,12 @@ export default function Guide() {
                                     </div>
                                 </div>
                             </div>
+
+                            <img
+                                src="/images/guide/step2-loop-settings.png"
+                                alt="開始・終了時間を設定してループをセットする画面"
+                                className="mb-6 w-full rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm"
+                            />
 
                             <div className="rounded-xl border border-purple-200 dark:border-purple-700 bg-purple-50 dark:bg-purple-900/20 p-5 text-center">
                                 <p className="text-sm text-gray-800 dark:text-gray-200 mb-3">
