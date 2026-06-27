@@ -116,12 +116,12 @@ export default function Plan({
                             </span>
                             {billing === 'annual' && (
                                 <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-700 dark:bg-green-900/40 dark:text-green-400">
-                                    ¥1,000/年お得
+                                    ¥1,900/年お得
                                 </span>
                             )}
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                        <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-3">
 
                             {/* ── Free（脱強調） ── */}
                             <div className={`rounded-2xl border bg-white p-4 dark:bg-gray-800 ${
@@ -157,7 +157,7 @@ export default function Plan({
                             </div>
 
                             {/* ── Pro（視覚的主役） ── */}
-                            <div className={`rounded-2xl border bg-white p-5 shadow-md dark:bg-gray-800 ${
+                            <div className={`flex flex-col rounded-2xl border bg-white p-5 shadow-md dark:bg-gray-800 ${
                                 isMonthly || isAnnual
                                     ? 'border-purple-500 ring-2 ring-purple-500'
                                     : 'border-purple-200 dark:border-purple-900'
@@ -199,6 +199,7 @@ export default function Plan({
                                 </ul>
 
                                 {/* CTA エリア */}
+                                <div className="mt-auto">
                                 {isCancelled ? (
                                     <div>
                                         <p className="mb-2 text-center text-xs text-gray-500 dark:text-gray-400">
@@ -250,10 +251,11 @@ export default function Plan({
                                 ) : isLifetime ? (
                                     <p className="text-center text-xs text-gray-400">Lifetimeプランに含まれています</p>
                                 ) : null}
+                                </div>
                             </div>
 
                             {/* ── Lifetime（視覚的主役） ── */}
-                            <div className={`rounded-2xl border bg-white p-5 shadow-md dark:bg-gray-800 ${
+                            <div className={`flex flex-col rounded-2xl border bg-white p-5 shadow-md dark:bg-gray-800 ${
                                 isLifetime
                                     ? 'border-amber-400 ring-2 ring-amber-400'
                                     : 'border-amber-200 dark:border-amber-900/50'
@@ -299,6 +301,7 @@ export default function Plan({
                                     </li>
                                 </ul>
 
+                                <div className="mt-auto">
                                 {isLifetime ? (
                                     <p className="w-full py-2 text-center text-sm font-medium text-amber-600 dark:text-amber-400">
                                         ✓ {t('plan.lifetimeMember')}
@@ -315,6 +318,7 @@ export default function Plan({
                                         <p className="mt-1.5 text-center text-xs text-gray-400">一度きりの支払い · 返金ポリシーあり</p>
                                     </div>
                                 )}
+                                </div>
                             </div>
                         </div>
                     </div>
