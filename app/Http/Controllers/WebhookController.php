@@ -27,8 +27,24 @@ class WebhookController extends CashierWebhookController
 
         $customerId = $payload['data']['object']['customer'];
         $user = User::where('stripe_id', $customerId)->first();
-        if ($user) {
+        if ($user && !$user->is_lifetime_pro) {
             $user->update(['is_pro' => false]);
+        }
+    }
+
+    public function handleCheckoutSessionCompleted(array $payload): void
+    {
+        parent::handleCheckoutSessionCompleted($payload);
+
+        $session = $payload['data']['object'];
+        if (($session['mode'] ?? '') === 'payment') {
+            $userId = $session['metadata']['user_id'] ?? null;
+            if ($userId) {
+                $user = User::find($userId);
+                if ($user) {
+                    $user->update(['is_pro' => true, 'is_lifetime_pro' => true]);
+                }
+            }
         }
     }
 }
