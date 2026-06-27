@@ -184,7 +184,7 @@ export default function Guide() {
                                     今すぐ区間リピートを試してみる（ログイン不要）
                                 </p>
                                 <Link
-                                    href={route('home.index')}
+                                    href="/home"
                                     className="inline-block rounded-xl bg-gradient-to-r from-red-500 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                                 >
                                     Loop Videoを使ってみる
@@ -255,7 +255,7 @@ export default function Guide() {
                                 インストール不要・ログイン不要で、YouTubeの区間リピートをすぐに始められます。
                             </p>
                             <Link
-                                href={route('home.index')}
+                                href="/home"
                                 className="inline-block rounded-xl bg-gradient-to-r from-red-500 to-purple-600 px-8 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                             >
                                 Loop Videoを無料で使う
