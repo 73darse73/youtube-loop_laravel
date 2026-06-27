@@ -33,28 +33,28 @@ export default function Guide() {
                             </p>
                             <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                                 <li className="flex items-start gap-2">
-                                    <span className="mt-0.5 text-base">📖</span>
+                                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400 dark:bg-gray-500" />
                                     <span>
                                         <strong className="text-gray-900 dark:text-white">語学学習</strong>
                                         ——ネイティブの発音やフレーズを聴き取るために、同じ数秒間を繰り返し再生したい。
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-2">
-                                    <span className="mt-0.5 text-base">🎸</span>
+                                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400 dark:bg-gray-500" />
                                     <span>
                                         <strong className="text-gray-900 dark:text-white">楽器練習</strong>
                                         ——弾き方がわからない箇所を何度も確認しながら、ゆっくり練習したい。
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-2">
-                                    <span className="mt-0.5 text-base">💃</span>
+                                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400 dark:bg-gray-500" />
                                     <span>
                                         <strong className="text-gray-900 dark:text-white">ダンス練習</strong>
                                         ——振り付けの特定のカウントだけを繰り返して、体に覚えさせたい。
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-2">
-                                    <span className="mt-0.5 text-base">🎵</span>
+                                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400 dark:bg-gray-500" />
                                     <span>
                                         <strong className="text-gray-900 dark:text-white">音楽のリスニング</strong>
                                         ——好きなサビや間奏だけを繰り返して聴きたい。
@@ -213,7 +213,7 @@ export default function Guide() {
                                         Q. 無料で使えますか？
                                     </h3>
                                     <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        基本的な区間リピート機能は無料でご利用いただけます。より多くの設定を保存したい場合は、月額300円のProプランもご用意しています。
+                                        基本的な区間リピート機能は無料でご利用いただけます。より多くの設定を保存したい場合は、月額490円のProプランもご用意しています。
                                     </p>
                                 </div>
 
@@ -222,7 +222,7 @@ export default function Guide() {
                                         Q. 設定したループ区間を保存できますか？
                                     </h3>
                                     <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        はい、ログイン後に「保存」ボタンを押すことでループ設定を保存できます。保存したループはマイページからいつでも呼び出せます。無料プランでは最大5件まで保存可能です。
+                                        はい、ログイン後に「保存」ボタンを押すことでループ設定を保存できます。保存したループはマイページからいつでも呼び出せます。無料プランでは最大3件まで保存可能です。
                                     </p>
                                 </div>
 
