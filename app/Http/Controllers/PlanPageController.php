@@ -15,6 +15,8 @@ class PlanPageController extends Controller
 
         return Inertia::render('Plan', [
             'isPro' => $results['isPro'],
+            'isLifetime' => $results['isLifetime'],
+            'planType' => $results['planType'],
             'loopCount' => $results['loopCount'],
             'isCancelled' => $results['isCancelled'],
             'endsAt' => $results['endsAt'],
