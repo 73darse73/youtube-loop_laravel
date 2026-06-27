@@ -30,6 +30,7 @@ export default function Plan({
 }: Props) {
     const { t } = useTranslation();
     const [processing, setProcessing] = useState<string | null>(null);
+    const [billing, setBilling] = useState<'annual' | 'monthly'>('annual');
 
     const handleUpgrade = (plan: 'monthly' | 'annual' | 'lifetime') => {
         setProcessing(plan);
@@ -69,6 +70,12 @@ export default function Plan({
     const isMonthly = planType === 'monthly';
     const isAnnual = planType === 'annual';
 
+    // 表示する価格（トグル状態に応じて切り替え）
+    const proPrice = billing === 'annual' ? '¥3,980' : '¥490';
+    const proPriceSuffix = billing === 'annual' ? ' / 年' : ' / 月';
+    const proCtaLabel = billing === 'annual' ? 'Pro 年払いで始める' : 'Pro 月払いで始める';
+    const proUpgradeTarget: 'monthly' | 'annual' = billing === 'annual' ? 'annual' : 'monthly';
+
     return (
         <>
             <Head title={t('plan.title')} />
@@ -80,27 +87,57 @@ export default function Plan({
                         <h1 className="mb-2 text-center text-2xl font-bold tracking-tight dark:text-white">
                             {t('plan.heading')}
                         </h1>
-                        <p className="mb-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                        <p className="mb-6 text-center text-sm text-gray-500 dark:text-gray-400">
                             {t('plan.desc')}
                         </p>
 
+                        {/* ── 月払い / 年払い トグル ── */}
+                        <div className="mb-8 flex items-center justify-center gap-3">
+                            <span className={`text-sm font-medium transition-colors ${billing === 'monthly' ? 'text-gray-900 dark:text-white' : 'text-gray-400 dark:text-gray-500'}`}>
+                                月払い
+                            </span>
+                            <button
+                                onClick={() => setBilling(billing === 'annual' ? 'monthly' : 'annual')}
+                                className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+                                    billing === 'annual'
+                                        ? 'bg-gradient-to-r from-purple-500 to-pink-500'
+                                        : 'bg-gray-300 dark:bg-gray-600'
+                                }`}
+                                aria-label="支払い周期を切り替え"
+                            >
+                                <span
+                                    className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition-transform ${
+                                        billing === 'annual' ? 'translate-x-8' : 'translate-x-1'
+                                    }`}
+                                />
+                            </button>
+                            <span className={`text-sm font-medium transition-colors ${billing === 'annual' ? 'text-gray-900 dark:text-white' : 'text-gray-400 dark:text-gray-500'}`}>
+                                年払い
+                            </span>
+                            {billing === 'annual' && (
+                                <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-700 dark:bg-green-900/40 dark:text-green-400">
+                                    ¥1,000/年お得
+                                </span>
+                            )}
+                        </div>
+
                         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
 
-                            {/* ── Free ── */}
-                            <div className={`rounded-2xl border bg-white p-5 dark:bg-gray-800 ${
+                            {/* ── Free（脱強調） ── */}
+                            <div className={`rounded-2xl border bg-white p-4 dark:bg-gray-800 ${
                                 isFree
                                     ? 'border-gray-300 shadow-sm dark:border-gray-600'
-                                    : 'border-gray-100 opacity-70 dark:border-gray-700/50'
+                                    : 'border-gray-100 opacity-60 dark:border-gray-700/50'
                             }`}>
-                                <div className="mb-3 flex items-center justify-between">
-                                    <h2 className="font-semibold text-gray-700 dark:text-gray-300">Free</h2>
+                                <div className="mb-2 flex items-center justify-between">
+                                    <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Free</h2>
                                     {isFree && (
-                                        <span className="rounded-full bg-gray-200 px-2.5 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                                        <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
                                             {t('plan.current')}
                                         </span>
                                     )}
                                 </div>
-                                <p className="mb-3 text-xl font-bold text-gray-700 dark:text-gray-300">
+                                <p className="mb-3 text-lg font-bold text-gray-500 dark:text-gray-400">
                                     ¥0
                                     <span className="text-xs font-normal text-gray-400"> / 月</span>
                                 </p>
@@ -111,15 +148,15 @@ export default function Plan({
                                 )}
                                 <ul className="space-y-1.5">
                                     {freeFeatures.map((f) => (
-                                        <li key={f} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                                            <Check className="h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
+                                        <li key={f} className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+                                            <Check className="h-3 w-3 flex-shrink-0 text-gray-300 dark:text-gray-600" />
                                             {f}
                                         </li>
                                     ))}
                                 </ul>
                             </div>
 
-                            {/* ── Pro ── */}
+                            {/* ── Pro（視覚的主役） ── */}
                             <div className={`rounded-2xl border bg-white p-5 shadow-md dark:bg-gray-800 ${
                                 isMonthly || isAnnual
                                     ? 'border-purple-500 ring-2 ring-purple-500'
@@ -141,7 +178,18 @@ export default function Plan({
                                     )}
                                 </div>
 
-                                <ul className="mb-4 space-y-1.5">
+                                {/* 価格表示（トグル連動） */}
+                                <div className="mb-1">
+                                    <p className="text-2xl font-bold dark:text-white">
+                                        {proPrice}
+                                        <span className="text-sm font-normal text-gray-400">{proPriceSuffix}</span>
+                                    </p>
+                                    {billing === 'annual' && (
+                                        <p className="text-xs text-gray-400">{t('plan.annualEquiv')}</p>
+                                    )}
+                                </div>
+
+                                <ul className="mb-5 space-y-1.5">
                                     {proFeatures.map((f) => (
                                         <li key={f} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                             <Check className="h-3.5 w-3.5 flex-shrink-0 text-purple-500" />
@@ -150,115 +198,61 @@ export default function Plan({
                                     ))}
                                 </ul>
 
-                                <div className="space-y-3">
-                                    {/* 月払いブロック */}
-                                    {isAnnual ? null : isCancelled ? (
-                                        <div className="rounded-xl bg-gray-50 p-3 dark:bg-gray-700/50">
-                                            <p className="mb-2 text-center text-xs text-gray-500 dark:text-gray-400">
-                                                {t('plan.cancelledUntil', { date: endsAt })}
-                                            </p>
-                                            <button
-                                                onClick={handleResume}
-                                                className="w-full rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
-                                            >
-                                                {t('plan.resumeSubscription')}
-                                            </button>
-                                        </div>
-                                    ) : (
-                                        <div className="rounded-xl bg-gray-50 p-3 dark:bg-gray-700/50">
-                                            <div className="mb-2 flex items-baseline justify-between">
-                                                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">月払い</span>
-                                                <span className="text-lg font-bold dark:text-white">
-                                                    ¥490
-                                                    <span className="text-xs font-normal text-gray-400"> / 月</span>
-                                                </span>
-                                            </div>
-                                            {isFree ? (
-                                                <>
-                                                    <button
-                                                        onClick={() => handleUpgrade('monthly')}
-                                                        disabled={processing !== null}
-                                                        className="w-full rounded-lg border border-purple-300 py-2 text-sm font-medium text-purple-600 transition-colors hover:bg-purple-50 disabled:opacity-60 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-purple-900/20"
-                                                    >
-                                                        {processing === 'monthly' ? t('common.loading') : 'Pro 月払いで始める'}
-                                                    </button>
-                                                    <p className="mt-1 text-center text-xs text-gray-400">いつでもキャンセル可 · 自動更新</p>
-                                                </>
-                                            ) : isMonthly ? (
-                                                <>
-                                                    <p className="text-center text-xs text-gray-500 dark:text-gray-400">
-                                                        {nextBillingDate && t('plan.nextBillingDate', { date: nextBillingDate })}
-                                                    </p>
-                                                </>
-                                            ) : null}
-                                        </div>
-                                    )}
-
-                                    {/* 年払いブロック */}
-                                    <div className={`rounded-xl p-3 ${
-                                        isAnnual
-                                            ? 'bg-purple-50 dark:bg-purple-900/20'
-                                            : 'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20'
-                                    }`}>
-                                        <div className="mb-2 flex items-baseline justify-between">
-                                            <div className="flex items-center gap-1.5">
-                                                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">年払い</span>
-                                                <span className="rounded-full bg-green-500 px-1.5 py-0.5 text-xs font-bold text-white">
-                                                    {t('plan.annualSave')}
-                                                </span>
-                                            </div>
-                                            <div className="text-right">
-                                                <span className="text-lg font-bold dark:text-white">
-                                                    ¥3,980
-                                                    <span className="text-xs font-normal text-gray-400"> / 年</span>
-                                                </span>
-                                                <p className="text-xs text-gray-400">{t('plan.annualEquiv')}</p>
-                                            </div>
-                                        </div>
-                                        {isFree ? (
-                                            <>
-                                                <button
-                                                    onClick={() => handleUpgrade('annual')}
-                                                    disabled={processing !== null}
-                                                    className="w-full rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60"
-                                                >
-                                                    {processing === 'annual' ? t('common.loading') : 'Pro 年払いで始める'}
-                                                </button>
-                                                <p className="mt-1 text-center text-xs text-gray-400">いつでもキャンセル可 · 年間一括請求</p>
-                                            </>
-                                        ) : isMonthly ? (
-                                            <>
-                                                <button
-                                                    onClick={() => handleUpgrade('annual')}
-                                                    disabled={processing !== null}
-                                                    className="w-full rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60"
-                                                >
-                                                    {processing === 'annual' ? t('common.loading') : '年払いに切り替える（¥1,000/年お得）'}
-                                                </button>
-                                                <p className="mt-1 text-center text-xs text-gray-400">いつでもキャンセル可 · 年間一括請求</p>
-                                            </>
-                                        ) : isAnnual ? (
-                                            <p className="text-center text-xs text-gray-500 dark:text-gray-400">
-                                                {nextBillingDate && t('plan.nextBillingDate', { date: nextBillingDate })}
-                                            </p>
-                                        ) : isLifetime ? (
-                                            <p className="text-center text-xs text-gray-400">Lifetimeプランに含まれています</p>
-                                        ) : null}
+                                {/* CTA エリア */}
+                                {isCancelled ? (
+                                    <div>
+                                        <p className="mb-2 text-center text-xs text-gray-500 dark:text-gray-400">
+                                            {t('plan.cancelledUntil', { date: endsAt })}
+                                        </p>
+                                        <button
+                                            onClick={handleResume}
+                                            className="w-full rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                                        >
+                                            {t('plan.resumeSubscription')}
+                                        </button>
                                     </div>
-
-                                    {/* キャンセルリンク（月払い・年払いユーザーのみ） */}
-                                    {(isMonthly || isAnnual) && !isCancelled && (
+                                ) : (isMonthly || isAnnual) ? (
+                                    <div>
+                                        <p className="text-center text-xs text-gray-500 dark:text-gray-400">
+                                            {nextBillingDate && t('plan.nextBillingDate', { date: nextBillingDate })}
+                                        </p>
+                                        {/* 月払いユーザーに年払い切り替えを促す */}
+                                        {isMonthly && billing === 'annual' && (
+                                            <button
+                                                onClick={() => handleUpgrade('annual')}
+                                                disabled={processing !== null}
+                                                className="mt-3 w-full rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                                            >
+                                                {processing === 'annual' ? t('common.loading') : t('plan.upgradeAnnual')}
+                                            </button>
+                                        )}
+                                        {/* キャンセルリンク */}
                                         <button
                                             onClick={handleCancel}
-                                            className="w-full text-center text-xs text-gray-400 underline-offset-2 hover:text-red-400 hover:underline dark:text-gray-600"
+                                            className="mt-3 w-full text-center text-xs text-gray-400 underline-offset-2 hover:text-red-400 hover:underline dark:text-gray-600"
                                         >
                                             {t('plan.cancelSubscription')}
                                         </button>
-                                    )}
-                                </div>
+                                    </div>
+                                ) : isFree ? (
+                                    <div>
+                                        <button
+                                            onClick={() => handleUpgrade(proUpgradeTarget)}
+                                            disabled={processing !== null}
+                                            className="w-full rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                                        >
+                                            {processing === proUpgradeTarget ? t('common.loading') : proCtaLabel}
+                                        </button>
+                                        <p className="mt-1.5 text-center text-xs text-gray-400">
+                                            {billing === 'annual' ? 'いつでもキャンセル可 · 年間一括請求' : 'いつでもキャンセル可 · 自動更新'}
+                                        </p>
+                                    </div>
+                                ) : isLifetime ? (
+                                    <p className="text-center text-xs text-gray-400">Lifetimeプランに含まれています</p>
+                                ) : null}
                             </div>
 
-                            {/* ── Lifetime ── */}
+                            {/* ── Lifetime（視覚的主役） ── */}
                             <div className={`rounded-2xl border bg-white p-5 shadow-md dark:bg-gray-800 ${
                                 isLifetime
                                     ? 'border-amber-400 ring-2 ring-amber-400'
@@ -276,7 +270,7 @@ export default function Plan({
                                     )}
                                 </div>
 
-                                <div className="mb-4">
+                                <div className="mb-1">
                                     <p className="text-2xl font-bold dark:text-white">
                                         ¥5,980
                                         <span className="text-sm font-normal text-gray-400"> 一括払い</span>
@@ -285,14 +279,14 @@ export default function Plan({
                                 </div>
 
                                 {!isLifetime && (
-                                    <div className="mb-4 rounded-lg bg-amber-50 px-3 py-2 dark:bg-amber-900/20">
+                                    <div className="mb-4 mt-3 rounded-lg bg-amber-50 px-3 py-2 dark:bg-amber-900/20">
                                         <p className="text-xs font-medium text-amber-700 dark:text-amber-400">
                                             年払いより¥1,998多いだけで、ずっと使える
                                         </p>
                                     </div>
                                 )}
 
-                                <ul className="mb-4 space-y-1.5">
+                                <ul className="mb-5 space-y-1.5">
                                     {proFeatures.map((f) => (
                                         <li key={f} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                             <Check className="h-3.5 w-3.5 flex-shrink-0 text-amber-500" />
@@ -310,16 +304,16 @@ export default function Plan({
                                         ✓ {t('plan.lifetimeMember')}
                                     </p>
                                 ) : (
-                                    <>
+                                    <div>
                                         <button
                                             onClick={() => handleUpgrade('lifetime')}
                                             disabled={processing !== null}
-                                            className="w-full rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                                            className="w-full rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
                                         >
                                             {processing === 'lifetime' ? t('common.loading') : t('plan.lifetimePurchase')}
                                         </button>
-                                        <p className="mt-1 text-center text-xs text-gray-400">一度きりの支払い · 返金ポリシーあり</p>
-                                    </>
+                                        <p className="mt-1.5 text-center text-xs text-gray-400">一度きりの支払い · 返金ポリシーあり</p>
+                                    </div>
                                 )}
                             </div>
                         </div>
