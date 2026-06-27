@@ -21,7 +21,7 @@ export default function AppFooter() {
                     {t('common.commercial')}
                 </Link>
                 <span className="hidden md:inline">·</span>
-                <Link href={route('guide')} className="hover:text-gray-800 hover:underline dark:hover:text-gray-200">
+                <Link href="/guide" className="hover:text-gray-800 hover:underline dark:hover:text-gray-200">
                     使い方ガイド
                 </Link>
             </div>
