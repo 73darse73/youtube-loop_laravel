@@ -8,8 +8,6 @@ import ko from './locales/ko';
 import pt from './locales/pt';
 import zhTW from './locales/zh-TW';
 
-const isServer = typeof window === 'undefined';
-
 const resources = {
     ja: { translation: ja },
     en: { translation: en },
@@ -19,30 +17,34 @@ const resources = {
     'zh-TW': { translation: zhTW },
 };
 
-if (isServer) {
-    // SSR環境（Node.js）: LanguageDetectorは不要。同期的に初期化する
-    i18n.use(initReactI18next).init({
-        resources,
-        lng: 'en',
-        fallbackLng: 'en',
-        interpolation: { escapeValue: false },
-    });
-} else {
-    // クライアント環境: require() はESMバンドルでエラーになるため
-    // 動的 import() で LanguageDetector を読み込んでから初期化する
+const isServer = typeof window === 'undefined';
+
+const savedLng = (() => {
+    if (isServer) return 'en';
+    try { return localStorage.getItem('i18nextLng') ?? 'en'; } catch { return 'en'; }
+})();
+
+i18n.use(initReactI18next).init({
+    resources,
+    lng: savedLng,
+    fallbackLng: 'en',
+    interpolation: { escapeValue: false },
+    initImmediate: false,
+});
+
+// クライアントのみ: ブラウザ言語を後から反映
+if (!isServer) {
     import('i18next-browser-languagedetector').then(({ default: LanguageDetector }) => {
-        i18n
-            .use(LanguageDetector)
-            .use(initReactI18next)
-            .init({
-                resources,
-                fallbackLng: 'en',
-                interpolation: { escapeValue: false },
-                detection: {
-                    order: ['localStorage', 'navigator'],
-                    caches: ['localStorage'],
-                },
-            });
+        const detector = new LanguageDetector();
+        detector.init({
+            order: ['localStorage', 'navigator'],
+            caches: ['localStorage'],
+        });
+        const detectedLng = detector.detect();
+        const lng = Array.isArray(detectedLng) ? detectedLng[0] : detectedLng;
+        if (lng && lng !== i18n.language) {
+            i18n.changeLanguage(lng);
+        }
     });
 }
 
