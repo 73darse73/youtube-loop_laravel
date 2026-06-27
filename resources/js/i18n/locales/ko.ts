@@ -80,6 +80,7 @@ export default {
         play: '재생',
         pause: '일시정지',
         loopRange: '루프 구간: {{start}}초 ~ {{end}}초',
+        speed: '재생 속도',
     },
     auth: {
         login: '로그인',

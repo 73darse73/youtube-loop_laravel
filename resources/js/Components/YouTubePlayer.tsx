@@ -14,6 +14,8 @@ interface Props {
     limitMessage?: string;
 }
 
+const PLAYBACK_RATE_PRESETS = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0] as const;
+
 function formatTime(seconds: number): string {
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
@@ -130,6 +132,7 @@ export default function YouTubePlayer({
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(startTime);
+    const [playbackRate, setPlaybackRate] = useState<number>(1.0);
     const intervalRef = useRef<number | null>(null);
     const timeTrackRef = useRef<number | null>(null);
 
@@ -183,6 +186,8 @@ export default function YouTubePlayer({
         }, 200);
     };
 
+    const playbackRateRef = useRef<number>(1.0);
+
     const onReady: YouTubeProps['onReady'] = (event) => {
         playerRef.current = event.target;
         const d = event.target.getDuration();
@@ -190,6 +195,8 @@ export default function YouTubePlayer({
             setDuration(d);
             onDurationReady?.(d);
         }
+        // 準備完了時に現在の速度を適用
+        event.target.setPlaybackRate(playbackRateRef.current);
     };
 
     const onStateChange: YouTubeProps['onStateChange'] = (event) => {
@@ -214,6 +221,14 @@ export default function YouTubePlayer({
         isPlaying
             ? playerRef.current.pauseVideo()
             : playerRef.current.playVideo();
+    };
+
+    const handlePlaybackRateChange = (rate: number) => {
+        setPlaybackRate(rate);
+        playbackRateRef.current = rate;
+        if (playerRef.current) {
+            playerRef.current.setPlaybackRate(rate);
+        }
     };
 
     const handleRangeChange = (start: number, end: number) => {
@@ -267,6 +282,44 @@ export default function YouTubePlayer({
                 onChange={handleRangeChange}
                 onDragEnd={() => playerRef.current?.playVideo()}
             />
+
+            {/* Playback Speed Control */}
+            <div className="space-y-2 px-1">
+                <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                        {t('player.speed')}
+                    </span>
+                    <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                        {playbackRate === 1.0 ? '1.0' : playbackRate}x
+                    </span>
+                </div>
+                {/* Preset buttons */}
+                <div className="flex gap-1">
+                    {PLAYBACK_RATE_PRESETS.map((rate) => (
+                        <button
+                            key={rate}
+                            onClick={() => handlePlaybackRateChange(rate)}
+                            className={`flex-1 rounded-md py-1 text-xs font-medium transition-colors ${
+                                playbackRate === rate
+                                    ? 'bg-indigo-500 text-white shadow-sm'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                            }`}
+                        >
+                            {rate === 1.0 ? '1.0' : rate}x
+                        </button>
+                    ))}
+                </div>
+                {/* Slider */}
+                <input
+                    type="range"
+                    min={0.5}
+                    max={2.0}
+                    step={0.05}
+                    value={playbackRate}
+                    onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))}
+                    className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-indigo-500 dark:bg-gray-700"
+                />
+            </div>
 
             <div className="flex justify-center pt-1">
                 <button

@@ -87,6 +87,7 @@ export default {
         play: 'Play',
         pause: 'Pause',
         loopRange: 'Loop: {{start}}s – {{end}}s',
+        speed: 'Speed',
     },
     auth: {
         login: 'Log in',

@@ -80,6 +80,7 @@ export default {
         play: '播放',
         pause: '暫停',
         loopRange: '循環區間：{{start}}秒 – {{end}}秒',
+        speed: '播放速度',
     },
     auth: {
         login: '登入',

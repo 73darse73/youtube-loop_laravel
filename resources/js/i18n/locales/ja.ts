@@ -87,6 +87,7 @@ export default {
         play: '再生',
         pause: '一時停止',
         loopRange: 'ループ区間: {{start}}秒 〜 {{end}}秒',
+        speed: '再生速度',
     },
     auth: {
         login: 'ログイン',
