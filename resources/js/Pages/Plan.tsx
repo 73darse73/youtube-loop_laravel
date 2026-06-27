@@ -283,7 +283,7 @@ export default function Plan({
                                 {!isLifetime && (
                                     <div className="mb-4 mt-3 rounded-lg bg-amber-50 px-3 py-2 dark:bg-amber-900/20">
                                         <p className="text-xs font-medium text-amber-700 dark:text-amber-400">
-                                            年払いより¥1,998多いだけで、ずっと使える
+                                            年払いより¥2,000多いだけで、ずっと使える
                                         </p>
                                     </div>
                                 )}
