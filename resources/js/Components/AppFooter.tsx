@@ -20,6 +20,10 @@ export default function AppFooter() {
                 <Link href={route('commercial-disclosure')} className="hover:text-gray-800 hover:underline dark:hover:text-gray-200">
                     {t('common.commercial')}
                 </Link>
+                <span className="hidden md:inline">·</span>
+                <Link href={route('guide')} className="hover:text-gray-800 hover:underline dark:hover:text-gray-200">
+                    使い方ガイド
+                </Link>
             </div>
         </footer>
     );

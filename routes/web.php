@@ -65,6 +65,10 @@ Route::get('/auth/google/callback', function () {
 
 
 
+Route::get('/guide', function () {
+    return Inertia::render('Guide');
+})->name('guide');
+
 Route::get('/terms', function () {
     return Inertia::render('TermsOfService');
 })->name('terms');
