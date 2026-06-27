@@ -154,8 +154,8 @@ export default function Landing() {
     useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const freeFeatures = t('landing.freeFeatures', { returnObjects: true }) as string[];
-    const proFeatures = t('landing.proFeatures', { returnObjects: true }) as string[];
+    const freeFeatures = (Array.isArray(t('landing.freeFeatures', { returnObjects: true })) ? t('landing.freeFeatures', { returnObjects: true }) : []) as string[];
+    const proFeatures = (Array.isArray(t('landing.proFeatures', { returnObjects: true })) ? t('landing.proFeatures', { returnObjects: true }) : []) as string[];
 
     return (
         <>
@@ -254,7 +254,7 @@ export default function Landing() {
                 <div className="border-y border-gray-200 bg-gray-50">
                     <div className="mx-auto max-w-5xl px-6 py-4">
                         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-800">
-                            {(t('landing.socialProof', { returnObjects: true }) as string[]).map((item) => (
+                            {(Array.isArray(t('landing.socialProof', { returnObjects: true })) ? t('landing.socialProof', { returnObjects: true }) as string[] : []).map((item) => (
                                 <span key={item} className="whitespace-nowrap">{item}</span>
                             ))}
                         </div>
