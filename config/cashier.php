@@ -24,8 +24,6 @@ return [
 
     'price_id' => env('STRIPE_PRICE_ID'),
 
-    'price_id_monthly' => env('STRIPE_PRICE_ID_MONTHLY'),
-
     'price_id_annual' => env('STRIPE_PRICE_ID_ANNUAL'),
 
     'price_id_lifetime' => env('STRIPE_PRICE_ID_LIFETIME'),

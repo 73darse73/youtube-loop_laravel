@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
         } else {
             $priceId = $plan === 'annual'
                 ? config('cashier.price_id_annual')
-                : config('cashier.price_id_monthly');
+                : config('cashier.price_id');
 
             $checkout = $user->newSubscription('default', $priceId)
                 ->checkout([

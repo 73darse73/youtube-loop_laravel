@@ -173,25 +173,27 @@ export default function Plan({
                                     )}
                                 </div>
 
-                                {billing === 'monthly' || isAnnual || isMonthly ? (
+                                {isAnnual ? (
                                     <>
                                         <p className="mb-1 text-2xl font-bold dark:text-white">
-                                            {isAnnual ? '¥3,980' : '¥490'}
-                                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                                {' '}/ {isAnnual ? '年' : '月'}
-                                            </span>
+                                            ¥3,980
+                                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400"> / 年</span>
                                         </p>
                                         <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
-                                            {(billing === 'annual' || isAnnual) ? t('plan.annualEquiv') : ' '}
+                                            {t('plan.annualEquiv')}
                                         </p>
                                     </>
                                 ) : (
                                     <>
                                         <p className="mb-1 text-2xl font-bold dark:text-white">
-                                            ¥490
-                                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400"> / 月</span>
+                                            {billing === 'annual' ? '¥3,980' : '¥300'}
+                                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                                {' '}/ {billing === 'annual' ? '年' : '月'}
+                                            </span>
                                         </p>
-                                        <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">&nbsp;</p>
+                                        <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
+                                            {billing === 'annual' ? t('plan.annualEquiv') : ' '}
+                                        </p>
                                     </>
                                 )}
 
