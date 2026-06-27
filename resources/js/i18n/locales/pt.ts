@@ -80,6 +80,7 @@ export default {
         play: 'Reproduzir',
         pause: 'Pausar',
         loopRange: 'Loop: {{start}}s – {{end}}s',
+        speed: 'Velocidade',
     },
     auth: {
         login: 'Entrar',
