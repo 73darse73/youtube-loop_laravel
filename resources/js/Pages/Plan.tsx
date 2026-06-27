@@ -186,7 +186,7 @@ export default function Plan({
                                 ) : (
                                     <>
                                         <p className="mb-1 text-2xl font-bold dark:text-white">
-                                            {billing === 'annual' ? '¥3,980' : '¥300'}
+                                            {billing === 'annual' ? '¥3,980' : '¥490'}
                                             <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                                                 {' '}/ {billing === 'annual' ? '年' : '月'}
                                             </span>
