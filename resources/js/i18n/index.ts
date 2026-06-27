@@ -29,14 +29,12 @@ i18n.use(initReactI18next).init({
     lng: savedLng,
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
-    initImmediate: false,
 });
 
 // クライアントのみ: ブラウザ言語を後から反映
 if (!isServer) {
     import('i18next-browser-languagedetector').then(({ default: LanguageDetector }) => {
-        const detector = new LanguageDetector();
-        detector.init({
+        const detector = new LanguageDetector(null, {
             order: ['localStorage', 'navigator'],
             caches: ['localStorage'],
         });
