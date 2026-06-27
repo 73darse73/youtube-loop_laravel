@@ -8,7 +8,7 @@ export default function LanguageSwitcher({ forcedLight = false }: { forcedLight?
 
     const current =
         SUPPORTED_LANGUAGES.find((l) => l.code === i18n.language) ??
-        SUPPORTED_LANGUAGES.find((l) => i18n.language.startsWith(l.code)) ??
+        SUPPORTED_LANGUAGES.find((l) => i18n.language?.startsWith(l.code)) ??
         SUPPORTED_LANGUAGES[1];
 
     const handleSelect = (code: string) => {
