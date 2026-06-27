@@ -387,7 +387,7 @@ export default function Landing() {
                 {/* Footer */}
                 <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-700">
                     <div className="flex justify-center gap-6 mb-4">
-                        <Link href={route('guide')} className="hover:text-gray-700 transition-colors">使い方ガイド</Link>
+                        <Link href="/guide" className="hover:text-gray-700 transition-colors">使い方ガイド</Link>
                         <Link href={route('terms')} className="hover:text-gray-700 transition-colors">{t('common.terms') ?? '利用規約'}</Link>
                         <Link href={route('privacy')} className="hover:text-gray-700 transition-colors">{t('common.privacy') ?? 'プライバシーポリシー'}</Link>
                     </div>
